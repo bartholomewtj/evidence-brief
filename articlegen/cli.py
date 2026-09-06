@@ -321,10 +321,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="articlegen",
         description=(
-            "A three-stage workflow: pick a briefing question, auto-collate research, "
-            "and prepare a sourced one-page briefing for your review — as a "
-            "self-contained HTML file (plus Markdown), grounded in journal-article "
-            "abstracts and open-access full texts."
+            "Evidence brief: sourced evidence briefings from a question. "
+            "Pick a briefing question, auto-collate research, and prepare a "
+            "sourced one-page briefing for your review — as a self-contained "
+            "HTML file (plus Markdown), grounded in journal-article abstracts "
+            "and open-access full texts. Every statistic is checked against "
+            "the cited papers."
         ),
     )
     parser.add_argument(
