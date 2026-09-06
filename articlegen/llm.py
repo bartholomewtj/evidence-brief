@@ -936,7 +936,7 @@ def _openrouter_generate(
                 "Content-Type": "application/json",
                 # Attribution headers; optional, and they carry no user content.
                 "HTTP-Referer": "https://github.com/bartholomewtj/article-generator",
-                "X-Title": "articlegen",
+                "X-Title": "Evidence brief",
             },
             json=body,
             timeout=180,

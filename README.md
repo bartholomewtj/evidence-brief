@@ -1,21 +1,22 @@
-# articlegen
+# Evidence brief
 
 [![Tests](https://github.com/bartholomewtj/article-generator/actions/workflows/tests.yml/badge.svg)](https://github.com/bartholomewtj/article-generator/actions/workflows/tests.yml)
 [![Deployment health](https://github.com/bartholomewtj/article-generator/actions/workflows/health.yml/badge.svg)](https://github.com/bartholomewtj/article-generator/actions/workflows/health.yml)
 
-Turn a topic into a **sourced evidence briefing** — the question, what the
-evidence shows, what remains open, and three papers to open — as one
-self-contained HTML page (plus Markdown) you can send as a link. Every claim is
-cited to a real paper, and every figure is checked back against the source it
-came from. Three stages: pick a question → research collated automatically →
-briefing prepared for your review.
+Sourced evidence briefings from a question. Every statistic is checked against
+the cited papers.
 
-`articlegen draft --long` still writes the journal-style Review; that path is
-kept for later, not deleted.
+The question, what the evidence shows, what remains open, and three papers to
+open — as one self-contained HTML page (plus Markdown) you can send as a link.
+Three stages: pick a question → research collated automatically → briefing
+prepared for your review.
 
-## 🚀 Live site
+The CLI command is still `articlegen`. `articlegen draft --long` still writes
+the journal-style Review; that path is kept for later, not deleted.
 
-🔗 **[Open the site](https://bartholomewtj.github.io/article-generator/)**
+## Live site
+
+**[Open the site](https://bartholomewtj.github.io/article-generator/)**
 
 Generating is free on the public site (GPT-5.6 Luna, host-paid, rate-limited).
 No key and no account needed. A finished briefing is listed on the landing
@@ -26,16 +27,16 @@ page under **From other visitors** as soon as it is generated.
 ## Use it from your phone or desktop
 
 1. **Open the site:** [https://bartholomewtj.github.io/article-generator/](https://bartholomewtj.github.io/article-generator/) (or run `articlegen web --open` locally).
-2. **Type a theme:** Enter your topic (e.g. `renewable energy storage`) and optional audience/style notes. The box is the first thing on the page.
-3. **Choose a draft:** Tap any generated **Draft Idea Card** to launch the evidence-grounded research pipeline.
-4. **Read, save & share:** View the rendered article. It is already on the
+2. **Type a theme:** Enter your topic (e.g. `seclusion reduction in acute psychiatric wards`) and optional audience/style notes. The box is the first thing on the page.
+3. **Choose a draft:** Tap any generated idea card to launch the evidence-grounded research pipeline.
+4. **Read, save & share:** View the rendered briefing. It is already on the
    public list. **Keep** holds it in your library past the rolling limit.
    **Download** saves it as a single HTML file you can open offline or print
    to PDF. **Shareable link** gives you a short link anyone can open.
 
 Below the topic box the landing page lists **From other visitors**
 (briefings generated on the site). Your own saved briefings are under
-**Your articles**. CLI drafts stay in `drafts/` on this machine; they are
+**Your briefings**. CLI drafts stay in `drafts/` on this machine; they are
 not on the public site.
 
 On a window wider than 1100px the page switches to a desktop layout: a left
@@ -43,7 +44,7 @@ sidebar instead of the top icon row, and the article fills the remaining
 window rather than sitting in a boxed column. The article's actions sit in a
 toolbar above it rather than a bar along the bottom of the screen. Narrower
 than that, you get the phone layout. Browser Back from an article returns to
-the landing page. A home button next to ArticleGen does the same.
+the landing page. A home button next to Evidence brief does the same.
 
 The public site writes with **GPT-5.6 Luna**. It is free to you; the host pays, and an hourly cap applies to everyone together. The web app does not take a visitor key. The CLI below also supports Anthropic and a Claude subscription. Local `articlegen web` needs `OPENROUTER_API_KEY` in the environment.
 
@@ -163,7 +164,7 @@ title ──▶ the model plans search queries
   retrieved, the full text too — and cites them; every superscript links to a
   numbered reference with a link back to the paper (DOI when available). Before
   writing, each source is scored for how *directly* it addresses the exact topic
-  — so the article can say when direct evidence is thin instead of quietly
+  — so the briefing can say when direct evidence is thin instead of quietly
   substituting adjacent work. A deterministic check flags any statistic absent
   from the material the writer was actually shown, and Table 1 is built from
   the fetched records rather than written by the model. Clinical
@@ -203,10 +204,10 @@ export OPENALEX_MAILTO=you@example.com  # optional, "polite pool"
 
 ```bash
 # 1. Generate ideas from a broad theme; skim them and pick one
-python -m articlegen ideas "renewable energy storage"
+python -m articlegen ideas "seclusion reduction in acute psychiatric wards"
 
 # 2. Research + draft the idea you picked (opens it when done)
-python -m articlegen draft "Why gravity batteries could outlast lithium" --open
+python -m articlegen draft "Does reducing seclusion on acute psychiatric wards increase violence?" --open
 
 # 3. Review everything you've drafted from one page
 python -m articlegen queue --open

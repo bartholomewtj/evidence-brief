@@ -1,3 +1,3 @@
-"""articlegen — turn a topic into a readable, evidence-backed single-page HTML article."""
+"""Evidence brief — sourced evidence briefings from a question."""
 
 __version__ = "0.1.0"

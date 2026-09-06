@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "articlegen"
 version = "0.1.0"
-description = "Generate readable, evidence-backed single-page HTML articles from a topic."
+description = "Sourced evidence briefings from a question. Every statistic is checked against the cited papers."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

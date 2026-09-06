@@ -3884,6 +3884,19 @@ def test_the_landing_page_leads_with_the_input() -> None:
           "Recent evidence briefings" not in page)
     check("the head frames the output as a briefing, not an article generator",
           "Research-Grounded Articles on Mobile" not in page)
+    check("the product name is Evidence brief",
+          "<title>Evidence brief" in page
+          and ">Evidence brief</a>" in page)
+    check("ArticleGen is gone from the page", "ArticleGen" not in page)
+    check("the library is briefings, not articles",
+          "Your briefings" in page and "Your articles" not in page)
+    check("the description names the statistic check",
+          "Every statistic is checked against the cited papers" in page)
+    readme = open(os.path.join(root, "README.md"), encoding="utf-8").read()
+    check("README is titled Evidence brief", readme.startswith("# Evidence brief\n"))
+    check("README lead is the product description",
+          "Sourced evidence briefings from a question. Every statistic is checked against"
+          in readme)
     check("landing page uses the general recipe",
           "recipe: general" in page and "#6ec4bb" in page)
     check("invented sky accent is gone",
