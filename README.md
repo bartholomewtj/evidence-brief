@@ -1,7 +1,7 @@
 # Evidence brief
 
-[![Tests](https://github.com/bartholomewtj/article-generator/actions/workflows/tests.yml/badge.svg)](https://github.com/bartholomewtj/article-generator/actions/workflows/tests.yml)
-[![Deployment health](https://github.com/bartholomewtj/article-generator/actions/workflows/health.yml/badge.svg)](https://github.com/bartholomewtj/article-generator/actions/workflows/health.yml)
+[![Tests](https://github.com/bartholomewtj/evidence-brief/actions/workflows/tests.yml/badge.svg)](https://github.com/bartholomewtj/evidence-brief/actions/workflows/tests.yml)
+[![Deployment health](https://github.com/bartholomewtj/evidence-brief/actions/workflows/health.yml/badge.svg)](https://github.com/bartholomewtj/evidence-brief/actions/workflows/health.yml)
 
 Sourced evidence briefings from a question. Every statistic is checked against
 the cited papers.
@@ -16,7 +16,7 @@ the journal-style Review; that path is kept for later, not deleted.
 
 ## Live site
 
-**[Open the site](https://bartholomewtj.github.io/article-generator/)**
+**[Open the site](https://bartholomewtj.github.io/evidence-brief/)**
 
 Generating is free on the public site (GPT-5.6 Luna, host-paid, rate-limited).
 No key and no account needed. A finished briefing is listed on the landing
@@ -26,7 +26,7 @@ page under **From other visitors** as soon as it is generated.
 
 ## Use it from your phone or desktop
 
-1. **Open the site:** [https://bartholomewtj.github.io/article-generator/](https://bartholomewtj.github.io/article-generator/) (or run `articlegen web --open` locally).
+1. **Open the site:** [https://bartholomewtj.github.io/evidence-brief/](https://bartholomewtj.github.io/evidence-brief/) (or run `articlegen web --open` locally).
 2. **Type a theme:** Enter your topic (e.g. `seclusion reduction in acute psychiatric wards`) and optional audience/style notes. The box is the first thing on the page.
 3. **Choose a draft:** Tap any generated idea card to launch the evidence-grounded research pipeline.
 4. **Read, save & share:** View the rendered briefing. It is already on the

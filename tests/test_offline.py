@@ -3897,6 +3897,14 @@ def test_the_landing_page_leads_with_the_input() -> None:
     check("README lead is the product description",
           "Sourced evidence briefings from a question. Every statistic is checked against"
           in readme)
+    check("README live site is the evidence-brief Pages URL",
+          "https://bartholomewtj.github.io/evidence-brief/" in readme
+          and "github.io/article-generator" not in readme)
+    health = open(os.path.join(root, ".github", "workflows", "health.yml"),
+                  encoding="utf-8").read()
+    check("health check curls the evidence-brief Pages URL",
+          "https://bartholomewtj.github.io/evidence-brief/" in health
+          and "github.io/article-generator" not in health)
     check("landing page uses the general recipe",
           "recipe: general" in page and "#6ec4bb" in page)
     check("invented sky accent is gone",

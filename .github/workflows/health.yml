@@ -75,7 +75,7 @@ jobs:
       - name: Pages front end is being served
         run: |
           if ! curl -fsS --max-time 30 \
-               https://bartholomewtj.github.io/article-generator/ -o /dev/null; then
+               https://bartholomewtj.github.io/evidence-brief/ -o /dev/null; then
             echo "::error::GitHub Pages did not return 200. The push trigger may have silently stopped firing again (issue #71); deploy manually with: gh workflow run deploy-pages.yml --ref main"
             exit 1
           fi
