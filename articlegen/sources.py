@@ -57,7 +57,7 @@ DATABASE_NAMES = {
 # profile that gets throttled first. OpenAlex also documents the User-Agent as
 # a way into the polite pool, so the mailto goes here as well as in the query
 # string — belt and braces, since only the header reaches Semantic Scholar.
-_UA_BASE = "articlegen/0.1.0 (+https://github.com/bartholomewtj/article-generator)"
+_UA_BASE = "articlegen/0.1.0 (+https://github.com/bartholomewtj/evidence-brief)"
 
 # Longest we'll honour a Retry-After. A draft has a user watching a progress
 # bar, so waiting out a 60s cool-off is worse than failing and letting the
@@ -1261,7 +1261,7 @@ _status_cache: dict[str, tuple[float, bool, str]] = {}
 def _unpaywall_email() -> str:
     """The contact Unpaywall requires. Never a made-up address — it blocks those."""
     return os.environ.get(
-        "OPENALEX_MAILTO", "https://github.com/bartholomewtj/article-generator")
+        "OPENALEX_MAILTO", "https://github.com/bartholomewtj/evidence-brief")
 
 
 def probe_unpaywall(doi: str = "10.1371/journal.pone.0000308") -> dict:
