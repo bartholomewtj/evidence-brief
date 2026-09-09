@@ -1,0 +1,281 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Evidence brief",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "happy-path",
+        "label": "Question to briefing",
+        "focus": [
+          "question",
+          "preflight",
+          "plan",
+          "gather",
+          "curate",
+          "expand",
+          "write",
+          "fulltext",
+          "gates",
+          "briefing"
+        ],
+        "note": "One generate_draft path. CLI and /api/draft both call it."
+      },
+      {
+        "id": "evidence-expansion",
+        "label": "Evidence expansion",
+        "focus": ["gather", "curate", "expand", "fulltext"],
+        "note": "Four APIs, then snowball and named sources, then cited open-access full text."
+      },
+      {
+        "id": "honesty-gates",
+        "label": "Honesty gates",
+        "focus": ["preflight", "apis_down", "curate", "empty_curation", "drop_ft", "gates"],
+        "note": "APIs down and empty curation stop the run. Rewrite failure drops full text so Methods stays true."
+      }
+    ]
+  },
+  "lanes": [
+    { "id": "you", "label": "You" },
+    { "id": "model", "label": "Model" },
+    { "id": "evidence", "label": "Evidence" },
+    { "id": "stop", "label": "Stop", "variant": "exception" }
+  ],
+  "phases": [
+    { "id": "ask", "label": "Ask", "fromCol": 0, "toCol": 0 },
+    { "id": "search", "label": "Search", "fromCol": 1, "toCol": 3 },
+    { "id": "write", "label": "Write", "fromCol": 4, "toCol": 4, "variant": "emphasis" },
+    { "id": "check", "label": "Check", "fromCol": 5, "toCol": 5 }
+  ],
+  "mainPath": [
+    "question",
+    "preflight",
+    "plan",
+    "gather",
+    "curate",
+    "expand",
+    "write",
+    "fulltext",
+    "gates",
+    "briefing"
+  ],
+  "semanticChecks": {
+    "allowedRoots": ["question"],
+    "allowedTerminals": ["briefing", "apis_down", "empty_curation", "drop_ft"],
+    "requiredEdges": [
+      { "from": "preflight", "to": "apis_down" },
+      { "from": "curate", "to": "empty_curation" },
+      { "from": "fulltext", "to": "drop_ft" }
+    ],
+    "requiredPaths": [
+      { "from": "question", "to": "briefing" }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "question",
+      "lane": "you",
+      "col": 0,
+      "type": "external",
+      "label": "Question",
+      "sublabel": "optional ideas first",
+      "tag": "articlegen draft",
+      "width": 132
+    },
+    {
+      "id": "preflight",
+      "lane": "evidence",
+      "col": 1,
+      "type": "cloud",
+      "label": "Pre-flight",
+      "sublabel": "probe before any LLM",
+      "width": 132
+    },
+    {
+      "id": "apis_down",
+      "lane": "stop",
+      "col": 1,
+      "type": "security",
+      "label": "APIs down",
+      "sublabel": "NoPapersFound",
+      "width": 132
+    },
+    {
+      "id": "plan",
+      "lane": "model",
+      "col": 2,
+      "type": "backend",
+      "label": "plan_queries",
+      "sublabel": "PICO kept, terms kept",
+      "width": 132
+    },
+    {
+      "id": "gather",
+      "lane": "evidence",
+      "col": 2,
+      "type": "cloud",
+      "label": "Gather",
+      "sublabel": "cap ~40, 24h cache",
+      "width": 132
+    },
+    {
+      "id": "curate",
+      "lane": "evidence",
+      "col": 3,
+      "type": "backend",
+      "label": "Curate",
+      "sublabel": "direct / related / tangential",
+      "tag": "retracted named in Methods",
+      "width": 132
+    },
+    {
+      "id": "empty_curation",
+      "lane": "stop",
+      "col": 3,
+      "type": "security",
+      "label": "Empty curation",
+      "sublabel": "CurationFailed",
+      "width": 132
+    },
+    {
+      "id": "expand",
+      "lane": "evidence",
+      "col": 4,
+      "type": "cloud",
+      "label": "Expand pool",
+      "sublabel": "snowball + named sources",
+      "width": 132
+    },
+    {
+      "id": "write",
+      "lane": "model",
+      "col": 4,
+      "type": "backend",
+      "label": "write_briefing",
+      "sublabel": "from abstracts",
+      "width": 132
+    },
+    {
+      "id": "fulltext",
+      "lane": "evidence",
+      "col": 5,
+      "type": "cloud",
+      "label": "Full text",
+      "sublabel": "cited OA, target 5",
+      "tag": "papers CLI, then Europe PMC",
+      "width": 132
+    },
+    {
+      "id": "gates",
+      "lane": "model",
+      "col": 5,
+      "type": "security",
+      "label": "Style + stats",
+      "sublabel": "haystack = writer haystack",
+      "tag": "one stats revise",
+      "width": 132
+    },
+    {
+      "id": "drop_ft",
+      "lane": "stop",
+      "col": 5,
+      "type": "security",
+      "label": "Drop full text",
+      "sublabel": "keep abstract draft",
+      "width": 132
+    },
+    {
+      "id": "briefing",
+      "lane": "you",
+      "col": 5,
+      "type": "frontend",
+      "label": "Briefing",
+      "sublabel": "HTML · MD · JSON",
+      "width": 132
+    }
+  ],
+  "edges": [
+    {
+      "id": "start-draft",
+      "from": "question",
+      "to": "preflight",
+      "label": "generate_draft",
+      "variant": "emphasis"
+    },
+    {
+      "id": "preflight-stop",
+      "from": "preflight",
+      "to": "apis_down",
+      "label": "all down",
+      "variant": "security",
+      "role": "error"
+    },
+    {
+      "id": "preflight-plan",
+      "from": "preflight",
+      "to": "plan",
+      "variant": "default"
+    },
+    {
+      "id": "plan-gather",
+      "from": "plan",
+      "to": "gather",
+      "variant": "default"
+    },
+    {
+      "id": "gather-curate",
+      "from": "gather",
+      "to": "curate",
+      "variant": "default"
+    },
+    {
+      "id": "curate-stop",
+      "from": "curate",
+      "to": "empty_curation",
+      "label": "no labels",
+      "variant": "security",
+      "role": "error"
+    },
+    {
+      "id": "curate-expand",
+      "from": "curate",
+      "to": "expand",
+      "variant": "default"
+    },
+    {
+      "id": "expand-write",
+      "from": "expand",
+      "to": "write",
+      "variant": "default"
+    },
+    {
+      "id": "write-fulltext",
+      "from": "write",
+      "to": "fulltext",
+      "label": "cited only",
+      "variant": "emphasis"
+    },
+    {
+      "id": "fulltext-drop",
+      "from": "fulltext",
+      "to": "drop_ft",
+      "label": "rewrite failed",
+      "variant": "dashed",
+      "role": "error"
+    },
+    {
+      "id": "fulltext-gates",
+      "from": "fulltext",
+      "to": "gates",
+      "variant": "default"
+    },
+    {
+      "id": "gates-briefing",
+      "from": "gates",
+      "to": "briefing",
+      "variant": "emphasis"
+    }
+  ]
+}
