@@ -7,7 +7,7 @@ Sourced evidence briefings from a question. Every statistic is checked against t
 
 One HTML page you can send: the question, what the evidence shows, what remains open, and three papers to open.
 
-**[Open the site](https://bartholomewtj.github.io/evidence-brief/)** — free, no key. The CLI command is still `articlegen`.
+**[Open the site](https://bartholomewtj.github.io/evidence-brief/)** — Generating is free on the public site. No key and no account needed. The CLI command is still `articlegen`.
 
 ## Run it
 
