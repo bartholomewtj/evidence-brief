@@ -9,4 +9,6 @@ The public tree is a run-kit plus current tests and the Pages gallery.
 
 Factory (`adws/`, `specs/`, `requests/`, `app_docs/`, `justfile`) stays on this machine and is gitignored. Do not add it back.
 
+`docs/pipeline.*` is the public process diagram (README). Keep it.
+
 Extra docs (project memory, journal-style notes, session handoffs, the old docs-current workflow) live in `archive/` on this machine and are gitignored. Do not put them back on GitHub.
