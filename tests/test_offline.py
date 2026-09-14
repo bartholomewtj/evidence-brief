@@ -8709,7 +8709,7 @@ def test_one_papers_process_per_run() -> None:
 
 
 def test_hosted_fulltext_prefetch_is_the_target() -> None:
-    """Hosted drafts send FULLTEXT_TARGET DOIs to papers, not the request cap."""
+    """Hosted drafts send the floor (2) OA-first DOIs to papers, not the request cap."""
     from articlegen import pipeline
 
     saved = os.environ.get("ARTICLEGEN_STATELESS")
@@ -8717,9 +8717,13 @@ def test_hosted_fulltext_prefetch_is_the_target() -> None:
         os.environ.pop("ARTICLEGEN_STATELESS", None)
         check("local prefetch is the request cap",
               pipeline._fulltext_prefetch_limit() == pipeline.MAX_FULLTEXT_REQUESTS)
+        check("local papers timeout is the CLI default",
+              pipeline._papers_get_timeout() == pipeline.paperfetch.DEFAULT_TIMEOUT)
         os.environ["ARTICLEGEN_STATELESS"] = "1"
-        check("hosted prefetch is the target",
-              pipeline._fulltext_prefetch_limit() == pipeline.FULLTEXT_TARGET)
+        check("hosted prefetch is the floor",
+              pipeline._fulltext_prefetch_limit() == pipeline.HOSTED_FULLTEXT_FLOOR)
+        check("hosted papers timeout is 20s per DOI",
+              pipeline._papers_get_timeout() == pipeline.HOSTED_PAPERS_TIMEOUT_SEC)
     finally:
         if saved is None:
             os.environ.pop("ARTICLEGEN_STATELESS", None)
@@ -8765,6 +8769,30 @@ def test_papers_batch_keeps_partial_results_on_timeout() -> None:
         check("truncated and unreached DOIs are empty, not a fallback to per-DOI",
               results[1] == ("", "") and results[2] == ("", "")
               and len(results) == 3)
+
+        paperfetch._BATCH_OK = None
+        paperfetch._BATCH_CACHE = {}
+        per_doi = []
+
+        def timeout_then_one(argv, **kw):
+            if argv[-1] == "-":
+                raise subprocess.TimeoutExpired(cmd=argv, timeout=1, output="")
+            per_doi.append(argv[-1])
+            return type("P", (), {
+                "stdout": json.dumps({
+                    "status": "ok", "doi": argv[-1], "read": text_path,
+                }),
+                "stderr": "", "returncode": 0,
+            })()
+
+        paperfetch.subprocess.run = timeout_then_one
+        empty_timeout = paperfetch.fetch_many_via_papers(
+            ["10.1/a", "10.1/b"], timeout=1)
+        check("a batch timeout with no JSON falls back to per-DOI",
+              per_doi == ["10.1/a", "10.1/b"])
+        check("per-DOI fallback still returns text",
+              empty_timeout[0][0] == "Kept from the timed-out batch."
+              and empty_timeout[1][0] == "Kept from the timed-out batch.")
     finally:
         paperfetch.subprocess.run = real_run
         paperfetch.shutil.which = real_which
@@ -8828,6 +8856,37 @@ def test_full_text_order_favours_reviews_and_trials() -> None:
           full_text_order(same, {i: "direct" for i in range(1, 5)}) == [1, 2, 3, 4])
     check("no labels means nothing is fetched",
           full_text_order(same, {}) == [])
+
+
+def test_full_text_order_tries_oa_copies_first() -> None:
+    """Among direct cites, a likely-OA DOI is fetched before a paywalled review.
+
+    Hosted papers only has time for one or two gets. Spending them on Wiley
+    or Cochrane first left JAMA Network Open (OA) unfetched.
+    """
+    from articlegen.sources import Paper, full_text_order, likely_open_access, paper_design
+
+    paywalled_review = Paper(
+        title="A systematic review and meta-analysis", abstract="a", year=2022,
+        doi="10.1002/14651858.cd009353.pub3")
+    oa_trial = Paper(
+        title="A randomised controlled trial", abstract="a", year=2019,
+        doi="10.1001/jamanetworkopen.2019.5463")
+    related_oa = Paper(
+        title="PLOS paper", abstract="a", year=2018,
+        doi="10.1371/journal.pone.0000308")
+    check("JAMA Network Open counts as likely OA",
+          likely_open_access(oa_trial))
+    check("a Cochrane DOI does not",
+          not likely_open_access(paywalled_review))
+    order = full_text_order(
+        [paywalled_review, oa_trial, related_oa],
+        {1: "direct", 2: "direct", 3: "related"},
+    )
+    check("direct OA trial is fetched before the direct paywalled review",
+          order[0] == 2)
+    check("direct still outranks related OA",
+          order.index(2) < order.index(3) and order.index(1) < order.index(3))
 
     # 4. paper_design directly: positives and negative controls
     # synthesis positives
@@ -10412,6 +10471,7 @@ def main(argv: list[str] | None = None) -> int:
         test_hosted_fulltext_prefetch_is_the_target,
         test_papers_batch_keeps_partial_results_on_timeout,
         test_full_text_order_favours_reviews_and_trials,
+        test_full_text_order_tries_oa_copies_first,
         test_pmcid_is_resolved_by_doi,
         test_unpaywall_fallback_in_resolve_pmcid,
         test_named_papers_in_abstracts_are_looked_up,
