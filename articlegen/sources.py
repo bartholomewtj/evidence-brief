@@ -1821,17 +1821,40 @@ def paper_design(paper: Paper) -> str:
 # The sort key is now relevance tier -> design weight -> recency -> search rank.
 FULLTEXT_RELEVANCE_ORDER = ("direct", "related")
 
+# DOI prefixes / tokens that usually have a legal OA PDF. Used only to
+# decide fetch order so a hosted draft spends its short papers budget on
+# copies it can actually attach.
+_OA_DOI_MARKERS = (
+    "10.1371/",           # PLOS
+    "10.1186/",           # BMC / SpringerOpen
+    "jamanetworkopen",
+    "10.3389/",           # Frontiers
+    "10.3390/",           # MDPI
+    "10.7717/",           # PeerJ
+    "10.12688/",          # F1000
+    "10.1038/s41467",     # Nature Communications
+    "10.1038/s41598",     # Scientific Reports
+)
+
+
+def likely_open_access(paper: Paper) -> bool:
+    """True when a full-text fetch is more likely to land than miss."""
+    if paper.pmcid and paper.is_open_access:
+        return True
+    doi = (paper.doi or "").lower()
+    return any(marker in doi for marker in _OA_DOI_MARKERS)
+
 
 def full_text_order(papers: list[Paper], relevance: dict[int, str]) -> list[int]:
     """1-based indices to attempt full text for, best candidate first.
 
-    Direct before related; systematic reviews / meta-analyses first, then
-    trials, then other designs (DESIGN_ORDER via paper_design); newest first
-    inside a design tier; search rank breaks the remaining ties (#166,
-    revising #143). A paper with no year sorts as if year 0 — an undated record
-    is not evidence of being current. Tangential and unlabelled sources are
-    absent from the result: they are never fetched, whether or not the target
-    is met.
+    Direct before related; among those, likely-OA copies before paywalled
+    ones; then systematic reviews / meta-analyses, then trials, then other
+    designs (DESIGN_ORDER via paper_design); newest first inside a design
+    tier; search rank breaks the remaining ties (#166, revising #143). A
+    paper with no year sorts as if year 0 — an undated record is not evidence
+    of being current. Tangential and unlabelled sources are absent from the
+    result: they are never fetched, whether or not the target is met.
     """
     tier = {label: n for n, label in enumerate(FULLTEXT_RELEVANCE_ORDER)}
     design = {label: n for n, label in enumerate(DESIGN_ORDER)}
@@ -1839,12 +1862,22 @@ def full_text_order(papers: list[Paper], relevance: dict[int, str]) -> list[int]
     for index, paper in enumerate(papers, start=1):
         label = relevance.get(index)
         if label in tier:
-            ranked.append((tier[label], design[paper_design(paper)],
-                           -(paper.year or 0), index))
-    return [index for _, _, _, index in sorted(ranked)]
+            ranked.append((
+                tier[label],
+                0 if likely_open_access(paper) else 1,
+                design[paper_design(paper)],
+                -(paper.year or 0),
+                index,
+            ))
+    return [index for _, _, _, _, index in sorted(ranked)]
 
 
-def fetch_full_text(paper: Paper, use_cache: bool = True, log=lambda msg: None) -> str:
+def fetch_full_text(
+    paper: Paper,
+    use_cache: bool = True,
+    log=lambda msg: None,
+    timeout: float | None = None,
+) -> str:
     """The paper's open-access full text as plain text, or "" when unavailable.
 
     When the `papers` CLI is available and the paper has a DOI, it is tried
@@ -1854,6 +1887,7 @@ def fetch_full_text(paper: Paper, use_cache: bool = True, log=lambda msg: None) 
     """
     now = time.time()
     doi = _normalize_doi(paper.doi)
+    papers_timeout = paperfetch.DEFAULT_TIMEOUT if timeout is None else timeout
     if doi and paperfetch.available(log):
         key = f"papers:{doi}"
         if use_cache and _CACHE_TTL > 0:
@@ -1864,10 +1898,13 @@ def fetch_full_text(paper: Paper, use_cache: bool = True, log=lambda msg: None) 
                     cached_status = entry[2] if len(entry) > 2 else ""
                     if cached_text:
                         paper.full_text_via = "papers"
-                    elif cached_status in paperfetch.NOT_OA_STATUSES:
+                        return cached_text
+                    if cached_status in paperfetch.NOT_OA_STATUSES:
                         paper.full_text_not_oa = True
-                    return cached_text
-        text, status = paperfetch.fetch_via_papers_with_status(doi, log=log)
+                        return cached_text
+                    # Timeout / transport miss: still try Europe PMC below.
+        text, status = paperfetch.fetch_via_papers_with_status(
+            doi, timeout=papers_timeout, log=log)
         text = _strip_citation_brackets(text)
         if status in paperfetch.NOT_OA_STATUSES:
             paper.full_text_not_oa = True

@@ -50,6 +50,12 @@ Logger = Callable[[str], None]
 # gets nothing. Fetching more than the excerpt budget can display is pure cost.
 FULLTEXT_TARGET = 5
 
+# Hosted drafts sit behind a long proxy, but a 5s-per-DOI papers batch
+# still times out on a cold cache and yields zero texts. Prefer two
+# open-access copies over five misses. Local CLI still aims for the target.
+HOSTED_FULLTEXT_FLOOR = 2
+HOSTED_PAPERS_TIMEOUT_SEC = 20.0
+
 # Every candidate now costs up to two Europe PMC requests (a DOI lookup, then
 # the fetch), where before a paper with no pmcid cost nothing. A topic whose
 # sources are all paywalled would otherwise spend one request per paper and
@@ -62,18 +68,28 @@ MAX_FULLTEXT_REQUESTS = 18
 REFRESH_LIMIT = 10
 
 
+def _hosted() -> bool:
+    return os.environ.get("ARTICLEGEN_STATELESS", "").strip().lower() in (
+        "1", "true", "yes")
+
+
 def _fulltext_prefetch_limit() -> int:
     """How many DOIs `papers get -` is sent before the apply loop.
 
-    The loop only keeps FULLTEXT_TARGET. Local CLI still prefetches the
-    request cap so a paywalled leading cite leaves later OA ones in the
-    batch. The hosted path sits behind a ~100s proxy, so it sends the
-    target and lets Europe PMC fill gaps.
+    Local CLI prefetches the request cap so a paywalled leading cite
+    leaves later OA ones in the batch. Hosted sends the floor (2)
+    OA-first DOIs with a longer per-DOI timeout, then Europe PMC
+    fills any remaining gaps.
     """
-    if os.environ.get("ARTICLEGEN_STATELESS", "").strip().lower() in (
-            "1", "true", "yes"):
-        return FULLTEXT_TARGET
+    if _hosted():
+        return HOSTED_FULLTEXT_FLOOR
     return MAX_FULLTEXT_REQUESTS
+
+
+def _papers_get_timeout() -> float:
+    if _hosted():
+        return HOSTED_PAPERS_TIMEOUT_SEC
+    return paperfetch.DEFAULT_TIMEOUT
 
 
 # Fail before billing the caller, when the sources are the problem.
@@ -205,8 +221,11 @@ def _retrieve_full_texts(
 
     When the papers CLI is available, the DOI list is sent once on stdin
     (`papers get -`) up to `_fulltext_prefetch_limit()`, then this loop
-    applies results and stops at FULLTEXT_TARGET. `papers status` runs first
-    so a missing mailto or S2 key is named before any get.
+    applies results. Hosted stops at HOSTED_FULLTEXT_FLOOR once two texts
+    land; local aims for FULLTEXT_TARGET. `papers status` runs first so a
+    missing mailto or S2 key is named before any get. Cited papers missing
+    a PMCID are looked up even when papers is installed, so Europe PMC can
+    fill after a timed-out batch.
     """
     fetched: list[int] = []
     requests_spent = 0
@@ -224,40 +243,49 @@ def _retrieve_full_texts(
                 dois.append(doi)
         if dois:
             paperfetch.preflight(log)
-            batch_timeout = paperfetch.DEFAULT_TIMEOUT
-            if prefetch <= FULLTEXT_TARGET:
-                batch_timeout = min(batch_timeout, 5.0)
-            paperfetch.fetch_many_via_papers(dois, timeout=batch_timeout, log=log)
+            paperfetch.fetch_many_via_papers(
+                dois, timeout=_papers_get_timeout(), log=log)
+    papers_timeout = _papers_get_timeout()
     for index in order:
         paper = papers[index - 1]
         if len(fetched) >= FULLTEXT_TARGET:
             stopped = f"target of {FULLTEXT_TARGET} reached"
+            break
+        if _hosted() and len(fetched) >= HOSTED_FULLTEXT_FLOOR:
+            stopped = f"hosted floor of {HOSTED_FULLTEXT_FLOOR} reached"
             break
         if requests_spent >= MAX_FULLTEXT_REQUESTS:
             stopped = f"request cap of {MAX_FULLTEXT_REQUESTS} reached"
             break
         eligible += 1
         has_doi = bool(_normalize_doi(paper.doi))
+
+        def _fetch() -> str:
+            try:
+                return fetch_full_text(
+                    paper, log=log, use_cache=use_cache, timeout=papers_timeout)
+            except TypeError:
+                return fetch_full_text(paper)
+
+        text = ""
         if via_papers and has_doi:
-            pass
-        elif not paper.pmcid and paper.doi:
             requests_spent += 1
-            resolve_pmcid(paper, log=log)
-        if not (via_papers and has_doi) and not (paper.pmcid and paper.is_open_access):
-            no_open_access += 1
-            continue
-        requests_spent += 1
-        try:
-            text = fetch_full_text(paper, log=log, use_cache=use_cache)
-        except TypeError:
-            text = fetch_full_text(paper)
+            text = _fetch()
+        if not text and not paper.pmcid and paper.doi:
+            requests_spent += 1
+            resolve_pmcid(paper, log=log, use_cache=use_cache)
+        if not text and paper.pmcid and paper.is_open_access:
+            requests_spent += 1
+            text = _fetch()
         if text:
             paper.full_text = text
             fetched.append(index)
         elif getattr(paper, "full_text_not_oa", False):
             no_open_access += 1
-        else:
+        elif via_papers and has_doi or (paper.pmcid and paper.is_open_access):
             fetch_failed += 1
+        else:
+            no_open_access += 1
     return fetched, eligible, no_open_access, fetch_failed, requests_spent, stopped
 
 

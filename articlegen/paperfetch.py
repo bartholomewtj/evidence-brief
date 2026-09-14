@@ -121,9 +121,12 @@ def _child_env() -> dict[str, str]:
         else:
             env.pop(name, None)
     mailto = (
-        env.get("PAPERS_MAILTO")
-        or env.get("OPENALEX_MAILTO")
-        or env.get("UNPAYWALL_EMAIL")
+        (os.environ.get("PAPERS_MAILTO") or "").strip()
+        or (os.environ.get("OPENALEX_MAILTO") or "").strip()
+        or (os.environ.get("UNPAYWALL_EMAIL") or "").strip()
+        or env_get("PAPERS_MAILTO")
+        or env_get("OPENALEX_MAILTO")
+        or env_get("UNPAYWALL_EMAIL")
         or ""
     )
     if mailto:
@@ -270,7 +273,9 @@ def _try_batch(
             return pairs
         if callable(log):
             log(f"  papers batch timed out: {exc}")
-        return [("", "")] * len(dois)
+        # No JSON at all: do not cache five empty misses. Caller falls back
+        # to one DOI at a time.
+        return None
     except (OSError, ValueError) as exc:
         if callable(log):
             log(f"  papers batch failed: {exc}")
