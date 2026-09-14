@@ -39,7 +39,7 @@ import time
 from http import HTTPStatus
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
-from . import gallery, llm
+from . import gallery, llm, paperfetch
 from .ideas import generate_ideas
 from .pipeline import NoPapersFound, generate_draft
 from .render import (
@@ -778,8 +778,8 @@ class ArticleGenHandler(SimpleHTTPRequestHandler):
             "papers_found": count,
             "sources": outcomes,
             "full_text": unpaywall,
-            "openalex_mailto_set": bool(os.environ.get("OPENALEX_MAILTO")),
-            "semantic_scholar_key_set": bool(os.environ.get("SEMANTIC_SCHOLAR_API_KEY")),
+            "openalex_mailto_set": bool(paperfetch.env_get("OPENALEX_MAILTO")),
+            "semantic_scholar_key_set": bool(paperfetch.env_get("SEMANTIC_SCHOLAR_API_KEY")),
         })
 
     def _log_stage(self, message: str) -> None:

@@ -18,7 +18,7 @@ On your machine:
 ```bash
 pip install -e .
 export OPENROUTER_API_KEY=...           # or ANTHROPIC_API_KEY, or --model cli:opus
-export SEMANTIC_SCHOLAR_API_KEY=...     # free; without it that database is skipped
+export SEMANTIC_SCHOLAR_API_KEY=...     # same User-env name as paperfetch; without it S2 is skipped often
 
 articlegen ideas "seclusion reduction in acute psychiatric wards"
 articlegen draft "Does reducing seclusion on acute psychiatric wards increase violence?" --open
