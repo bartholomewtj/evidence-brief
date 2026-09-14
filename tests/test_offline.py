@@ -4112,6 +4112,36 @@ def test_browser_back_from_an_article_returns_home() -> None:
           and page.count('class="home-btn"') == 2)
 
 
+def test_citation_clicks_in_the_reader_do_not_leave_the_article() -> None:
+    """srcdoc iframes leak #ref-N onto the parent URL; that used to mean Home.
+
+    Articles live in a sandboxed iframe via srcdoc. Clicking <a href="#ref-1">
+    in that document changes this page's hash in Chrome/Safari, and the
+    hashchange listener treated anything that was not #read=/#p=/#g= as
+    "leave the article". The click is intercepted inside the frame so the
+    citation scrolls to the reference, and a leaked fragment is not treated
+    as navigation. Back still clears an empty hash to the landing view.
+    """
+    page = open(
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "index.html"),
+        encoding="utf-8",
+    ).read()
+
+    check("fragment clicks in the iframe are intercepted",
+          "function bindIframeFragmentLinks(" in page
+          and "function scrollIframeToId(" in page)
+    load = page[page.index("iframe.addEventListener('load'"):]
+    check("the iframe load handler binds them", "bindIframeFragmentLinks()" in load)
+
+    handler = page[page.index("addEventListener('hashchange'"):]
+    handler = handler[:handler.index("\n  });\n") + 6]
+    check("a leaked fragment scrolls inside the frame instead of leaving",
+          "scrollIframeToId" in handler
+          and "history.replaceState" in handler)
+    check("an empty hash still returns to the landing view",
+          "showView('themeView')" in handler)
+
+
 def test_health_reports_which_build_is_running() -> None:
     """The deployment must be able to say what it is running, and from where.
 
@@ -10490,6 +10520,7 @@ def main(argv: list[str] | None = None) -> int:
         test_article_in_the_web_app_cannot_run_scripts,
         test_desktop_article_uses_the_full_window,
         test_browser_back_from_an_article_returns_home,
+        test_citation_clicks_in_the_reader_do_not_leave_the_article,
         test_health_reports_which_build_is_running,
         test_openalex_reaches_for_recent_work_as_well,
         test_claude_cli_provider,
