@@ -833,8 +833,9 @@
            saved articles (issue #100).
            allow-same-origin is kept deliberately, and it does NOT re-enable
            scripts. It is what lets this page still reach contentDocument to
-           sync the theme and read the article back out when saving it.
-           Dropping it would break both for no extra safety.
+           sync the theme, intercept in-article fragment links, and read the
+           article back out when saving it.
+           Dropping it would break those for no extra safety.
            Articles rendered for the app carry no scripts anyway; the hideArticleToolbar
            call below covers older draft files on disk that still do. -->
       <iframe id="articleIframe" class="article-iframe" title="Generated briefing"
@@ -1162,6 +1163,7 @@
       iframe.addEventListener('load', function() {
         syncThemeToIframe();
         hideArticleToolbar();
+        bindIframeFragmentLinks();
       });
     }
   });
@@ -1177,6 +1179,10 @@
   // on screen. lastHandledHash skips the reload when we set the hash after
   // already putting the article in the iframe.
   let lastHandledHash = window.location.hash || '';
+
+  function isShareHash(hash) {
+    return hash.startsWith('#read=') || hash.startsWith('#p=') || hash.startsWith('#g=');
+  }
 
   function goHome() {
     showView('themeView');
@@ -1194,15 +1200,80 @@
     }
   }
 
+  // srcdoc iframes have URL about:srcdoc. A click on <a href="#ref-1"> then
+  // changes *this* page's hash instead of scrolling inside the frame, and the
+  // hashchange listener below used to treat that as "leave the article".
+  // Capture the click in the frame (parent JS; the iframe itself has no
+  // scripts) and scroll the target. The hashchange path is the safety net
+  // for a leak that still reaches the parent URL.
+  function scrollIframeToId(id) {
+    if (!id) return;
+    const iframe = document.getElementById('articleIframe');
+    if (!iframe) return;
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      if (!doc) return;
+      const target = doc.getElementById(id);
+      if (!target) return;
+      if (!doc.getElementById('articlegen-fragment-target-style')) {
+        const style = doc.createElement('style');
+        style.id = 'articlegen-fragment-target-style';
+        style.textContent = '.is-fragment-target { background: var(--surface); border-radius: 2px; scroll-margin-top: 0.5rem; }';
+        (doc.head || doc.documentElement).appendChild(style);
+      }
+      doc.querySelectorAll('.is-fragment-target').forEach(function (el) {
+        el.classList.remove('is-fragment-target');
+      });
+      target.classList.add('is-fragment-target');
+      target.scrollIntoView({ block: 'start' });
+    } catch (e) {}
+  }
+
+  function bindIframeFragmentLinks() {
+    const iframe = document.getElementById('articleIframe');
+    if (!iframe) return;
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      if (!doc || !doc.documentElement) return;
+      if (doc.documentElement.getAttribute('data-fragments-bound') === '1') return;
+      doc.documentElement.setAttribute('data-fragments-bound', '1');
+      doc.addEventListener('click', function (e) {
+        const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (!a) return;
+        const href = a.getAttribute('href') || '';
+        if (href.charAt(0) !== '#' || href === '#') return;
+        e.preventDefault();
+        e.stopPropagation();
+        try {
+          scrollIframeToId(decodeURIComponent(href.slice(1)));
+        } catch (err) {}
+      }, true);
+    } catch (e) {}
+  }
+
   window.addEventListener('hashchange', function () {
     const hash = window.location.hash || '';
     if (hash === lastHandledHash) return;
-    lastHandledHash = hash;
-    if (hash.startsWith('#read=') || hash.startsWith('#p=') || hash.startsWith('#g=')) {
+    if (isShareHash(hash)) {
+      lastHandledHash = hash;
       checkUrlHashForArticle();
-    } else {
-      showView('themeView');
+      return;
     }
+    // A citation (or #limitations / #table-1) leaked out of the srcdoc iframe.
+    // Stay on the article, put the share hash back, and scroll in the frame.
+    const readerOpen = document.getElementById('readerView')?.classList.contains('active');
+    if (hash && readerOpen) {
+      const fragment = hash.slice(1);
+      if (isShareHash(lastHandledHash)) {
+        history.replaceState(null, '', window.location.pathname + window.location.search + lastHandledHash);
+      } else {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+      scrollIframeToId(fragment);
+      return;
+    }
+    lastHandledHash = hash;
+    showView('themeView');
   });
 
   function showToast(msg) {
