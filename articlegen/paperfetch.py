@@ -79,8 +79,47 @@ def available(log: Callable[[str], None] | None = None) -> bool:
     return _AVAILABLE
 
 
+# Scholarly keys paperfetch (and this search) share. Process env first;
+# on Windows, the User environment if this process started before setx.
+_PAPERS_KEYS = (
+    "SEMANTIC_SCHOLAR_API_KEY",
+    "NCBI_API_KEY",
+    "CORE_API_KEY",
+    "LIBKEY_API_KEY",
+    "PAPERS_MAILTO",
+    "OPENALEX_MAILTO",
+    "UNPAYWALL_EMAIL",
+)
+
+
+def _user_env(name: str) -> str:
+    """Windows User-environment value, or ""."""
+    if os.name != "nt":
+        return ""
+    try:
+        import winreg
+
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Environment") as key:
+            raw, _ = winreg.QueryValueEx(key, name)
+    except OSError:
+        return ""
+    return str(raw or "").strip()
+
+
+def env_get(name: str) -> str:
+    """Process env, then Windows User env. Never writes os.environ."""
+    val = (os.environ.get(name) or "").strip()
+    return val or _user_env(name)
+
+
 def _child_env() -> dict[str, str]:
     env = dict(os.environ)
+    for name in _PAPERS_KEYS:
+        val = env_get(name)
+        if val:
+            env[name] = val
+        else:
+            env.pop(name, None)
     mailto = (
         env.get("PAPERS_MAILTO")
         or env.get("OPENALEX_MAILTO")

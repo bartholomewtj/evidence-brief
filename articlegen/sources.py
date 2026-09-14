@@ -2,10 +2,9 @@
 
 Four free, keyless sources are queried:
 
-- Semantic Scholar Graph API (an optional API key raises rate limits — but
-  keys are no longer granted to free-domain emails or third-party apps, so
-  in practice the contested keyless pool is all this source has, and it
-  refuses more often than it answers)
+- Semantic Scholar Graph API (optional `SEMANTIC_SCHOLAR_API_KEY` raises
+  rate limits; same User-env name as paperfetch. Without a key the
+  contested keyless pool is used and it refuses more often than it answers)
 - OpenAlex (an optional mailto address gets you into the "polite pool")
 - Europe PMC (no key, no mailto; biomedical/life-science coverage, which
   suits the mental-health topics this is mostly used for)
@@ -685,7 +684,7 @@ def search_semantic_scholar(query: str, limit: int = 15) -> list[Paper]:
     """
     global _s2_patient_round_spent
     headers = {}
-    api_key = os.environ.get("SEMANTIC_SCHOLAR_API_KEY")
+    api_key = paperfetch.env_get("SEMANTIC_SCHOLAR_API_KEY")
     if api_key:
         headers["x-api-key"] = api_key
     params = {"query": query, "limit": limit, "fields": _SS_FIELDS}

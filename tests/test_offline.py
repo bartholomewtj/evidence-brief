@@ -7991,6 +7991,66 @@ def test_full_text_comes_from_the_papers_cli_when_it_is_there() -> None:
         reset_paperfetch()
 
 
+def test_scholarly_keys_reach_articlegen_and_papers() -> None:
+    """Process env wins; Windows User env fills a gap; papers child gets both.
+
+    Local paperfetch and articlegen share SEMANTIC_SCHOLAR_API_KEY /
+    NCBI_API_KEY / CORE_API_KEY. A Grok or IDE session started before setx
+    has an empty process env even when the User env is set. env_get reads
+    User env without writing os.environ (LLM keys stay per-call).
+    """
+    from articlegen import paperfetch, sources
+
+    saved = {k: os.environ.get(k) for k in (
+        "SEMANTIC_SCHOLAR_API_KEY", "NCBI_API_KEY", "CORE_API_KEY")}
+    saved_user = paperfetch._user_env
+    try:
+        os.environ["SEMANTIC_SCHOLAR_API_KEY"] = "process-s2"
+        paperfetch._user_env = lambda name: "user-s2" if name == "SEMANTIC_SCHOLAR_API_KEY" else ""
+        check("env_get prefers process env over User env",
+              paperfetch.env_get("SEMANTIC_SCHOLAR_API_KEY") == "process-s2")
+
+        os.environ.pop("SEMANTIC_SCHOLAR_API_KEY", None)
+        os.environ.pop("NCBI_API_KEY", None)
+        os.environ.pop("CORE_API_KEY", None)
+        paperfetch._user_env = lambda name: {
+            "SEMANTIC_SCHOLAR_API_KEY": "user-s2",
+            "NCBI_API_KEY": "user-ncbi",
+            "CORE_API_KEY": "user-core",
+        }.get(name, "")
+        check("env_get falls back to User env when process unset",
+              paperfetch.env_get("SEMANTIC_SCHOLAR_API_KEY") == "user-s2")
+        child = paperfetch._child_env()
+        check("papers subprocess gets S2 from User env",
+              child.get("SEMANTIC_SCHOLAR_API_KEY") == "user-s2")
+        check("papers subprocess gets NCBI from User env",
+              child.get("NCBI_API_KEY") == "user-ncbi")
+        check("papers subprocess gets CORE from User env",
+              child.get("CORE_API_KEY") == "user-core")
+        check("search_semantic_scholar uses env_get for the header",
+              "env_get(\"SEMANTIC_SCHOLAR_API_KEY\")" in __import__("inspect").getsource(
+                  sources.search_semantic_scholar))
+    finally:
+        paperfetch._user_env = saved_user
+        for k, v in saved.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+
+
+def test_render_blueprint_declares_scholarly_secrets() -> None:
+    """Hosted articlegen needs the same keys in the Render dashboard."""
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    text = open(os.path.join(root, "render.yaml"), encoding="utf-8").read()
+    for key in ("SEMANTIC_SCHOLAR_API_KEY", "NCBI_API_KEY", "CORE_API_KEY"):
+        check(f"render.yaml declares {key}", f"key: {key}" in text)
+    check("scholarly secrets are dashboard-only (sync: false)",
+          text.count("sync: false") >= 6)
+    check("LIBKEY_API_KEY stays off the public host",
+          "LIBKEY_API_KEY" not in text or "Do not set LIBKEY_API_KEY" in text)
+
+
 def test_queued_ckn_counts_as_no_open_access() -> None:
     """`queued_ckn` and `no_oa` are both paywalled, not "OA but returned no text".
 
@@ -10343,6 +10403,8 @@ def main(argv: list[str] | None = None) -> int:
         test_pipeline_fetches_full_text,
         test_unlabelled_sources_stop_the_run,
         test_full_text_comes_from_the_papers_cli_when_it_is_there,
+        test_scholarly_keys_reach_articlegen_and_papers,
+        test_render_blueprint_declares_scholarly_secrets,
         test_queued_ckn_counts_as_no_open_access,
         test_ckn_loop,
         test_refresh_reports_new_direct,

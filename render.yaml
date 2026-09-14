@@ -62,6 +62,17 @@ services:
       - key: PAPERS_MAILTO
         sync: false
 
+      # Same names as local paperfetch / articlegen CLI. Set in the Render
+      # dashboard as secrets — never commit them. Absent: Semantic Scholar
+      # search is keyless (often 429s); NCBI / CORE steps in papers are
+      # skipped or rate-limited. Do not set LIBKEY_API_KEY here (CKN-only).
+      - key: SEMANTIC_SCHOLAR_API_KEY
+        sync: false
+      - key: NCBI_API_KEY
+        sync: false
+      - key: CORE_API_KEY
+        sync: false
+
       # Host-paid public drafts (GPT-5.6 Luna). Set the value in the Render
       # dashboard as a secret — never commit it. Absent: generate returns 400.
       # The web app does not take a visitor key. Rate limits are the spend
