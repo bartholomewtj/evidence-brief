@@ -6754,6 +6754,24 @@ def test_structured_briefing() -> None:
     rules = {i["rule"] for i in check_style(plain)["issues"]}
     check("graded findings count as hedges", "under-hedged" not in rules)
 
+    # A result with no citation of its own is an error the revision must fix
+    # with the sources in hand; a synthesis sentence across cited studies is not.
+    uncited = dict(article, findings=[{
+        "claim": "Bans did not raise attainment.",
+        "evidence": "A trial of 30 schools found no difference [1]. A conference "
+        "abstract of the same trial reported significantly fewer admissions. "
+        "Both studies tested packages, not bans alone. Taken together, these "
+        "results showed no benefit.",
+        "certainty": "low"}])
+    issues = [i for i in check_style(uncited)["issues"] if i["rule"] == "uncited-evidence"]
+    check("an uncited result is flagged",
+          len(issues) == 1 and "conference abstract" in issues[0]["excerpt"])
+    check("but not a synthesis sentence", "Taken together" not in issues[0]["excerpt"]
+          and "Both studies" not in issues[0]["excerpt"])
+    from articlegen.style import SOURCED_RULES, SUBSTANCE_RULES
+    check("its revision gets the sources but is not a thinness fix",
+          "uncited-evidence" in SOURCED_RULES and "uncited-evidence" not in SUBSTANCE_RULES)
+
 
 def test_demo_and_index() -> None:
     import tempfile

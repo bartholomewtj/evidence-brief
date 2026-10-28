@@ -31,7 +31,7 @@ from .sources import (DATABASE_NAMES, DEFAULT_MAX_PAPERS, NAMED_SOURCE_LIMIT,
                       named_matches, named_references, openalex_citing_works,
                       openalex_records, openalex_work, paper_design,
                       resolve_pmcid)
-from .style import (SUBSTANCE_RULES, check_style, errors as style_errors,
+from .style import (SOURCED_RULES, check_style, errors as style_errors,
                     format_report as format_style, revision_brief)
 from .verify import check_statistics, revision_brief as statistics_brief
 from .render import _au_date
@@ -488,7 +488,7 @@ def enforce_style(
         # abstracts and 60,000 characters of full text to fix a contraction is
         # ~30,000 input tokens the model is explicitly forbidden to use — and
         # material it cannot use is material it can still be distracted by.
-        needs_sources = any(i["rule"] in SUBSTANCE_RULES for i in problems)
+        needs_sources = any(i["rule"] in SOURCED_RULES for i in problems)
         if papers and not needs_sources:
             log("  (register-only fixes; revising against the draft alone)")
 
