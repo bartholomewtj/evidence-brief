@@ -3731,7 +3731,7 @@ def test_full_text_dependencies_fail_loudly_enough_to_diagnose() -> None:
 
     # The pipeline has to pass the logger, or none of the above is reachable.
     check("the pipeline passes its logger through",
-          "resolve_pmcid(paper, log=log)" in inspect.getsource(
+          "resolve_pmcid(paper, log=log" in inspect.getsource(
               articlegen_pipeline._retrieve_full_texts)
           and "_retrieve_full_texts(" in inspect.getsource(
               articlegen_pipeline.generate_draft))
