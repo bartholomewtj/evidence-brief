@@ -734,6 +734,9 @@ outcome, mechanism or conclusion it does not report, and never call a result \
 significant, non-significant or null unless the source says so.
 - Every source you cite must appear on its own, as [N], at least once — never \
 only inside a bundle like [1, 4].
+- Every sentence in `evidence` that reports a study's numbers or result ends \
+with that study's [N], even when the next sentence cites it too. A claim no \
+source you were given supports does not belong in the briefing.
 - Do not restate the certainty grade inside `evidence`; the page prints it \
 beside the claim.
 

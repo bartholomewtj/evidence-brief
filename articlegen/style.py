@@ -27,7 +27,7 @@ import collections
 import re
 import statistics
 
-from .briefing import certainty_level, finding_texts, overall_certainty
+from .briefing import certainty_level, finding_parts, finding_texts, overall_certainty
 
 # --------------------------------------------------------------------------
 # vocabulary
@@ -631,6 +631,15 @@ def check_style(article: dict, direct_sources: int | None = None) -> dict:
             "never says what they individually did or found. Give each its own "
             "treatment: design, population, and result.")
 
+    uncited = _uncited_evidence(article)
+    if uncited:
+        add("uncited-evidence", "error", "findings",
+            f"{len(uncited)} sentence(s) in the findings report a result or a number "
+            "but cite no source. End each with the [N] of the study it describes, "
+            "taken from the SOURCES. A sentence that no source you were given "
+            "supports must be deleted, not cited.",
+            " | ".join(u[:140] for u in uncited[:3]))
+
     return {"issues": issues, "stats": stats}
 
 
@@ -733,6 +742,43 @@ def _never_cited_alone(article: dict) -> tuple[list[int], int]:
     return never_solo, len(cited)
 
 
+# A sentence in a finding's evidence that reports a number or a study's result
+# names the study it came from. Measured on the Sonnet writer: about one evidence
+# sentence in fourteen reported a result with no [N] of its own, and one of them
+# described a "conference abstract of the same trial" nothing in the cited
+# material supports. Without a citation the figure check falls back to every
+# source at once, and a claim with no source is invisible to it entirely.
+_RESULT_VERB = re.compile(
+    r"\b(?:reported|found|showed|observed|associated|reduced|increased|decreased|"
+    r"lowered|raised|improved|worsened|differed|significant(?:ly)?|no difference)\b",
+    re.I,
+)
+_SYNTHESIS_OPENER = re.compile(
+    r"^(?:taken together|together|overall|across|in sum|in short|both|these|this|"
+    r"the two|the three|all|neither|none|such|so|thus|that)\b",
+    re.I,
+)
+_BARE_NUMBER = re.compile(r"(?<![\w.])\d+(?:[.,]\d+)?%?")
+_YEAR = re.compile(r"\b(?:19|20)\d{2}\b")
+
+
+def _uncited_evidence(article: dict) -> list[str]:
+    """Evidence sentences in structured findings that report a result or a
+    number but carry no citation marker. Legacy string findings are exempt."""
+    out = []
+    for finding in article.get("findings") or []:
+        if not isinstance(finding, dict):
+            continue
+        for sentence in _sentences(finding_parts(finding)[1]):
+            if re.search(r"\[\d", sentence):
+                continue
+            numbered = _BARE_NUMBER.search(_YEAR.sub("", sentence))
+            result = _RESULT_VERB.search(sentence) and not _SYNTHESIS_OPENER.search(sentence)
+            if numbered or result:
+                out.append(sentence)
+    return out
+
+
 def _repeated_phrase(sentences: list[str]) -> str:
     """The longest run of words that appears verbatim more than once, if any.
 
@@ -774,6 +820,12 @@ SUBSTANCE_RULES = frozenset({
     "under-length", "too-few-sections", "recycled-phrasing",
     "hedge-monotony", "repeated-opener", "echoed-abstract", "bundled-citations",
 })
+
+# Rules whose fix needs the sources in the revision prompt. The substance rules
+# need material to add; `uncited-evidence` needs to know which study a sentence
+# came from. It is not a substance rule: its brief says cite or cut, not "pull
+# in more", so `revision_brief` keeps the reword-only instruction for it.
+SOURCED_RULES = SUBSTANCE_RULES | {"uncited-evidence"}
 
 # Warnings that ride along on a revision that is already happening. A warning
 # never buys a revision on its own — `enforce_style` returns early when there
