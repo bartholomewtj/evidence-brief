@@ -27,6 +27,8 @@ import collections
 import re
 import statistics
 
+from .briefing import certainty_level, finding_texts, overall_certainty
+
 # --------------------------------------------------------------------------
 # vocabulary
 # --------------------------------------------------------------------------
@@ -327,7 +329,7 @@ def prose_blocks(article: dict) -> list[tuple[str, str]]:
     if summary:
         where = "answer" if article.get("answer") else "abstract"
         blocks.append((where, summary))
-    for finding in article.get("findings") or []:
+    for finding in finding_texts(article):
         blocks.append(("findings", finding))
     for unknown in article.get("unknowns") or []:
         blocks.append(("unknowns", unknown))
@@ -523,6 +525,17 @@ def check_style(article: dict, direct_sources: int | None = None) -> dict:
     hedge_counts = {h: n for h, n in hedge_counts.items() if n}
     top_hedge, top_hedge_n = max(hedge_counts.items(), key=lambda kv: kv[1], default=("", 0))
 
+    # A structured briefing grades every finding and the verdict, GRADE-style.
+    # That grade is the hedge, stated once and explicitly, which is what the
+    # density rule is a proxy for; counting only verbal hedges would push the
+    # writer to re-hedge prose the grade already qualifies.
+    graded = sum(
+        1 for f in article.get("findings") or []
+        if isinstance(f, dict) and certainty_level(f.get("certainty"))
+    )
+    if graded:
+        total_hedges += graded + (1 if overall_certainty(article)[0] else 0)
+
     stats = {
         "sentences": n_sentences,
         "words": total_words,
@@ -642,7 +655,7 @@ def _echo_pairs(article: dict) -> list[tuple[str, str, str, str]]:
         or ""
     )
     points = " ".join(
-        article.get("findings")
+        finding_texts(article)
         or article.get("key_points")
         or article.get("key_takeaways")
         or []
@@ -693,7 +706,7 @@ def _never_cited_alone(article: dict) -> tuple[list[int], int]:
     """
     everywhere = " ".join(raw for _, raw in prose_blocks(article))
     # On a briefing the findings *are* the body — there are no sections.
-    body = " ".join(article.get("findings") or []) or " ".join(
+    body = " ".join(finding_texts(article)) or " ".join(
         para
         for section in article.get("sections") or []
         for para in section.get("paragraphs") or []

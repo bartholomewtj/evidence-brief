@@ -69,6 +69,14 @@ OPENROUTER_DEFAULT_MODEL = "anthropic/claude-opus-5"
 # stays Opus. The public path must not silently inherit that default — a
 # crafted POST could otherwise bill the hosted key at $5/$25.
 OPENROUTER_PUBLIC_MODEL = "openai/gpt-5.6-luna"
+# The hosted *writer*. Luna still plans the queries, labels relevance and
+# proposes the idea cards; the briefing itself, and its style and figure
+# revisions, are written by this model. Measured on five frozen evidence pools
+# with a blind Opus judge (tools/brief_eval.py, Oct 2026): Sonnet 5.5 beat Luna
+# 10-0 pairwise on the same prompt and the same papers, +1.0 on a 10-point
+# overall score, at about $0.25 a briefing against Luna's $0.01. GPT-5.6 Terra,
+# at a similar price, only edged Luna 6-4. Server-chosen, never caller-chosen.
+OPENROUTER_PUBLIC_WRITER_MODEL = "anthropic/claude-sonnet-5.5"
 
 # Where to retry when a safety classifier declines. OpenRouter cannot pass
 # Anthropic's server-side `fallbacks` parameter (Claude API only), so this

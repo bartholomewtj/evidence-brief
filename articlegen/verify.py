@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import re
 
+from .briefing import finding_texts
 from .sources import Paper, full_text_excerpts
 
 # Units that make a bare integer a clinical quantity rather than a year, a
@@ -155,7 +156,7 @@ def _article_text(article: dict) -> str:
     ]
     fs = article.get("featured_study") or {}
     parts += [fs.get("method", ""), fs.get("results", "")]
-    parts.extend(article.get("findings") or [])
+    parts.extend(finding_texts(article))
     parts.extend(article.get("unknowns") or [])
     for section in article.get("sections", []):
         parts.extend(section.get("paragraphs", []))

@@ -850,9 +850,15 @@ def generate_draft(
     long: bool = False,
     search_terms: list[str] | None = None,
     pico: dict | None = None,
+    writer_model: str | None = None,
 ) -> Draft:
     """Research and write one briefing (or a `--long` Review). Raises NoPapersFound
     if the search comes back empty.
+
+    `writer_model`, when given, writes the briefing and its style and figure
+    revisions; `model` still plans the search and labels relevance. The hosted
+    site splits them so the cheap model does the screening and the stronger
+    one does the writing. Unset, one model does everything, as before.
 
     `api_key` overrides the environment for this call only — the server passes
     the caller's key here and must never route it through `os.environ`.
@@ -979,6 +985,8 @@ def generate_draft(
     log(f"  cite ceiling: {cite_target(_n_direct, _shown)} "
         f"({_n_direct if _n_direct is not None else 'unlabelled'} direct of {_shown} shown)")
 
+    planning_model = model
+    model = writer_model or model
     compose = write_article if long else write_briefing
     log("Writing the review (this can take a few minutes)..." if long
         else "Writing the briefing (this can take a few minutes)...")
@@ -1072,6 +1080,9 @@ def generate_draft(
         "full_text_sources": sorted(fetched),
         "full_text_via": {"papers": n_papers_via, "europe_pmc": n_epmc_via},
     }
+    planner = resolve_provider(planning_model, api_key)[1]
+    if planner != provenance["model"]:
+        provenance["planning_model"] = planner
     if named.get("queries"):
         provenance["named_sources"] = {"queries": named["queries"], "added": named["added"]}
     if referenced.get("seeds") or referenced.get("cited_seed"):
