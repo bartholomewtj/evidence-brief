@@ -20,8 +20,10 @@ public GitHub gist; generating puts it there. The browser also keeps its own
 copies in localStorage.
 
 The web app does not take a visitor key. A shared host holds
-`ARTICLEGEN_PUBLIC_OPENROUTER_KEY` (or `OPENROUTER_API_KEY`) and always writes
-with `OPENROUTER_PUBLIC_MODEL`. A `key` field in the request body is ignored.
+`ARTICLEGEN_PUBLIC_OPENROUTER_KEY` (or `OPENROUTER_API_KEY`), plans and screens
+with `OPENROUTER_PUBLIC_MODEL` and writes with `OPENROUTER_PUBLIC_WRITER_MODEL`.
+A `key` field in the request body is ignored. Drafts run as polled jobs
+(`async: true`), because a hosted run outlives the proxy's ~100s window.
 The rate limits are a spend cap, not just a scholarly-API cap. Local
 `articlegen web` uses the same env vars; without one, generate returns 400.
 """
@@ -468,6 +470,9 @@ class ArticleGenHandler(SimpleHTTPRequestHandler):
             if self.path in ("/api/drafts", "/api/drafts/"):
                 self._handle_get_drafts()
                 return
+            if self.path.startswith("/api/draft/"):
+                self._handle_job(self.path[len("/api/draft/"):].strip("/"))
+                return
             if self.path in ("/api/health", "/api/health/"):
                 public = public_generation_enabled()
                 body = {"ok": True, "stateless": STATELESS, "public": public,
@@ -475,6 +480,7 @@ class ArticleGenHandler(SimpleHTTPRequestHandler):
                         **_build_info()}
                 if public:
                     body["public_model"] = llm.OPENROUTER_PUBLIC_MODEL
+                    body["public_writer_model"] = llm.OPENROUTER_PUBLIC_WRITER_MODEL
                 self._send_json(body)
                 return
             if self.path in ("/api/gallery", "/api/gallery/"):
@@ -635,7 +641,8 @@ class ArticleGenHandler(SimpleHTTPRequestHandler):
         except Exception as exc:
             self._send_json({"error": self._unexpected("generating ideas", exc)}, status=500)
 
-    def _handle_draft(self, payload: dict) -> None:
+    def _draft_params(self, payload: dict) -> dict | None:
+        """Validate a draft request. Sends the 400 and returns None when it fails."""
         topic = (payload.get("topic") or "").strip()
         style = (payload.get("style") or "").strip()
         api_key, model = _credentials(payload)
@@ -649,94 +656,69 @@ class ArticleGenHandler(SimpleHTTPRequestHandler):
         if not topic:
             self._note_run(error="missing_topic")
             self._send_json({"error": "Please provide a briefing question."}, status=400)
-            return
+            return None
 
         if len(topic) > 300:
             self._note_run(error="topic_too_long")
             self._send_json({"error": "Topic is too long (300 characters max)."}, status=400)
-            return
+            return None
 
         raw_terms = payload.get("search_terms")
         if raw_terms is not None and not isinstance(raw_terms, (list, tuple)):
             self._note_run(error="bad_search_terms")
             self._send_json({"error": "search_terms must be a list of strings."}, status=400)
-            return
+            return None
         search_terms = clean_search_terms(raw_terms)
 
         raw_pico = payload.get("pico")
         if raw_pico is not None and not isinstance(raw_pico, dict):
             self._note_run(error="bad_pico")
             self._send_json({"error": "pico must be an object of strings."}, status=400)
-            return
+            return None
         pico = clean_pico(raw_pico)
 
-        if self._missing_key(api_key) or self._over_rate_limit():
-            return
-
-        try:
-            draft = generate_draft(
-                topic, style_note=style[:500], max_papers=DEFAULT_MAX_PAPERS, api_key=api_key,
-                model=model, log=self._log_stage,
-                search_terms=search_terms,
-                pico=pico,
-            )
-        except NoPapersFound as exc:
-            self._note_run(error=type(exc).__name__)
-            # 503 when the upstream APIs are the problem: it's not the caller's
-            # request that was unprocessable, and the distinction tells them
-            # whether to reword the topic or simply try again.
-            self._send_json({"error": str(exc)}, status=503 if exc.sources_failed else 422)
-            return
-        except Exception as exc:
-            self._send_json({"error": self._unexpected("writing the briefing", exc)},
-                            status=500)
-            return
-
-        self._note_run(
-            **draft_run_fields(draft),
-            model=draft.provenance.get("model") or resolved,
-        )
-
-        render_args = (
-            draft.article, draft.papers, draft.topic,
-            draft.curation, draft.verification, draft.provenance,
-            draft.style_report,
-        )
-        # The copy sent back goes into a sandboxed iframe in the front end, so
-        # it carries no scripts and no toolbar (see render_article's docstring).
-        # The copy written to drafts/ below is opened directly in a browser with
-        # no app around it, so it keeps both — same file the CLI produces.
-        article_html = render_article(*render_args, standalone=False)
-        article_md = render_markdown(*render_args)
-
-        response = {
-            "ok": True,
-            "title": draft.article.get("title", topic),
-            "stem": f"{datetime.date.today().isoformat()}-{_slugify(topic)}",
-            "sources_count": len(draft.cited_refs),
-            "summary": draft.summary(),
-            "html": article_html,
-            "markdown": article_md,
+        return {
+            "topic": topic, "style": style, "api_key": api_key, "model": model,
+            "resolved": resolved, "search_terms": search_terms, "pico": pico,
         }
 
-        if not STATELESS:
-            # Local mode: mirror the CLI so `articlegen queue` sees the same drafts.
-            os.makedirs(DRAFTS_DIR, exist_ok=True)
-            html_name = f"{response['stem']}.html"
-            md_name = f"{response['stem']}.md"
-            with open(os.path.join(DRAFTS_DIR, html_name), "w", encoding="utf-8") as f:
-                f.write(render_article(*render_args))
-            with open(os.path.join(DRAFTS_DIR, md_name), "w", encoding="utf-8") as f:
-                f.write(article_md)
-            build_index(DRAFTS_DIR)
-            response["html_url"] = f"/drafts/{html_name}"
-            response["md_url"] = f"/drafts/{md_name}"
+    def _handle_draft(self, payload: dict) -> None:
+        params = self._draft_params(payload)
+        if params is None:
+            return
+        if self._missing_key(params["api_key"]) or self._over_rate_limit():
+            return
 
-        item = gallery.try_publish(response["title"], article_html)
-        if item:
-            response["gallery"] = item
+        # `async: true` is what the current front end sends: the run continues
+        # in a thread and the page polls GET /api/draft/<job>. Without it the
+        # request blocks until the briefing is written, as it always did — kept
+        # for a cached old page and for scripts, but a run that outlives
+        # Cloudflare's ~100s window in front of Render is lost on that path.
+        if payload.get("async"):
+            job_id = start_draft_job(params)
+            if job_id is None:
+                self._note_run(error="busy")
+                self._send_json(
+                    {"error": "The server is writing as many briefings as it can at "
+                              "once. Try again in a minute."}, status=429)
+                return
+            self._send_json({"ok": True, "job": job_id, "status": "running"}, status=202)
+            return
 
-        self._send_json(response)
+        status, body, fields = produce_draft(params, log=self._log_stage)
+        self._note_run(**fields)
+        self._send_json(body, status=status)
+
+    def _handle_job(self, job_id: str) -> None:
+        """Where a polling page reads a running draft's stage, then its result."""
+        job = job_snapshot(job_id)
+        if job is None:
+            self._send_json(
+                {"status": "missing",
+                 "error": "This briefing run is not on the server any more. The host "
+                          "may have restarted; start it again."}, status=404)
+            return
+        self._send_json(job)
 
     def _handle_diag(self) -> None:
         """Can this host reach the scholarly APIs at all?
@@ -785,6 +767,217 @@ class ArticleGenHandler(SimpleHTTPRequestHandler):
     def _log_stage(self, message: str) -> None:
         """Pipeline progress to the server log. Never carries the caller's key."""
         sys.stderr.write(f"[draft] {message}\n")
+
+
+# --------------------------------------------------------------- draft jobs
+#
+# A hosted briefing takes longer than Cloudflare will hold a request open in
+# front of Render (~100s): the stronger writer alone runs 40-80s, after 30-60s
+# of search and screening. So the page starts a job and polls it. The job lives
+# in this process only — a restart loses it, and the poll says so — and is
+# dropped JOB_TTL seconds after it finishes. Nothing is written to disk.
+
+JOB_TTL = 30 * 60
+MAX_RUNNING_JOBS = int(os.environ.get("ARTICLEGEN_MAX_JOBS", "4"))
+
+_jobs: dict[str, dict] = {}
+_jobs_lock = threading.Lock()
+
+# The pipeline's own log lines, mapped to what a visitor can follow. Only the
+# stage name and a count ever leave the server: never a query, a title or an
+# error's detail.
+_STAGE_PATTERNS = (
+    (re.compile(r"^Planning search queries"), "planning", lambda m: "Planning the searches"),
+    (re.compile(r"^Fetching journal articles"), "searching",
+     lambda m: "Searching Semantic Scholar, OpenAlex, Europe PMC and arXiv"),
+    (re.compile(r"^Collected (\d+) candidate papers"), "searching",
+     lambda m: f"Found {m.group(1)} candidate papers"),
+    (re.compile(r"^Assessing source relevance"), "screening",
+     lambda m: "Rating how directly each paper answers the question"),
+    (re.compile(r"relevance: (\d+) direct / (\d+) related"), "screening",
+     lambda m: f"{m.group(1)} papers address the question directly, {m.group(2)} are related"),
+    (re.compile(r"^Writing the (?:briefing|review)"), "writing",
+     lambda m: "Writing a first draft from the abstracts"),
+    (re.compile(r"^Fetching open-access full texts"), "reading",
+     lambda m: "Fetching open-access full texts of the cited papers"),
+    (re.compile(r"full text retrieved for (\d+) cited"), "reading",
+     lambda m: (f"Read {m.group(1)} full text{'s' if m.group(1) != '1' else ''}"
+                if m.group(1) != "0" else "No open-access full text found; using abstracts")),
+    (re.compile(r"^Rewriting with cited full text"), "writing",
+     lambda m: "Rewriting the briefing with the full texts"),
+    (re.compile(r"^Prose style:"), "checking", lambda m: "Checking the prose"),
+    (re.compile(r"^Statistics:"), "checking",
+     lambda m: "Checking every figure against the paper it cites"),
+)
+
+
+def public_stage(message: str) -> tuple[str, str] | None:
+    """(stage, message) a visitor may see for one pipeline log line, or None."""
+    text = (message or "").strip()
+    for pattern, stage, render in _STAGE_PATTERNS:
+        m = pattern.search(text)
+        if m:
+            return stage, render(m)
+    return None
+
+
+def _unexpected_message(doing: str, exc: Exception, log) -> str:
+    """The sentence a visitor sees for an internal failure; detail goes to the log."""
+    log(f"ERROR while {doing}: {type(exc).__name__}: {exc}")
+    lowered = str(exc).lower()
+    if any(hint in lowered for hint in ArticleGenHandler._ACTIONABLE):
+        return str(exc)
+    return (f"Something went wrong {doing}, and it was not your request's fault. "
+            "Try again — if it keeps happening, the backend log has the detail.")
+
+
+def produce_draft(params: dict, log) -> tuple[int, dict, dict]:
+    """Run the pipeline for validated `params`. Returns (status, body, run fields).
+
+    The one copy used by the blocking request and by a job thread alike.
+    """
+    topic = params["topic"]
+    search_terms, pico = params["search_terms"], params["pico"]
+    try:
+        draft = generate_draft(
+            topic, style_note=params["style"][:500], max_papers=DEFAULT_MAX_PAPERS,
+            api_key=params["api_key"], model=params["model"], log=log,
+            search_terms=search_terms,
+            pico=pico,
+            # Hosted only: the host's key writes with the stronger model.
+            writer_model=(llm.OPENROUTER_PUBLIC_WRITER_MODEL
+                          if _hosted_openrouter_key() else None),
+        )
+    except NoPapersFound as exc:
+        # 503 when the upstream APIs are the problem: it's not the caller's
+        # request that was unprocessable, and the distinction tells them
+        # whether to reword the topic or simply try again.
+        return (503 if exc.sources_failed else 422, {"error": str(exc)},
+                {"error": type(exc).__name__})
+    except Exception as exc:
+        return (500, {"error": _unexpected_message("writing the briefing", exc, log)},
+                {"error": type(exc).__name__})
+
+    fields = dict(draft_run_fields(draft),
+                  model=draft.provenance.get("model") or params["resolved"])
+
+    render_args = (
+        draft.article, draft.papers, draft.topic,
+        draft.curation, draft.verification, draft.provenance,
+        draft.style_report,
+    )
+    # The copy sent back goes into a sandboxed iframe in the front end, so
+    # it carries no scripts and no toolbar (see render_article's docstring).
+    # The copy written to drafts/ below is opened directly in a browser with
+    # no app around it, so it keeps both — same file the CLI produces.
+    article_html = render_article(*render_args, standalone=False)
+    article_md = render_markdown(*render_args)
+
+    response = {
+        "ok": True,
+        "title": draft.article.get("title", topic),
+        "stem": f"{datetime.date.today().isoformat()}-{_slugify(topic)}",
+        "sources_count": len(draft.cited_refs),
+        "summary": draft.summary(),
+        "html": article_html,
+        "markdown": article_md,
+    }
+
+    if not STATELESS:
+        # Local mode: mirror the CLI so `articlegen queue` sees the same drafts.
+        os.makedirs(DRAFTS_DIR, exist_ok=True)
+        html_name = f"{response['stem']}.html"
+        md_name = f"{response['stem']}.md"
+        with open(os.path.join(DRAFTS_DIR, html_name), "w", encoding="utf-8") as f:
+            f.write(render_article(*render_args))
+        with open(os.path.join(DRAFTS_DIR, md_name), "w", encoding="utf-8") as f:
+            f.write(article_md)
+        build_index(DRAFTS_DIR)
+        response["html_url"] = f"/drafts/{html_name}"
+        response["md_url"] = f"/drafts/{md_name}"
+
+    item = gallery.try_publish(response["title"], article_html)
+    if item:
+        response["gallery"] = item
+    return 200, response, fields
+
+
+def _prune_jobs(now: float) -> None:
+    for job_id in [k for k, j in _jobs.items()
+                   if j.get("finished") and now - j["finished"] > JOB_TTL]:
+        del _jobs[job_id]
+
+
+def start_draft_job(params: dict) -> str | None:
+    """Start a draft in a thread. None when MAX_RUNNING_JOBS are already running."""
+    import secrets
+
+    now = time.time()
+    with _jobs_lock:
+        _prune_jobs(now)
+        if sum(1 for j in _jobs.values() if j["status"] == "running") >= MAX_RUNNING_JOBS:
+            return None
+        job_id = secrets.token_hex(16)
+        _jobs[job_id] = {"status": "running", "stage": "planning",
+                         "message": "Planning the searches", "started": now,
+                         "finished": None, "result": None, "error": None,
+                         "http_status": None}
+
+    def log(message: str) -> None:
+        sys.stderr.write(f"[draft {job_id[:8]}] {message}\n")
+        stage = public_stage(message)
+        if stage:
+            with _jobs_lock:
+                job = _jobs.get(job_id)
+                if job is not None:
+                    job["stage"], job["message"] = stage
+
+    def work() -> None:
+        try:
+            status, body, fields = produce_draft(params, log)
+        except Exception as exc:  # produce_draft catches; this is the backstop
+            status, body, fields = 500, {"error": _unexpected_message(
+                "writing the briefing", exc, log)}, {"error": type(exc).__name__}
+        finished = time.time()
+        with _jobs_lock:
+            job = _jobs.get(job_id)
+            if job is not None:
+                job.update(status="done" if status < 400 else "error",
+                           finished=finished, http_status=status,
+                           result=body if status < 400 else None,
+                           error=body.get("error") if status >= 400 else None)
+        # The run line a blocking request would have written when it returned.
+        try:
+            record = build_run_record(
+                "/api/draft", "POST", status, (finished - now) * 1000,
+                dict({"key": _key_mode(), "model": params["resolved"]}, **fields))
+            sys.stderr.write(json.dumps(record) + "\n")
+            gallery.append_run(record)
+        except Exception as exc:
+            sys.stderr.write(f"[web] run-log write failed: {type(exc).__name__}\n")
+
+    threading.Thread(target=work, name=f"draft-{job_id[:8]}", daemon=True).start()
+    return job_id
+
+
+def job_snapshot(job_id: str) -> dict | None:
+    """What a poll returns: stage while running, the briefing once done."""
+    if not re.fullmatch(r"[0-9a-f]{32}", job_id or ""):
+        return None
+    with _jobs_lock:
+        _prune_jobs(time.time())
+        job = _jobs.get(job_id)
+        if job is None:
+            return None
+        end = job["finished"] or time.time()
+        out = {"status": job["status"], "stage": job["stage"], "message": job["message"],
+               "elapsed": int(end - job["started"])}
+        if job["status"] == "done":
+            out["result"] = job["result"]
+        elif job["status"] == "error":
+            out["error"] = job["error"]
+            out["http_status"] = job["http_status"]
+        return out
 
 
 def run_server(port: int = 8000, directory: str = ".") -> None:

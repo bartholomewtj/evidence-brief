@@ -22,8 +22,9 @@ import json
 import re
 from typing import Callable
 
+from .briefing import normalize_briefing, revised_findings
 from .llm import generate_json
-from .sources import Paper, full_text_excerpts
+from .sources import Paper, classify_design, full_text_excerpts
 
 # The search plan is at most four queries, whoever wrote them. When the ideas
 # stage supplied terms they are the start of that set and the model may add one
@@ -251,30 +252,86 @@ _BRIEFING_SCHEMA = {
         },
         "answer": {
             "type": "string",
-            "description": "ONE paragraph, 80-140 words: what the evidence shows and "
-            "how strong it is. The thing a reader would paste into an email. No "
-            "citation markers, no undefined abbreviations, no second person, no "
-            "result stronger than the direct sources support.",
+            "description": "ONE paragraph, 70-120 words. The FIRST sentence is the "
+            "verdict: it answers the question as asked — direction, approximate size "
+            "where the sources give one, and how firm — in words a busy reader could "
+            "forward unchanged. The remaining sentences say what the verdict rests on "
+            "(designs, populations) and the one caveat that matters most. No citation "
+            "markers, no undefined abbreviations, no second person, no result "
+            "stronger than the direct sources support.",
+        },
+        "certainty": {
+            "type": "object",
+            "properties": {
+                "level": {"type": "string", "enum": ["high", "moderate", "low", "very low"]},
+                "reason": {
+                    "type": "string",
+                    "description": "At most 25 words: what sets the level — design, "
+                    "consistency, directness, precision. E.g. 'Two small open-label "
+                    "trials and several before-after studies; results agree in "
+                    "direction but follow-up is short.'",
+                },
+            },
+            "required": ["level", "reason"],
+            "additionalProperties": False,
+            "description": "Overall certainty of the evidence for the verdict, "
+            "GRADE-style.",
         },
         "findings": {
             "type": "array",
-            "items": {"type": "string"},
-            "description": "5-8 declarative bullets. Each is a NAMED finding from a "
-            "specific study: design, population, magnitude, citation [N]. Not a "
-            "restatement of `answer`. If a bullet would survive deleting every "
-            "source, it is too vague to include.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "claim": {
+                        "type": "string",
+                        "description": "ONE declarative sentence, at most 25 words: "
+                        "the takeaway, specific enough to be wrong. No citation markers.",
+                    },
+                    "evidence": {
+                        "type": "string",
+                        "description": "2-4 sentences: the studies behind the claim. "
+                        "Name each study's design and population and give its "
+                        "decisive numbers, with its [N] at the clause that reports "
+                        "it. Say where studies agree, where they disagree and why.",
+                    },
+                    "certainty": {
+                        "type": "string",
+                        "enum": ["high", "moderate", "low", "very low"],
+                    },
+                },
+                "required": ["claim", "evidence", "certainty"],
+                "additionalProperties": False,
+            },
+            "description": "3-6 synthesised findings, most important first. Each "
+            "takes one outcome or theme the question turns on and brings together "
+            "EVERY cited study that bears on it. Not one study per finding, and not "
+            "a restatement of `answer`.",
         },
         "unknowns": {
             "type": "array",
             "items": {"type": "string"},
             "description": "2-4 bullets: what remains open. A gap, a disagreement, "
-            "or a design that has not been run. Not a hedge restating a finding.",
+            "or a design that has not been run — and what would settle it. Not a "
+            "hedge restating a finding.",
         },
         "open_these": {
             "type": "array",
-            "items": {"type": "integer"},
-            "description": "Exactly 3 SOURCE indices, most useful first — the papers "
-            "a reader should open. Prefer direct systematic reviews and trials.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "source_index": {"type": "integer"},
+                    "why": {
+                        "type": "string",
+                        "description": "At most 20 words: what the reader gets from "
+                        "opening this paper that the briefing cannot give them.",
+                    },
+                },
+                "required": ["source_index", "why"],
+                "additionalProperties": False,
+            },
+            "description": "Exactly 3 cited sources, most useful first — the papers "
+            "a reader should open. Prefer direct systematic reviews and the largest "
+            "or best-designed trials.",
         },
         "keywords": {
             "type": "array",
@@ -301,7 +358,7 @@ _BRIEFING_SCHEMA = {
         },
     },
     "required": [
-        "title", "question", "answer", "findings", "unknowns",
+        "title", "question", "answer", "certainty", "findings", "unknowns",
         "open_these", "keywords", "glossary", "references",
     ],
     "additionalProperties": False,
@@ -628,28 +685,96 @@ evidence — how many sources were cited, how many are direct, related or backgr
 and the year range are computed and printed for you.
 - When recommending a paper to open, summarise it FROM ITS ABSTRACT ONLY.
 
+WHAT THE READER NEEDS — a clinician, manager or researcher with three minutes. \
+They want the verdict, how sure it is, and the evidence that carries it, in that \
+order. A list of study summaries makes them do the synthesis themselves; doing \
+it for them is the job.
+
 DIVISION OF LABOUR — do not write the same summary four times:
 
 - `question` — what is being asked, in whom. Not the answer.
-- `answer` — the standalone verdict and its strength. No citations. The only \
-overview.
-- `findings` — specific findings, each tied to a named study. Not the answer \
-in bullets.
-- `unknowns` — gaps and disagreements. Not a hedge restating a finding.
+- `answer` — the verdict FIRST, in its opening sentence: does the evidence say \
+yes, no, it depends, or that nobody has tested it — and roughly how much. \
+Then what it rests on and the caveat that matters. No citations. The only overview.
+- `certainty` — how firm the verdict is, and the reason in a phrase.
+- `findings` — the evidence, organised by what the question turns on. Not the \
+answer in bullets.
+- `unknowns` — gaps and disagreements, and what study would close each. Not a \
+hedge restating a finding.
 
 Do not reuse a phrase from `answer` in a finding.
 
-SUBSTANCE:
+SYNTHESIS — how to build `findings`:
 
-- Every finding reports what a study DID (design, population, size) and what it \
-FOUND. "The evidence suggests these strategies may be effective" is not a finding.
-- Attribute findings to their study, not to a vague body of evidence. Name the \
-design and the population in the prose.
+- One finding per outcome or theme that matters for the question: the main \
+effect first, then its size and durability, harms or unintended effects, the \
+populations or settings where it differs, and anything that contradicts it. \
+Pick the 3-6 the evidence actually speaks to.
+- Each finding's `claim` is the takeaway in one plain sentence ("Open-door and \
+seclusion-reduction programmes have not been followed by more violence."). Its \
+`evidence` then brings together EVERY cited study that bears on that claim — \
+not the single best one. Name each study's design and population at the clause \
+that reports it, give its decisive number, and put its [N] there: "a Norwegian \
+randomised trial of 556 patients found staff assaults similar under open doors \
+[2], and a before-after study of four New Zealand wards found no significant \
+rise in assaults as seclusion hours fell by 53% [1]."
+- Weigh the studies, do not just list them: say which design carries the claim, \
+where results agree, where they conflict and the likely reason (population, \
+dose, follow-up, outcome definition, risk of bias).
+- Give the decisive numbers. When a source reports an effect estimate — a mean \
+difference, risk or odds ratio, risk difference, pooled estimate — give it with \
+its comparator, units and confidence interval as the source states them, plus \
+the sample size and follow-up. A pooled estimate from a meta-analysis outranks a \
+single trial's. Where several studies report the same outcome in different \
+units, say so rather than mixing them. A finding with no number, when its \
+sources give one, is a finding the reader cannot use.
+- Report each study only as far as its abstract or full text goes. Never turn \
+one study into "studies" or "trials", never credit a source with a subgroup, \
+outcome, mechanism or conclusion it does not report, and never call a result \
+significant, non-significant or null unless the source says so.
+- Every source you cite must appear on its own, as [N], at least once — never \
+only inside a bundle like [1, 4].
+- Do not restate the certainty grade inside `evidence`; the page prints it \
+beside the claim.
+
+USE THE EVIDENCE YOU WERE GIVEN. When the WORKING SET note says many sources are \
+directly on-topic, a briefing that cites four of them understates what is known. \
+Bring in each direct source that adds something — another population, a larger \
+sample, a stronger design, a longer follow-up, a contradicting result — up to the \
+ceiling. Leave out only sources that repeat another without adding anything.
+
+STAY INSIDE THE SOURCES:
+
+- Where a study's design limits what it can show, say so in a few words at \
+the clause that cites it ("an uncontrolled before-after study", "a preprint", \
+"an opt-in sample with self-reported outcomes"). Each source's "Design (from \
+index metadata)" line and PREPRINT flag are there to help. Studies drawn from \
+one programme or dataset are not independent replications.
+- Never call a study the first, largest, only or best unless its own text says so.
+- Report numbers in the units and form the source uses: never convert units, \
+recompute an effect, or present a within-group change as a between-group one.
+
+CERTAINTY — grade the evidence GRADE-style, for the verdict and for each finding:
+
+- "high": several well-conducted randomised trials, or a meta-analysis of them, \
+with consistent results in the population asked about.
+- "moderate": randomised evidence with a real limitation (few or small trials, \
+inconsistent results, short follow-up, indirect population), or large consistent \
+observational evidence.
+- "low": observational, before-after or uncontrolled studies; a single small \
+trial; or evidence borrowed from an adjacent population.
+- "very low": case reports or series, conflicting small studies, or pure \
+extrapolation.
+Grade down for risk of bias, inconsistency, indirectness and imprecision. \
+A grade the evidence cannot carry is worse \
+than a modest one.
 """ + _WORKING_SET_RULE + """
 """ + _TOPIC_FIDELITY_RULE + """
 """ + _DATE_RULE + """
 - Hedge to the evidence in front of you, and vary how: "in a single small trial", \
-"consistently across three cohorts", "no controlled study has tested".
+"consistently across three cohorts", "no controlled study has tested". With a \
+certainty grade on every finding, the prose does not need to hedge every clause: \
+state what a study found plainly and let the grade carry the doubt.
 
 TITLE: descriptive. Names the question. Does not claim the result.
 
@@ -810,7 +935,9 @@ def apply_revisions(article: dict, edits: list[dict]) -> tuple[dict, list[str]]:
             revised["question"] = " ".join(replacement)
         elif key == "answer":
             revised["answer"] = " ".join(replacement)
-        elif key in ("findings", "unknowns"):
+        elif key == "findings":
+            revised["findings"] = revised_findings(revised.get("findings") or [], replacement)
+        elif key == "unknowns":
             revised[key] = replacement
         elif key == "key_points":
             revised["key_points"] = replacement
@@ -877,6 +1004,11 @@ For each block that needs fixing, emit one edit naming `where` it goes and the \
 Leave every block the brief does not complain about out of your reply entirely; \
 anything you omit is kept exactly as it is.
 
+When the draft's findings are objects with a `claim` and `evidence`, a \
+`findings` replacement has one string per finding, in order, written as the \
+claim, then " || ", then the evidence. Certainty grades are not yours to change \
+here and are kept as they are.
+
 Within the blocks you do return: every "[N]" citation marker must survive exactly \
 as it is and stay attached to the same claim, and every number must be unchanged. \
 Do not add claims, sources or figures unless the brief explicitly tells you the \
@@ -910,6 +1042,11 @@ _REVISE_BRIEFING_FIGURES_PATCH_SYSTEM = _BRIEFING_SYSTEM + """
 
 You are now REVISING an existing draft rather than writing a new one, and you \
 return ONLY the blocks you changed -- not the whole article.
+
+When the draft's findings are objects with a `claim` and `evidence`, a \
+`findings` replacement has one plain-text string per finding, in order, written \
+as the claim, then " || ", then the evidence. Never return a finding as JSON. \
+Certainty grades are kept as they are.
 
 A deterministic check could not find some of the numbers this draft reports in \
 the material the draft was written from. Your ONLY job is to make each flagged \
@@ -1206,12 +1343,27 @@ def _truncate_abstract(abstract: str, limit: int | None) -> str:
     return cut.rstrip() + " […]"
 
 
+# `classify_design` labels, as a writer reads them. "other" is left out: a
+# design the metadata cannot name is no design at all, not a category.
+_PROMPT_DESIGN = {
+    "synthesis": "systematic review or meta-analysis",
+    "trial": "trial",
+    "observational": "observational study",
+    "qualitative": "qualitative study",
+    "case": "case report or series",
+    "scoping": "scoping review",
+    "narrative": "narrative review",
+    "consensus": "consensus statement or guideline",
+}
+
+
 def _format_sources(
     papers: list[Paper],
     relevance: dict[int, str] | None = None,
     excerpts: dict[int, str] | None = None,
     omit: set[int] | None = None,
     abstract_chars: int | None = None,
+    appraisal: bool = False,
 ) -> str:
     """Render the sources for the prompt.
 
@@ -1233,11 +1385,23 @@ def _format_sources(
 
     def render(paper: Paper, index: int, abstract: str) -> str:
         tag = f" [{relevance[index]} to topic]" if relevance and index in relevance else ""
+        venue = paper.venue or "unknown"
+        design = ""
+        if appraisal:
+            # What Table 1 will print, so prose and table agree, and the status
+            # a reader most needs flagged. Writer prompts only: curation judges
+            # topic fit, not design.
+            label = _PROMPT_DESIGN.get(classify_design(paper), "")
+            if label:
+                design = f"Design (from index metadata): {label}\n"
+            if paper.is_preprint:
+                venue += " — PREPRINT, not peer reviewed"
         block = (
             f"SOURCE {index}{tag}\n"
             f"Title: {paper.title}\n"
             f"Authors: {paper.author_line} ({paper.year or 'n.d.'})\n"
-            f"Venue: {paper.venue or 'unknown'} | Citations: {paper.citation_count}\n"
+            f"Venue: {venue} | Citations: {paper.citation_count}\n"
+            f"{design}"
             f"Abstract: {abstract}"
         )
         if excerpts and index in excerpts:
@@ -1441,6 +1605,17 @@ def _writer_context(
             "outcome of screening, not an omission; the counts the reader sees "
             "are computed from what you cite.\n\n"
         )
+        n_direct = (counts or {}).get("direct") or 0
+        if kind == "briefing" and n_direct >= target:
+            # Measured: with 29 direct sources and a ceiling of 12, the writer
+            # cited 5 — the "ceiling, not a quota" wording above read as
+            # permission to stop at one study per finding.
+            context += (
+                f"This is NOT a thin evidence base: {n_direct} sources are directly "
+                f"on-topic. A briefing citing far fewer than {target} is leaving direct "
+                "evidence out. Build each finding on all the direct studies that "
+                "bear on it.\n\n"
+            )
     else:
         context += (
             f"WORKING SET. {len(papers)} records were screened and {shown} are "
@@ -1458,7 +1633,7 @@ def _writer_context(
             "uncited while citing an abstract-only case report is the wrong trade. "
             f"Cite one only if the {kind} genuinely has no use for it.\n\n"
         )
-    context += _format_sources(papers, relevance, excerpts, omit=omit)
+    context += _format_sources(papers, relevance, excerpts, omit=omit, appraisal=True)
     return context, use_full_text
 
 
@@ -1482,7 +1657,7 @@ def write_briefing(
         api_key=api_key,
     )
     article["form"] = FORM_BRIEFING
-    return article
+    return normalize_briefing(article)
 
 
 def write_article(
@@ -1563,7 +1738,7 @@ def revise_prose(
             context, schema, system=system, model=model, deep=True, api_key=api_key,
         )
         revised["form"] = article.get("form")
-        return revised
+        return normalize_briefing(revised) if briefing else revised
 
     if briefing:
         patch_system = (_REVISE_BRIEFING_PATCH_SYSTEM_FULLTEXT if use_full_text

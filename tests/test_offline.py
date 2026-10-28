@@ -30,6 +30,21 @@ os.environ["ARTICLEGEN_CACHE_DIR"] = tempfile.mkdtemp(prefix="articlegen-test-ca
 FAILURES: list[str] = []
 
 
+def _draft_handler_src() -> str:
+    """Everything a draft request runs through on the server, as source.
+
+    The handler validates (`_draft_params`), then either runs the pipeline in
+    place or starts a job; `produce_draft` is the one copy of the pipeline call
+    both paths share. Source checks on "the web handler" read all three.
+    """
+    import inspect
+
+    from articlegen import web
+    return "\n".join(inspect.getsource(f) for f in (
+        web.ArticleGenHandler._draft_params, web.ArticleGenHandler._handle_draft,
+        web.produce_draft))
+
+
 def check(name: str, cond: bool) -> None:
     """Record a failed check. Raises instead when pytest is the runner.
 
@@ -678,7 +693,7 @@ def test_pipeline_is_shared() -> None:
     from articlegen import cli, pipeline, web
 
     cmd_draft_src = inspect.getsource(cli.cmd_draft)
-    handler_src = inspect.getsource(web.ArticleGenHandler._handle_draft)
+    handler_src = _draft_handler_src()
 
     for name, src in (("cli.cmd_draft", cmd_draft_src), ("web._handle_draft", handler_src)):
         check(f"{name} calls generate_draft", "generate_draft(" in src)
@@ -809,7 +824,7 @@ def test_idea_search_terms_reach_the_draft() -> None:
           "search_terms=" in inspect.getsource(cli.cmd_draft))
 
     # 10. Web
-    web_src = inspect.getsource(web.ArticleGenHandler._handle_draft)
+    web_src = _draft_handler_src()
     check("web handler reads search_terms from payload",
           'payload.get("search_terms")' in web_src)
     check("web handler forwards search_terms to generate_draft",
@@ -943,7 +958,7 @@ def test_idea_pico_reaches_the_curator() -> None:
         ) = saved_pipeline
 
     # 14. web
-    web_src = inspect.getsource(web.ArticleGenHandler._handle_draft)
+    web_src = _draft_handler_src()
     check("web handler reads pico from payload", 'payload.get("pico")' in web_src)
     check("web handler forwards pico to generate_draft", "pico=pico" in web_src)
 
@@ -3846,13 +3861,18 @@ def test_first_visit_does_not_dead_end() -> None:
     # visitor was once shown 500 characters of raw JSON on their phone.
     from articlegen.web import ArticleGenHandler
 
-    for fn in (ArticleGenHandler._handle_ideas, ArticleGenHandler._handle_draft):
+    from articlegen.web import produce_draft
+
+    for fn in (ArticleGenHandler._handle_ideas, produce_draft):
         # Only the catch-all matters. `NoPapersFound` carries a message written
-        # for the visitor and is deliberately passed through as it is.
+        # for the visitor and is deliberately passed through as it is. The
+        # draft's catch-all moved into `produce_draft`, shared by the blocking
+        # request and the job thread.
         generic = inspect.getsource(fn)
         generic = generic[generic.index("except Exception"):]
         check(f"{fn.__name__} does not return the raw exception",
-              "_unexpected(" in generic and "str(exc)" not in generic)
+              ("_unexpected(" in generic or "_unexpected_message(" in generic)
+              and "str(exc)" not in generic)
 
     unexpected = inspect.getsource(ArticleGenHandler._unexpected)
     check("the raw detail still reaches the log", "_log_stage(" in unexpected)
@@ -4041,7 +4061,7 @@ def test_article_in_the_web_app_cannot_run_scripts() -> None:
     check("and never with allow-scripts", "allow-scripts" not in frame)
     check("but keeps allow-same-origin", "allow-same-origin" in frame)
 
-    src = inspect.getsource(web.ArticleGenHandler._handle_draft)
+    src = _draft_handler_src()
     check("the API returns the script-free copy", "standalone=False" in src)
 
 
@@ -5707,7 +5727,7 @@ def test_failed_style_gate_is_visible_in_the_article() -> None:
     import inspect
     from articlegen import cli, web
     for name, src in (("cli", inspect.getsource(cli.cmd_draft) + inspect.getsource(cli._write_draft_files)),
-                      ("web", inspect.getsource(web.ArticleGenHandler._handle_draft))):
+                      ("web", _draft_handler_src())):
         check(f"{name} passes the style report to the renderer",
               "draft.style_report" in src)
 
@@ -6604,6 +6624,137 @@ def test_legacy_draft_fields() -> None:
     check("pull quote is dropped", "quote" not in h)
 
 
+def test_draft_runs_as_a_polled_job() -> None:
+    """A hosted draft outlives Cloudflare's ~100s window, so it runs as a job.
+
+    The page POSTs with `async: true`, gets a job id at once, and polls
+    GET /api/draft/<id>. The poll carries the real stage, mapped from the
+    pipeline's own log lines, and never a query, title or error detail.
+    """
+    import time as _time
+
+    from articlegen import web
+
+    check("stage: relevance counts",
+          web.public_stage("  relevance: 9 direct / 14 related / 17 tangential")
+          == ("screening", "9 papers address the question directly, 14 are related"))
+    check("stage: full texts read",
+          web.public_stage("  full text retrieved for 1 cited source(s): [3]")
+          == ("reading", "Read 1 full text"))
+    check("a query never becomes a stage",
+          web.public_stage("Queries: secret query; another  (core: x)") is None)
+
+    seen: list[str] = []
+
+    def fake_produce(params, log):
+        log("Fetching journal articles...")
+        seen.append(web.job_snapshot(job_ids[0])["stage"] if job_ids else "")
+        log("Collected 40 candidate papers.")
+        return 200, {"ok": True, "title": "T", "html": "<p>x</p>"}, {"cited": 3}
+
+    real_produce, real_append = web.produce_draft, web.gallery.append_run
+    job_ids: list[str] = []
+    try:
+        web.produce_draft = fake_produce
+        web.gallery.append_run = lambda record: None
+        params = {"topic": "t", "style": "", "api_key": None, "model": None,
+                  "resolved": None, "search_terms": [], "pico": {}}
+        job_id = web.start_draft_job(params)
+        job_ids.append(job_id)
+        check("a job id is 32 hex characters", bool(job_id) and len(job_id) == 32)
+        for _ in range(100):
+            snap = web.job_snapshot(job_id)
+            if snap and snap["status"] != "running":
+                break
+            _time.sleep(0.02)
+        check("the finished job returns the briefing",
+              snap["status"] == "done" and snap["result"]["html"] == "<p>x</p>")
+        check("and its last stage", snap["message"] == "Found 40 candidate papers")
+        check("an unknown or malformed id is missing, not an error",
+              web.job_snapshot("0" * 32) is None and web.job_snapshot("../etc") is None)
+
+        def slow(params, log):
+            _time.sleep(0.5)
+            return 200, {"ok": True}, {}
+
+        web.produce_draft = slow
+        real_max, web.MAX_RUNNING_JOBS = web.MAX_RUNNING_JOBS, 1
+        try:
+            first = web.start_draft_job(params)
+            check("the job cap refuses a second concurrent run",
+                  first is not None and web.start_draft_job(params) is None)
+        finally:
+            web.MAX_RUNNING_JOBS = real_max
+    finally:
+        web.produce_draft, web.gallery.append_run = real_produce, real_append
+
+    page = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                             "index.html"), encoding="utf-8").read()
+    check("the page asks for a job", "async: true" in page)
+    check("and polls it", "/api/draft/' + encodeURIComponent(jobId)" in page)
+
+
+def test_structured_briefing() -> None:
+    """A briefing finding is a claim, its evidence and a GRADE-style grade.
+
+    Measured on five frozen evidence pools (tools/brief_eval.py), the old
+    one-study-per-bullet findings scored 3.6/10 for synthesis with a blind
+    judge; synthesised, graded findings scored 6.0 and won 10 of 10 pairwise
+    votes. The page leads with the verdict and shows how sure each claim is.
+    Old manifests hold string findings and int `open_these`; they still render.
+    """
+    from articlegen import briefing, demo
+    from articlegen.render import render_article, render_markdown
+    from articlegen.style import check_style
+    from articlegen.verify import _article_text
+
+    article = dict(demo.SAMPLE_BRIEFING)
+    h = render_article(article, demo.SAMPLE_PAPERS, "t", demo.SAMPLE_CURATION, None,
+                       demo.SAMPLE_PROVENANCE)
+    md = render_markdown(article, demo.SAMPLE_PAPERS, "t", demo.SAMPLE_CURATION, None,
+                         demo.SAMPLE_PROVENANCE)
+    check("the verdict sentence is bold", '<strong class="verdict">Sleep supports' in h)
+    check("the overall grade is shown with its reason",
+          'class="certainty c-moderate"' in h and "rests on rodent imaging alone" in h)
+    check("each finding leads with its claim", 'class="finding-claim"' in h
+          and h.count('<li class="finding">') == len(article["findings"]))
+    check("a low grade is marked low", 'class="certainty c-low"' in h)
+    check("papers to open carry a reason", 'class="paper-why"' in h
+          and "limits of a mouse model" in h)
+    check("the briefing now draws the Fig. 1 its assessment cites",
+          "Fig. 1 |" in h and "shown in Fig. 1" in h)
+    check("markdown keeps the claim, the grade and the reason",
+          "**Sleep after learning improves retention" in md
+          and "*(Moderate certainty)*" in md and "limits of a mouse model" in md)
+    check("the gates read claim and evidence as prose",
+          "leading mechanism. A review of hippocampal replay" in _article_text(article))
+
+    legacy = dict(article, findings=["A trial found a thing [1]."], open_these=[1, 3],
+                  certainty=None)
+    hl = render_article(legacy, demo.SAMPLE_PAPERS, "t", demo.SAMPLE_CURATION, None,
+                        demo.SAMPLE_PROVENANCE)
+    check("legacy string findings still render", "A trial found a thing" in hl
+          and 'class="finding-claim"' not in hl)
+    check("legacy int open_these still render", hl.count('class="paper-num"') == 2)
+    check("no grade, no badge", 'class="certainty-row"' not in hl)
+
+    check("a restated grade is cut from the evidence",
+          briefing.finding_parts({"claim": "c", "evidence": "x [1]. Certainty: low.",
+                                  "certainty": "low"})[1] == "x [1].")
+    merged = briefing.revised_findings(
+        [{"claim": "Old.", "evidence": "e", "certainty": "low"}], ["New claim. New evidence [1]."])
+    check("a prose revision keeps the grade and splits the claim",
+          merged == [{"claim": "New claim.", "evidence": "New evidence [1].", "certainty": "low"}])
+
+    # The grade is the hedge: a graded briefing is not failed as under-hedged
+    # for stating each study's result plainly.
+    plain = dict(article, findings=[
+        {"claim": f"Claim {i} holds.", "evidence": f"A trial reported a result [{i}]. "
+         f"Another reported the same [{i}].", "certainty": "moderate"} for i in range(1, 6)])
+    rules = {i["rule"] for i in check_style(plain)["issues"]}
+    check("graded findings count as hedges", "under-hedged" not in rules)
+
+
 def test_demo_and_index() -> None:
     import tempfile
     from articlegen import demo
@@ -6616,7 +6767,7 @@ def test_demo_and_index() -> None:
     check("demo briefing html names the artefact", "Evidence briefing" in h)
     check("demo briefing has findings and unknowns",
           "What the evidence shows" in h and "What remains open" in h)
-    check("demo briefing has three papers to open", "Three papers to open" in h)
+    check("demo briefing has papers to open", "Papers to open first" in h)
     check("demo briefing has no journal Box 1", "Box 1 |" not in h)
     check("demo markdown renders as a briefing", md.startswith("**EVIDENCE BRIEFING**"))
     review = render_article(demo.SAMPLE_ARTICLE, demo.SAMPLE_PAPERS, "Sample topic",
@@ -6828,7 +6979,7 @@ def test_visitor_gallery() -> None:
     check("front end gist file matches the server",
           f"GALLERY_INDEX_FILE = '{gallery.GALLERY_INDEX_FILE}'" in page)
 
-    draft_src = inspect.getsource(web.ArticleGenHandler._handle_draft)
+    draft_src = _draft_handler_src()
     check("generating publishes to the gallery",
           "gallery.try_publish" in draft_src)
     check("generate does not go through the manual gallery POST",
@@ -10196,7 +10347,7 @@ def test_the_candidate_pool_is_big_enough_to_curate() -> None:
     check("the CLI flag defaults to the constant",
           args.max_papers == sources.DEFAULT_MAX_PAPERS)
 
-    handler = inspect.getsource(web.ArticleGenHandler._handle_draft)
+    handler = _draft_handler_src()
     check("the web handler reads the constant rather than its own number",
           "max_papers=DEFAULT_MAX_PAPERS" in handler)
 
@@ -10553,7 +10704,7 @@ def main(argv: list[str] | None = None) -> int:
         test_statistic_verification, test_flagged_figures_buy_one_revision,
         test_ranking, test_recency_actually_counts, test_render_blocks,
         test_display_item_placement, test_legacy_draft_fields,
-        test_demo_and_index, test_web_server,
+        test_draft_runs_as_a_polled_job, test_structured_briefing, test_demo_and_index, test_web_server,
         test_run_log_never_carries_the_topic,
         test_every_endpoint_logs_one_run_line,
         test_run_log_gist_is_optional_and_gist_scoped,

@@ -21,6 +21,9 @@ import os
 import re
 
 from . import sources
+from .briefing import (
+    CERTAINTY_LABELS, finding_parts, open_these_items, overall_certainty, split_verdict,
+)
 from .sources import Paper
 from .style import SUBSTANCE_RULES
 from .writer import is_briefing
@@ -688,18 +691,14 @@ def _table_html(cited: list[Paper], labels: dict[int, str]) -> str:
             f'<td>{row["read"]}</td></tr>'
         )
     caption = (
-        "Characteristics of the cited evidence. Design is inferred from each record's "
-        "title, journal and index metadata and reads Other where no design could be "
-        "inferred; no quality appraisal was performed. Relevance is the curation label "
-        "for how directly each source addresses the review question. Read records whether "
-        "the model saw the source's open-access full text or its abstract only. n is the "
-        "largest sample size stated in the abstract, read from “n = …” or from a "
-        "count next to a word like participants; a dash means the abstract states none. "
-        "Registered is a trial registration number found in the abstract or in the "
-        "Europe PMC record. Funding reads Grant listed where Europe PMC lists a "
-        "grant for that record; a dash means none was listed there, not that the work "
-        "was unfunded. All three are read as text, not checked, and none of them is a "
-        "quality assessment."
+        "Characteristics of the cited evidence, read as text from each record; "
+        "no quality appraisal was performed. Design is inferred from title, journal "
+        "and index metadata (Other where none could be inferred). n is the largest "
+        "sample size the abstract states. Registered is a trial registration number "
+        "in the abstract or Europe PMC record. Funding reads Grant listed where "
+        "Europe PMC lists a grant; a dash means none listed, not unfunded. Relevance is the "
+        "curation label; Read is whether the model saw open-access full text or the "
+        "abstract only."
     )
     return (
         '<div class="display table-wrap" aria-labelledby="table-1">\n'
@@ -941,7 +940,7 @@ def _methods_paragraphs(
             "above. "
         )
     search += (
-        f"Each remaining record was assessed for how directly it addresses {esc(topic)} "
+        f"Each remaining record was assessed for how directly it addresses the question ‘{esc(topic.strip().rstrip(chr(46)))}’ "
         f"and labelled direct, related or background; {n_cited} were cited here and are "
         "listed in Table 1."
     )
@@ -1014,9 +1013,15 @@ def _methods_paragraphs(
             "the one cited, is flagged under Limitations."
         )
 
+    planner = provenance.get("planning_model")
+    if model and planner:
+        lead = (f"Search planning and source curation were performed by a large language "
+                f"model ({esc(planner)}), and drafting by another ({esc(model)}).")
+    else:
+        lead = ("Search planning, source curation and drafting were performed by a large "
+                "language " + (f"model ({esc(model)})." if model else "model."))
     generation = (
-        "Search planning, source curation and drafting were performed by a large language "
-        + (f"model ({esc(model)})." if model else "model.")
+        lead
         + " Source retrieval, relevance tabulation, citation numbering, Table 1, Fig. 1 and "
         "the statistical check are deterministic and were not model-generated."
     )
@@ -1447,17 +1452,38 @@ def _briefing_body_html(
     verification: dict | None,
     cited: list[Paper],
 ) -> str:
-    """Findings, unknowns, three papers to open. No journal display items."""
+    """Findings, unknowns, papers to open. No journal display items.
+
+    A structured finding leads with its claim and carries its own certainty
+    grade; a legacy string finding renders as it always did, as plain text.
+    """
     note = _grounding_note(verification, bool(_full_text_count(cited)))
     note_html = f'<p class="key-points-note">{html.escape(note)}</p>\n' if note else ""
 
-    findings = "\n".join(
-        f"<li>{_prose(item, cite_map, valid_numbers, flags)}</li>"
-        for item in (article.get("findings") or [])
-    )
+    items_html = []
+    for finding in article.get("findings") or []:
+        claim, evidence, level = finding_parts(finding)
+        if not (claim or evidence):
+            continue
+        if claim:
+            pill = _certainty_pill(level)
+            items_html.append(
+                '<li class="finding">'
+                f'<p class="finding-claim">{_prose(claim, cite_map, valid_numbers, flags)}'
+                f'{pill}</p>'
+                + (f'<p class="finding-evidence">'
+                   f'{_prose(evidence, cite_map, valid_numbers, flags)}</p>' if evidence else "")
+                + "</li>"
+            )
+        else:
+            items_html.append(f"<li>{_prose(evidence, cite_map, valid_numbers, flags)}</li>")
+    structured = any(isinstance(f, dict) for f in article.get("findings") or [])
+    list_tag = "ol" if structured else "ul"
     findings_html = (
-        '<aside class="key-points">\n<h2>What the evidence shows</h2>\n'
-        f'{note_html}<ul>\n{findings}\n</ul>\n</aside>' if findings else ""
+        f'<section class="key-points findings{" structured" if structured else ""}">\n'
+        '<h2>What the evidence shows</h2>\n'
+        f'{note_html}<{list_tag}>\n' + "\n".join(items_html) + f'\n</{list_tag}>\n</section>'
+        if items_html else ""
     )
 
     unknowns = "\n".join(
@@ -1465,33 +1491,84 @@ def _briefing_body_html(
         for item in (article.get("unknowns") or [])
     )
     unknowns_html = (
-        '<aside class="key-points">\n<h2>What remains open</h2>\n'
-        f'<ul>\n{unknowns}\n</ul>\n</aside>' if unknowns else ""
+        '<section class="key-points unknowns">\n<h2>What remains open</h2>\n'
+        f'<ul>\n{unknowns}\n</ul>\n</section>' if unknowns else ""
     )
 
     items = []
-    for raw in (article.get("open_these") or []):
-        if not isinstance(raw, int) or not 1 <= raw <= len(papers):
+    for raw, why in open_these_items(article):
+        if not 1 <= raw <= len(papers):
             continue
         paper = papers[raw - 1]
         n = cite_map.get(raw)
-        num = f'<sup class="cite"><a href="#ref-{n}">{n}</a></sup> ' if n else ""
+        num = f'<a class="paper-num" href="#ref-{n}">{n}</a>' if n else ""
         title = html.escape(_titled(paper.title))
         title_html = (
             f'<a href="{html.escape(paper.link, quote=True)}">{title}</a>'
             if paper.link else title
         )
+        venue = f" · {html.escape(paper.venue)}" if paper.venue else ""
+        why_html = f'<p class="paper-why">{html.escape(why)}</p>' if why else ""
         items.append(
-            f'<li>{num}{html.escape(_short_author(paper))} '
-            f'({paper.year or "n.d."}). {title_html}</li>'
+            f'<li>{num}<div><p class="paper-title">{title_html}</p>'
+            f'<p class="paper-meta">{html.escape(_short_author(paper))} '
+            f'({paper.year or "n.d."}){venue}</p>{why_html}</div></li>'
         )
         if len(items) == 3:
             break
     open_html = (
-        '<aside class="key-points open-these">\n<h2>Three papers to open</h2>\n'
-        f'<ul>\n{" ".join(items)}\n</ul>\n</aside>' if items else ""
+        '<section class="key-points open-these">\n<h2>Papers to open first</h2>\n'
+        f'<ol class="paper-list">\n{"".join(items)}\n</ol>\n</section>' if items else ""
     )
     return "\n\n".join(p for p in (findings_html, unknowns_html, open_html) if p)
+
+
+def _same_words(topic: str, *others: str) -> bool:
+    """True when `topic` says nothing that one of `others` does not."""
+    def words(text: str) -> set[str]:
+        return set(re.findall(r"[a-z0-9]+", text.lower())) - {"the", "a", "an", "of", "in", "on", "for", "and", "to", "does", "do", "is", "are"}
+    have = words(topic)
+    return any(have and have <= words(o) for o in others if o)
+
+
+def _certainty_pill(level: str, prefix: str = "") -> str:
+    if not level:
+        return ""
+    slug = level.replace(" ", "-")
+    return (f' <span class="certainty c-{slug}" title="GRADE-style certainty, '
+            f'assessed by the model">{html.escape(prefix + CERTAINTY_LABELS[level])}</span>')
+
+
+def _briefing_lead_html(
+    article: dict, topic: str, cite_map: dict[int, int], valid_numbers: set[int],
+    flags: dict[str, str] | None,
+) -> str:
+    """Question, then the answer with its verdict sentence set in bold and the
+    overall certainty under it."""
+    parts = []
+    if article.get("question"):
+        parts.append(
+            '<p class="question"><span class="run-in-head">Question</span>'
+            f'{_prose(article["question"], cite_map, valid_numbers, flags)}</p>'
+        )
+    verdict, rest = split_verdict(_summary_text(article))
+    level, reason = overall_certainty(article)
+    body = f'<strong class="verdict">{_prose(verdict, cite_map, valid_numbers, flags)}</strong>'
+    if rest:
+        body += " " + _prose(rest, cite_map, valid_numbers, flags)
+    certainty = ""
+    if level:
+        certainty = (
+            '<p class="certainty-row">'
+            f'{_certainty_pill(level).strip()}'
+            + (f' <span class="certainty-reason">{html.escape(reason)}</span>' if reason else "")
+            + "</p>"
+        )
+    parts.append(
+        '<section class="answer">\n<p class="answer-label">Answer</p>\n'
+        f'<p class="answer-text">{body}</p>\n{certainty}\n</section>'
+    )
+    return "\n".join(parts)
 
 
 def render_article(
@@ -1559,6 +1636,33 @@ def render_article(
         if keywords else ""
     )
 
+    if briefing:
+        # Keywords are index terms, not reading: they sit under the body rather
+        # than between the answer and the evidence.
+        lead_html = _briefing_lead_html(article, topic, cite_map, valid_numbers, flags)
+        if keywords_html:
+            body_html += "\n\n" + keywords_html.replace(
+                'class="keywords"', 'class="keywords keywords-end"', 1)
+        # Fig. 1 is referenced by the evidence assessment on both shapes; the
+        # briefing used to cite it without ever drawing it.
+        table = "\n\n".join(p for p in (_figure_html(cited, labels), table) if p)
+    else:
+        lead_html = (
+            f"{question_html}\n"
+            '<div class="abstract">\n'
+            f'<p><span class="run-in-head">{html.escape(summary_label)}</span>'
+            f"{_prose(_summary_text(article), cite_map, valid_numbers, flags)}</p>\n"
+            "</div>\n" + keywords_html
+        )
+
+    # The subject is what the reader typed. A briefing's question restates it,
+    # usually word for word, so the line only earns its place when they differ.
+    subject_html = (
+        f'<p class="subject-line"><span class="meta-label">Subject</span>{html.escape(topic)}</p>'
+    )
+    if briefing and _same_words(topic, article.get("question") or "", article.get("title") or ""):
+        subject_html = ""
+
     refs_html = []
     for n, paper in enumerate(cited, start=1):
         title = html.escape(_titled(paper.title))
@@ -1585,8 +1689,11 @@ def render_article(
         f"Generated {(provenance or {}).get('date') or _au_date()}",
         f"{len(cited)} sources cited" + (f", {span}" if span else ""),
         _synthesis_label(cited),
-        "Not peer reviewed",
     ]
+    # The disclosure banner directly above already says it at full contrast;
+    # the briefing does not need it a second time in grey.
+    if not briefing:
+        meta_bits.append("Not peer reviewed")
 
     # Format first, THEN inject the stylesheet: the CSS is full of braces that
     # str.format would try to read as fields.
@@ -1594,13 +1701,10 @@ def render_article(
         _TEMPLATE.format(
             page_title=html.escape(article["title"]),
             title=html.escape(article["title"]),
-            subject=html.escape(topic),
+            subject_line=subject_html,
             meta_line=" &middot; ".join(html.escape(b) for b in meta_bits),
             article_type=html.escape(article_type),
-            question=question_html,
-            summary_label=html.escape(summary_label),
-            abstract=_prose(_summary_text(article), cite_map, valid_numbers, flags),
-            keywords=keywords_html,
+            lead=lead_html,
             body=body_html,
             methods=_methods_html(provenance, len(papers), len(cited), topic,
                                   n_full_cited=_full_text_count(cited),
@@ -1633,6 +1737,10 @@ _CSS = """
     --seg-direct: #184f95;
     --seg-related: #2a78d6;
     --seg-tangential: #86b6ef;
+    --c-high: #1f6b45; --c-high-bg: #e3f1e8;
+    --c-moderate: #1d5a96; --c-moderate-bg: #e3edf8;
+    --c-low: #8a5a00; --c-low-bg: #f8eed9;
+    --c-very-low: #9b2c1f; --c-very-low-bg: #f8e4e0;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
@@ -1649,6 +1757,10 @@ _CSS = """
       --seg-direct: #86b6ef;
       --seg-related: #3987e5;
       --seg-tangential: #184f95;
+      --c-high: #8fd6ad; --c-high-bg: #1d3328;
+      --c-moderate: #9dc4f5; --c-moderate-bg: #1d2b3d;
+      --c-low: #f0c46e; --c-low-bg: #3a3020;
+      --c-very-low: #f2a193; --c-very-low-bg: #3d2420;
       color-scheme: dark;
     }
   }
@@ -1665,6 +1777,10 @@ _CSS = """
     --seg-direct: #86b6ef;
     --seg-related: #3987e5;
     --seg-tangential: #184f95;
+    --c-high: #8fd6ad; --c-high-bg: #1d3328;
+    --c-moderate: #9dc4f5; --c-moderate-bg: #1d2b3d;
+    --c-low: #f0c46e; --c-low-bg: #3a3020;
+    --c-very-low: #f2a193; --c-very-low-bg: #3d2420;
     color-scheme: dark;
   }
   * { box-sizing: border-box; }
@@ -1747,6 +1863,78 @@ _CSS = """
   aside.key-points li { margin-bottom: 0.5rem; font-size: 0.95rem; line-height: 1.55; }
   aside.key-points li:last-child { margin-bottom: 0; }
 
+  /* ---- briefing: answer, findings, papers --------------------------- */
+  section.answer {
+    margin: 0 0 1.4rem; padding: 1.15rem 1.3rem 1.1rem;
+    border: 1px solid var(--rule-strong); border-radius: 6px; background: var(--surface);
+  }
+  .answer-label {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 0.45rem;
+  }
+  .answer-text { margin: 0; font-size: 1.08rem; line-height: 1.62; color: var(--ink-2); }
+  .answer-text .verdict { color: var(--ink); font-weight: 700; }
+  .certainty-row {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 0.6rem;
+    margin: 0.85rem 0 0; padding-top: 0.75rem; border-top: 1px solid var(--rule);
+    font-size: 0.84rem; color: var(--muted);
+  }
+  span.certainty {
+    display: inline-block; white-space: nowrap; vertical-align: 0.08em;
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em; line-height: 1.5;
+    padding: 0.05rem 0.5rem; border-radius: 999px; margin-left: 0.35rem;
+  }
+  .certainty-row span.certainty { margin-left: 0; font-size: 0.74rem; }
+  .c-high { color: var(--c-high); background: var(--c-high-bg); }
+  .c-moderate { color: var(--c-moderate); background: var(--c-moderate-bg); }
+  .c-low { color: var(--c-low); background: var(--c-low-bg); }
+  .c-very-low { color: var(--c-very-low); background: var(--c-very-low-bg); }
+  section.key-points {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0 0 2.2rem;
+  }
+  section.key-points h2 {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent);
+    margin: 0 0 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--ink);
+  }
+  section.key-points ul { margin: 0; padding-left: 1.1rem; }
+  section.key-points li { margin-bottom: 0.55rem; font-size: 0.95rem; line-height: 1.55; }
+  section.findings.structured ol { list-style: none; counter-reset: finding; margin: 0; padding: 0; }
+  li.finding {
+    counter-increment: finding; position: relative;
+    padding: 0.85rem 0 0.9rem 2.2rem; margin: 0 !important;
+    border-bottom: 1px solid var(--rule);
+  }
+  li.finding:last-child { border-bottom: none; }
+  li.finding::before {
+    content: counter(finding); position: absolute; left: 0; top: 0.9rem;
+    width: 1.45rem; height: 1.45rem; border-radius: 50%;
+    background: var(--ink); color: var(--bg);
+    font-size: 0.75rem; font-weight: 700; line-height: 1.45rem; text-align: center;
+  }
+  .finding-claim { margin: 0 0 0.3rem; font-size: 1rem; font-weight: 650; line-height: 1.45; color: var(--ink); }
+  .finding-evidence { margin: 0; font-size: 0.92rem; line-height: 1.6; color: var(--ink-2); }
+  ol.paper-list { list-style: none; margin: 0; padding: 0; }
+  ol.paper-list li {
+    display: flex; gap: 0.8rem; align-items: flex-start;
+    padding: 0.7rem 0; border-bottom: 1px solid var(--rule); margin: 0;
+  }
+  ol.paper-list li:last-child { border-bottom: none; }
+  .paper-num {
+    flex: 0 0 auto; min-width: 1.6rem; text-align: center; text-decoration: none;
+    font-size: 0.78rem; font-weight: 700; color: var(--link);
+    border: 1px solid var(--rule-strong); border-radius: 4px; padding: 0.05rem 0.3rem;
+  }
+  .paper-title { margin: 0; font-size: 0.95rem; font-weight: 600; line-height: 1.4; }
+  .paper-title a { color: var(--ink); text-decoration: none; }
+  .paper-title a:hover { color: var(--link); text-decoration: underline; }
+  .paper-meta { margin: 0.1rem 0 0; font-size: 0.8rem; color: var(--muted); }
+  .paper-why { margin: 0.3rem 0 0; font-size: 0.88rem; color: var(--ink-2); }
+
   /* ---- body -------------------------------------------------------- */
   h2 {
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -1778,7 +1966,8 @@ _CSS = """
   .box-note { color: var(--muted); font-size: 0.78rem !important; font-style: italic;
               margin-top: 0.75rem !important; }
   figure.figure { margin: 1.8rem 0 2rem; padding: 1rem 0 0; border-top: 1px solid var(--rule); }
-  .fig-svg { width: 100%; height: auto; display: block; }
+  .fig-svg { width: 100%; max-width: 44rem; height: auto; display: block; }
+  .keywords-end { margin-top: -1rem; }
   .fig-grid { stroke: var(--rule); stroke-width: 1; }
   .fig-axis { stroke: var(--rule-strong); stroke-width: 1; }
   .fig-tick { fill: var(--muted); font-size: 11px;
@@ -1936,15 +2125,11 @@ _TEMPLATE = """<!DOCTYPE html>
     <h1>{title}</h1>
     <p class="ai-disclosure">{disclosure_banner}</p>
     <p class="meta-line">{meta_line}</p>
-    <p class="subject-line"><span class="meta-label">Subject</span>{subject}</p>
+    {subject_line}
 
     {toolbar}
 
-    {question}
-    <div class="abstract">
-      <p><span class="run-in-head">{summary_label}</span>{abstract}</p>
-    </div>
-    {keywords}
+    {lead}
   </header>
 
   {body}
@@ -2017,15 +2202,21 @@ def render_markdown(
         "",
         f"*Generated {today} · {len(cited)} sources cited"
         + (f", {span}" if span else "")
-        + f" · {_synthesis_label(cited)} · Not peer reviewed*",
-        "",
-        f"**Subject:** {topic}",
+        + f" · {_synthesis_label(cited)}" + ("" if briefing else " · Not peer reviewed") + "*",
         "",
     ]
+    if not (briefing and _same_words(topic, article.get("question") or "", article.get("title") or "")):
+        lines += [f"**Subject:** {topic}", ""]
     if article.get("question"):
         lines += [f"**Question.** {prose(article['question'])}", ""]
-    summary_label = "Answer" if briefing else "Abstract"
-    lines += [f"**{summary_label}.** {prose(_summary_text(article))}", ""]
+    if briefing:
+        verdict, rest = split_verdict(_summary_text(article))
+        lines += [f"**Answer.** **{prose(verdict)}**" + (f" {prose(rest)}" if rest else ""), ""]
+        level, reason = overall_certainty(article)
+        if level:
+            lines += [f"*{CERTAINTY_LABELS[level]}*" + (f" — {reason}" if reason else ""), ""]
+    else:
+        lines += [f"**Abstract.** {prose(_summary_text(article))}", ""]
 
     keywords = [k for k in (article.get("keywords") or []) if k]
     if keywords:
@@ -2040,7 +2231,13 @@ def render_markdown(
             lines += ["## What the evidence shows", ""]
             if note:
                 lines += [f"*{note}*", ""]
-            lines += [f"- {prose(p)}" for p in findings]
+            for n, finding in enumerate(findings, start=1):
+                claim, evidence, level = finding_parts(finding)
+                if claim:
+                    grade = f" *({CERTAINTY_LABELS[level]})*" if level else ""
+                    lines.append(f"{n}. **{prose(claim)}**{grade} {prose(evidence)}".rstrip())
+                elif evidence:
+                    lines.append(f"- {prose(evidence)}")
             lines.append("")
         unknowns = article.get("unknowns") or []
         if unknowns:
@@ -2048,8 +2245,8 @@ def render_markdown(
             lines += [f"- {prose(p)}" for p in unknowns]
             lines.append("")
         opened = []
-        for raw in (article.get("open_these") or []):
-            if not isinstance(raw, int) or not 1 <= raw <= len(papers):
+        for raw, why in open_these_items(article):
+            if not 1 <= raw <= len(papers):
                 continue
             paper = papers[raw - 1]
             n = cite_map.get(raw)
@@ -2057,12 +2254,12 @@ def render_markdown(
             link = f" <{paper.link}>" if paper.link else ""
             opened.append(
                 f"- {num}{_short_author(paper)} ({paper.year or 'n.d.'}). "
-                f"{_titled(paper.title)}{link}"
+                f"{_titled(paper.title)}{link}" + (f" — {why}" if why else "")
             )
             if len(opened) == 3:
                 break
         if opened:
-            lines += ["## Three papers to open", ""] + opened + [""]
+            lines += ["## Papers to open first", ""] + opened + [""]
     else:
         # Same layout as the HTML: figure after the introduction, box after the
         # first thematic section, key points directly before the conclusions.
@@ -2098,6 +2295,10 @@ def render_markdown(
                                n_full_cited=_full_text_count(cited),
                                n_retracted=_retracted_count(papers))
     lines += _assessment_markdown(cited, counts, verification, style_report)
+    if briefing:
+        figure_md = _figure_markdown(cited, labels)
+        if figure_md:
+            lines += [figure_md, ""]
     if table_md:
         lines += [table_md, ""]
 
