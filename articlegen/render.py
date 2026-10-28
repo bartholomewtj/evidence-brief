@@ -2040,6 +2040,13 @@ _CSS = """
   .share-toast { font-size: 0.78rem; color: var(--accent); align-self: center; display: none; }
 
   @media (max-width: 34rem) {
+    /* Phones: the number floats beside the claim instead of indenting the
+       whole finding, which cost a sixth of a narrow column. */
+    li.finding { padding-left: 0; }
+    li.finding::before {
+      position: static; float: left; margin: 0.12rem 0.55rem 0 0;
+    }
+    section.answer { padding: 1rem 1rem 0.95rem; }
     .gloss-row { display: block; }
     .gloss-row dt { margin-bottom: 0.15rem; }
     .body-section p + p { text-indent: 0; }
