@@ -474,6 +474,16 @@
     border: none;
     display: block;
   }
+  /* Phones and tablets: the article runs edge to edge. Its own page padding
+     already gives it margins; the card border and the shell's padding on top
+     of that left a column too narrow to read. */
+  @media (max-width: 1099px) {
+    #readerView .reader-frame-wrapper {
+      border: none; border-radius: 0;
+      margin-left: -1.25rem; margin-right: -1.25rem;
+      width: calc(100% + 2.5rem);
+    }
+  }
 
   /* One set of reader actions, two layouts: a bar pinned to the bottom of the
      screen on a phone, a toolbar above the article on a desktop. This used to
