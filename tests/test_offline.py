@@ -4127,9 +4127,11 @@ def test_browser_back_from_an_article_returns_home() -> None:
     check("a home control sits next to the wordmark",
           'class="brand"' in page and 'class="home-btn"' in page
           and 'onclick="goHome()"' in page)
-    check("both the phone header and the desktop sidebar have it",
-          page.count('class="brand"') == 2
-          and page.count('class="home-btn"') == 2)
+    # One top bar on every screen size replaced the phone header plus the
+    # desktop sidebar, so there is exactly one brand and one home control.
+    check("the one top bar has it on every screen size",
+          page.count('class="brand"') == 1 and page.count('class="home-btn"') == 1
+          and 'class="app-header"' in page and 'class="sidebar"' not in page)
 
 
 def test_citation_clicks_in_the_reader_do_not_leave_the_article() -> None:
@@ -6622,6 +6624,32 @@ def test_legacy_draft_fields() -> None:
     check("standfirst is used as the abstract", "The old deck line." in h)
     check("key_takeaways render as key points", "Old point" in h and "Key points" in h)
     check("pull quote is dropped", "quote" not in h)
+
+
+def test_light_is_the_default() -> None:
+    """Light unless the visitor chooses dark (or "system", which follows the OS).
+
+    Both the site and every rendered briefing used to follow the OS, so a
+    dark-mode machine saw a dark site on first visit.
+    """
+    from articlegen import demo
+    from articlegen.render import render_article
+
+    page = open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                             "index.html"), encoding="utf-8").read()
+    check("site: nothing stored means light",
+          "localStorage.getItem('articlegen_theme') || 'light'" in page
+          and "|| 'system'" not in page)
+    check("site: dark palette only under data-theme=dark",
+          'html[data-theme="dark"] {' in page
+          and ':root:not([data-theme="light"])' not in page)
+    h = render_article(demo.SAMPLE_BRIEFING, demo.SAMPLE_PAPERS, "t")
+    check("briefing: nothing stored means light",
+          "localStorage.getItem('articlegen_theme') || 'light'" in h)
+    check("briefing: no automatic dark from the OS",
+          ':root:not([data-theme="light"])' not in h)
+    check("briefing: the text stops at a readable measure",
+          "article { max-width: 68rem; margin: 0 auto; }" in h)
 
 
 def test_draft_runs_as_a_polled_job() -> None:
@@ -10722,7 +10750,7 @@ def main(argv: list[str] | None = None) -> int:
         test_statistic_verification, test_flagged_figures_buy_one_revision,
         test_ranking, test_recency_actually_counts, test_render_blocks,
         test_display_item_placement, test_legacy_draft_fields,
-        test_draft_runs_as_a_polled_job, test_structured_briefing, test_demo_and_index, test_web_server,
+        test_light_is_the_default, test_draft_runs_as_a_polled_job, test_structured_briefing, test_demo_and_index, test_web_server,
         test_run_log_never_carries_the_topic,
         test_every_endpoint_logs_one_run_line,
         test_run_log_gist_is_optional_and_gist_scoped,

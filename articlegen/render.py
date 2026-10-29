@@ -1743,27 +1743,6 @@ _CSS = """
     --c-very-low: #9b2c1f; --c-very-low-bg: #f8e4e0;
     color-scheme: light;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #14150f;
-      --surface: #1e1f1c;
-      --ink: #f2f1ea;
-      --ink-2: #cfcec5;
-      --muted: #9d9d94;
-      --accent: #9dc4f5;
-      --link: #86b6ef;
-      --rule: #33342f;
-      --rule-strong: #4c4d47;
-      --seg-direct: #86b6ef;
-      --seg-related: #3987e5;
-      --seg-tangential: #184f95;
-      --c-high: #8fd6ad; --c-high-bg: #1d3328;
-      --c-moderate: #9dc4f5; --c-moderate-bg: #1d2b3d;
-      --c-low: #f0c46e; --c-low-bg: #3a3020;
-      --c-very-low: #f2a193; --c-very-low-bg: #3d2420;
-      color-scheme: dark;
-    }
-  }
   html[data-theme="dark"] {
     --bg: #14150f;
     --surface: #1e1f1c;
@@ -1797,6 +1776,9 @@ _CSS = """
   /* Phone: padded viewport. Desktop: the page uses the window, not a boxed
      column — side padding only. */
   main { max-width: none; width: 100%; margin: 0; padding: 2rem 1.25rem 4rem; }
+  /* Full window, readable measure: wide screens centre the article at about
+     a broadsheet page rather than running 170-character lines. */
+  article { max-width: 68rem; margin: 0 auto; }
   @media (min-width: 1100px) {
     main { padding: 2.5rem 4.5rem 4rem; }
   }
@@ -2064,10 +2046,10 @@ _CSS = """
 # formatted themselves, so their braces are ordinary single braces.
 _HEAD_SCRIPT = """<script>
   (function() {
-    var saved = localStorage.getItem('articlegen_theme') || 'system';
-    if (saved === 'dark' || saved === 'light') {
-      document.documentElement.setAttribute('data-theme', saved);
-    }
+    var saved = localStorage.getItem('articlegen_theme') || 'light';
+    var dark = saved === 'dark' || (saved === 'system' && window.matchMedia
+      && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
   })();
 </script>"""
 
@@ -2097,8 +2079,7 @@ function copyArticleLink() {
 }
 function toggleArticleTheme() {
   var cur = document.documentElement.getAttribute('data-theme');
-  var isSysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var effective = cur || (isSysDark ? 'dark' : 'light');
+  var effective = cur || 'light';
   var next = effective === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('articlegen_theme', next);
@@ -2108,8 +2089,7 @@ function updateArticleThemeIcon() {
   var icon = document.getElementById('themeIcon');
   if (!icon) return;
   var cur = document.documentElement.getAttribute('data-theme');
-  var isSysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var effective = cur || (isSysDark ? 'dark' : 'light');
+  var effective = cur || 'light';
   icon.innerHTML = effective === 'dark' ? '&#9789;' : '&#9788;';
 }
 document.addEventListener('DOMContentLoaded', updateArticleThemeIcon);
@@ -2463,17 +2443,14 @@ _INDEX_TEMPLATE = """<!DOCTYPE html>
 <title>Evidence briefings</title>
 <script>
   (function() {{
-    var saved = localStorage.getItem('articlegen_theme') || 'system';
-    if (saved === 'dark' || saved === 'light') {{
-      document.documentElement.setAttribute('data-theme', saved);
-    }}
+    var saved = localStorage.getItem('articlegen_theme') || 'light';
+    var dark = saved === 'dark' || (saved === 'system' && window.matchMedia
+      && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
   }})();
 </script>
 <style>
   :root, html[data-theme="light"] {{ --bg:#fff; --ink:#14171a; --muted:#6a7178; --accent:#17457f; --link:#1b5aa8; --rule:#dfdfda; --card:#f7f7f5; color-scheme: light; }}
-  @media (prefers-color-scheme: dark) {{
-    :root:not([data-theme="light"]) {{ --bg:#14150f; --ink:#f2f1ea; --muted:#9d9d94; --accent:#9dc4f5; --link:#86b6ef; --rule:#33342f; --card:#1e1f1c; color-scheme: dark; }}
-  }}
   html[data-theme="dark"] {{ --bg:#14150f; --ink:#f2f1ea; --muted:#9d9d94; --accent:#9dc4f5; --link:#86b6ef; --rule:#33342f; --card:#1e1f1c; color-scheme: dark; }}
   body {{ margin:0; background:var(--bg); color:var(--ink);
     font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; line-height:1.5; }}
@@ -2514,8 +2491,7 @@ _INDEX_TEMPLATE = """<!DOCTYPE html>
 <script>
 function toggleIndexTheme() {{
   var cur = document.documentElement.getAttribute('data-theme');
-  var isSysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var effective = cur || (isSysDark ? 'dark' : 'light');
+  var effective = cur || 'light';
   var next = effective === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('articlegen_theme', next);
@@ -2525,8 +2501,7 @@ function updateIndexThemeIcon() {{
   var icon = document.getElementById('idxThemeIcon');
   if (!icon) return;
   var cur = document.documentElement.getAttribute('data-theme');
-  var isSysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var effective = cur || (isSysDark ? 'dark' : 'light');
+  var effective = cur || 'light';
   icon.innerHTML = effective === 'dark' ? '&#9789;' : '&#9788;';
 }}
 document.addEventListener('DOMContentLoaded', updateIndexThemeIcon);
