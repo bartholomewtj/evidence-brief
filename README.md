@@ -120,3 +120,5 @@ python tests/test_replays.py
 ```
 
 Run them as scripts, the way CI does. `tests/replays/` holds real run manifests — do not edit them.
+
+pytest is not a dependency and CI does not use it, but `python -m pytest tests` works: `check()` in `test_offline.py` also raises when `PYTEST_CURRENT_TEST` is set, and `test_journal_conventions()` wraps the conformance suite as one case. A new check helper or suite has to fail under both runners, or pytest reports green while the script prints `FAIL`.
