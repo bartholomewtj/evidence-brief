@@ -1,0 +1,2051 @@
+{
+  "started": "2026-09-17T02:39:55.520930+00:00",
+  "question": "What health risks are associated with night shift work in working adults, and how strong is the evidence across sleep, cardiometabolic, cancer and mental health outcomes?",
+  "n_papers": 20,
+  "n_claims": 12,
+  "curation": {
+    "baseline_choice_short_topic": {
+      "agree": 15,
+      "n": 20,
+      "direct": "13/13",
+      "related": "2/5",
+      "tangential": "0/2",
+      "critical_ok": false,
+      "counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "toward_related": 2,
+      "away_related": 3,
+      "disagreements": [
+        {
+          "i": 1,
+          "opus": "related",
+          "jev": "direct"
+        },
+        {
+          "i": 2,
+          "opus": "tangential",
+          "jev": "related"
+        },
+        {
+          "i": 16,
+          "opus": "related",
+          "jev": "direct"
+        },
+        {
+          "i": 17,
+          "opus": "tangential",
+          "jev": "related"
+        },
+        {
+          "i": 19,
+          "opus": "related",
+          "jev": "direct"
+        }
+      ],
+      "seconds": null,
+      "note": "from 10-run bakeoff, short topic only"
+    },
+    "choice_full_question": {
+      "agree": 6,
+      "n": 20,
+      "direct": "1/13",
+      "related": "5/5",
+      "tangential": "0/2",
+      "critical_ok": false,
+      "counts": {
+        "direct": 1,
+        "related": 19,
+        "tangential": 0
+      },
+      "toward_related": 14,
+      "away_related": 0,
+      "disagreements": [
+        {
+          "i": 2,
+          "opus": "tangential",
+          "jev": "related"
+        },
+        {
+          "i": 3,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 4,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 5,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 6,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 7,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 8,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 9,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 11,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 12,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 14,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 17,
+          "opus": "tangential",
+          "jev": "related"
+        },
+        {
+          "i": 18,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 20,
+          "opus": "direct",
+          "jev": "related"
+        }
+      ],
+      "seconds": 6.07,
+      "tokens_in": 18599,
+      "tokens_out": 840,
+      "est_usd": 0.000781,
+      "raw": [
+        {
+          "i": 1,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 2,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 3,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 4,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 5,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 6,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 7,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 8,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 9,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 10,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 11,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 12,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 13,
+          "payload": {
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 14,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 15,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 16,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 17,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 18,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 19,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 20,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        }
+      ]
+    },
+    "strict_choice": {
+      "agree": 15,
+      "n": 20,
+      "direct": "8/13",
+      "related": "5/5",
+      "tangential": "2/2",
+      "critical_ok": false,
+      "counts": {
+        "direct": 8,
+        "related": 10,
+        "tangential": 2
+      },
+      "toward_related": 5,
+      "away_related": 0,
+      "disagreements": [
+        {
+          "i": 3,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 5,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 6,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 8,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 20,
+          "opus": "direct",
+          "jev": "related"
+        }
+      ],
+      "seconds": 5.69,
+      "tokens_in": 20219,
+      "tokens_out": 844,
+      "est_usd": 0.000849,
+      "raw": [
+        {
+          "i": 1,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 2,
+          "payload": {
+            "relevance": "tangential"
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 3,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 4,
+          "payload": {
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 5,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 6,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 7,
+          "payload": {
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 8,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 9,
+          "payload": {
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 10,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 11,
+          "payload": {
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 12,
+          "payload": {
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 13,
+          "payload": {
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 14,
+          "payload": {
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 15,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 16,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 17,
+          "payload": {
+            "relevance": "tangential"
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 18,
+          "payload": {
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 19,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 20,
+          "payload": {
+            "relevance": "related"
+          },
+          "label": "related"
+        }
+      ]
+    },
+    "score_three_levels": {
+      "agree": 11,
+      "n": 20,
+      "direct": "6/13",
+      "related": "5/5",
+      "tangential": "0/2",
+      "critical_ok": false,
+      "counts": {
+        "direct": 6,
+        "related": 14,
+        "tangential": 0
+      },
+      "toward_related": 9,
+      "away_related": 0,
+      "disagreements": [
+        {
+          "i": 2,
+          "opus": "tangential",
+          "jev": "related"
+        },
+        {
+          "i": 3,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 5,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 6,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 9,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 14,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 17,
+          "opus": "tangential",
+          "jev": "related"
+        },
+        {
+          "i": 18,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 20,
+          "opus": "direct",
+          "jev": "related"
+        }
+      ],
+      "seconds": 5.74,
+      "tokens_in": 17939,
+      "tokens_out": 380,
+      "est_usd": 0.000753,
+      "raw": [
+        {
+          "i": 1,
+          "payload": {
+            "relevance": 1.24
+          },
+          "label": "related"
+        },
+        {
+          "i": 2,
+          "payload": {
+            "relevance": 0.93
+          },
+          "label": "related"
+        },
+        {
+          "i": 3,
+          "payload": {
+            "relevance": 1.18
+          },
+          "label": "related"
+        },
+        {
+          "i": 4,
+          "payload": {
+            "relevance": 1.74
+          },
+          "label": "direct"
+        },
+        {
+          "i": 5,
+          "payload": {
+            "relevance": 1.04
+          },
+          "label": "related"
+        },
+        {
+          "i": 6,
+          "payload": {
+            "relevance": 1.13
+          },
+          "label": "related"
+        },
+        {
+          "i": 7,
+          "payload": {
+            "relevance": 1.69
+          },
+          "label": "direct"
+        },
+        {
+          "i": 8,
+          "payload": {
+            "relevance": 1.5
+          },
+          "label": "direct"
+        },
+        {
+          "i": 9,
+          "payload": {
+            "relevance": 1.29
+          },
+          "label": "related"
+        },
+        {
+          "i": 10,
+          "payload": {
+            "relevance": 1.0
+          },
+          "label": "related"
+        },
+        {
+          "i": 11,
+          "payload": {
+            "relevance": 1.55
+          },
+          "label": "direct"
+        },
+        {
+          "i": 12,
+          "payload": {
+            "relevance": 1.55
+          },
+          "label": "direct"
+        },
+        {
+          "i": 13,
+          "payload": {
+            "relevance": 1.8
+          },
+          "label": "direct"
+        },
+        {
+          "i": 14,
+          "payload": {
+            "relevance": 1.44
+          },
+          "label": "related"
+        },
+        {
+          "i": 15,
+          "payload": {
+            "relevance": 1.06
+          },
+          "label": "related"
+        },
+        {
+          "i": 16,
+          "payload": {
+            "relevance": 1.01
+          },
+          "label": "related"
+        },
+        {
+          "i": 17,
+          "payload": {
+            "relevance": 0.8
+          },
+          "label": "related"
+        },
+        {
+          "i": 18,
+          "payload": {
+            "relevance": 1.2
+          },
+          "label": "related"
+        },
+        {
+          "i": 19,
+          "payload": {
+            "relevance": 1.0
+          },
+          "label": "related"
+        },
+        {
+          "i": 20,
+          "payload": {
+            "relevance": 1.03
+          },
+          "label": "related"
+        }
+      ]
+    },
+    "noul_compose": {
+      "agree": 14,
+      "n": 20,
+      "direct": "11/13",
+      "related": "1/5",
+      "tangential": "2/2",
+      "critical_ok": false,
+      "counts": {
+        "direct": 11,
+        "related": 3,
+        "tangential": 6
+      },
+      "toward_related": 2,
+      "away_related": 4,
+      "disagreements": [
+        {
+          "i": 1,
+          "opus": "related",
+          "jev": "tangential"
+        },
+        {
+          "i": 3,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 10,
+          "opus": "related",
+          "jev": "tangential"
+        },
+        {
+          "i": 15,
+          "opus": "related",
+          "jev": "tangential"
+        },
+        {
+          "i": 16,
+          "opus": "related",
+          "jev": "tangential"
+        },
+        {
+          "i": 20,
+          "opus": "direct",
+          "jev": "related"
+        }
+      ],
+      "seconds": 5.59,
+      "tokens_in": 22159,
+      "tokens_out": 1540,
+      "est_usd": 0.000931,
+      "raw": [
+        {
+          "i": 1,
+          "payload": {
+            "shift_is_exposure": 0.98,
+            "health_outcome": 0.18,
+            "same_question": 0.62,
+            "background_only": 0.62
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 2,
+          "payload": {
+            "shift_is_exposure": 0.08,
+            "health_outcome": 0.07,
+            "same_question": 0.27,
+            "background_only": 0.75
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 3,
+          "payload": {
+            "shift_is_exposure": 0.98,
+            "health_outcome": 0.2,
+            "same_question": 0.81,
+            "background_only": 0.51
+          },
+          "label": "related"
+        },
+        {
+          "i": 4,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "health_outcome": 0.99,
+            "same_question": 0.93,
+            "background_only": 0.14
+          },
+          "label": "direct"
+        },
+        {
+          "i": 5,
+          "payload": {
+            "shift_is_exposure": 0.97,
+            "health_outcome": 0.99,
+            "same_question": 0.6,
+            "background_only": 0.16
+          },
+          "label": "direct"
+        },
+        {
+          "i": 6,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "health_outcome": 0.99,
+            "same_question": 0.7,
+            "background_only": 0.13
+          },
+          "label": "direct"
+        },
+        {
+          "i": 7,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "health_outcome": 0.99,
+            "same_question": 0.9,
+            "background_only": 0.12
+          },
+          "label": "direct"
+        },
+        {
+          "i": 8,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "health_outcome": 0.98,
+            "same_question": 0.8,
+            "background_only": 0.15
+          },
+          "label": "direct"
+        },
+        {
+          "i": 9,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "health_outcome": 0.99,
+            "same_question": 0.93,
+            "background_only": 0.14
+          },
+          "label": "direct"
+        },
+        {
+          "i": 10,
+          "payload": {
+            "shift_is_exposure": 0.97,
+            "health_outcome": 0.3,
+            "same_question": 0.14,
+            "background_only": 0.67
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 11,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "health_outcome": 0.99,
+            "same_question": 0.93,
+            "background_only": 0.1
+          },
+          "label": "direct"
+        },
+        {
+          "i": 12,
+          "payload": {
+            "shift_is_exposure": 0.98,
+            "health_outcome": 0.99,
+            "same_question": 0.92,
+            "background_only": 0.26
+          },
+          "label": "direct"
+        },
+        {
+          "i": 13,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "health_outcome": 0.95,
+            "same_question": 0.9,
+            "background_only": 0.14
+          },
+          "label": "direct"
+        },
+        {
+          "i": 14,
+          "payload": {
+            "shift_is_exposure": 0.97,
+            "health_outcome": 0.99,
+            "same_question": 0.88,
+            "background_only": 0.12
+          },
+          "label": "direct"
+        },
+        {
+          "i": 15,
+          "payload": {
+            "shift_is_exposure": 0.95,
+            "health_outcome": 0.33,
+            "same_question": 0.51,
+            "background_only": 0.83
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 16,
+          "payload": {
+            "shift_is_exposure": 0.69,
+            "health_outcome": 0.98,
+            "same_question": 0.27,
+            "background_only": 0.58
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 17,
+          "payload": {
+            "shift_is_exposure": 0.15,
+            "health_outcome": 0.07,
+            "same_question": 0.07,
+            "background_only": 0.85
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 18,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "health_outcome": 0.99,
+            "same_question": 0.92,
+            "background_only": 0.2
+          },
+          "label": "direct"
+        },
+        {
+          "i": 19,
+          "payload": {
+            "shift_is_exposure": 0.95,
+            "health_outcome": 0.98,
+            "same_question": 0.33,
+            "background_only": 0.38
+          },
+          "label": "related"
+        },
+        {
+          "i": 20,
+          "payload": {
+            "shift_is_exposure": 0.98,
+            "health_outcome": 0.99,
+            "same_question": 0.54,
+            "background_only": 0.38
+          },
+          "label": "related"
+        }
+      ],
+      "sweeps": [
+        {
+          "thresholds": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "agree": 15,
+          "n": 20,
+          "direct": "12/13",
+          "tangential": "2/2",
+          "critical_ok": false,
+          "counts": {
+            "direct": 12,
+            "related": 1,
+            "tangential": 7
+          }
+        },
+        {
+          "thresholds": [
+            0.5,
+            0.55,
+            0.55,
+            0.5
+          ],
+          "agree": 14,
+          "n": 20,
+          "direct": "11/13",
+          "tangential": "2/2",
+          "critical_ok": false,
+          "counts": {
+            "direct": 11,
+            "related": 3,
+            "tangential": 6
+          }
+        },
+        {
+          "thresholds": [
+            0.4,
+            0.6,
+            0.6,
+            0.5
+          ],
+          "agree": 15,
+          "n": 20,
+          "direct": "11/13",
+          "tangential": "2/2",
+          "critical_ok": false,
+          "counts": {
+            "direct": 11,
+            "related": 4,
+            "tangential": 5
+          }
+        },
+        {
+          "thresholds": [
+            0.6,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "agree": 15,
+          "n": 20,
+          "direct": "12/13",
+          "tangential": "2/2",
+          "critical_ok": false,
+          "counts": {
+            "direct": 12,
+            "related": 1,
+            "tangential": 7
+          }
+        },
+        {
+          "thresholds": [
+            0.5,
+            0.7,
+            0.5,
+            0.5
+          ],
+          "agree": 18,
+          "n": 20,
+          "direct": "12/13",
+          "tangential": "2/2",
+          "critical_ok": false,
+          "counts": {
+            "direct": 12,
+            "related": 5,
+            "tangential": 3
+          }
+        }
+      ]
+    },
+    "two_stage": {
+      "agree": 15,
+      "n": 20,
+      "direct": "8/13",
+      "related": "5/5",
+      "tangential": "2/2",
+      "critical_ok": false,
+      "counts": {
+        "direct": 8,
+        "related": 10,
+        "tangential": 2
+      },
+      "toward_related": 5,
+      "away_related": 0,
+      "disagreements": [
+        {
+          "i": 3,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 5,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 6,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 8,
+          "opus": "direct",
+          "jev": "related"
+        },
+        {
+          "i": 20,
+          "opus": "direct",
+          "jev": "related"
+        }
+      ],
+      "seconds": 5.44,
+      "tokens_in": 21899,
+      "tokens_out": 1244,
+      "est_usd": 0.00092,
+      "raw": [
+        {
+          "i": 1,
+          "payload": {
+            "shift_is_exposure": 0.98,
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 2,
+          "payload": {
+            "shift_is_exposure": 0.09,
+            "relevance": "tangential"
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 3,
+          "payload": {
+            "shift_is_exposure": 0.98,
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 4,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 5,
+          "payload": {
+            "shift_is_exposure": 0.97,
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 6,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 7,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 8,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 9,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 10,
+          "payload": {
+            "shift_is_exposure": 0.97,
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 11,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 12,
+          "payload": {
+            "shift_is_exposure": 0.98,
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 13,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 14,
+          "payload": {
+            "shift_is_exposure": 0.97,
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 15,
+          "payload": {
+            "shift_is_exposure": 0.95,
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 16,
+          "payload": {
+            "shift_is_exposure": 0.64,
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 17,
+          "payload": {
+            "shift_is_exposure": 0.14,
+            "relevance": "tangential"
+          },
+          "label": "tangential"
+        },
+        {
+          "i": 18,
+          "payload": {
+            "shift_is_exposure": 0.99,
+            "relevance": "direct"
+          },
+          "label": "direct"
+        },
+        {
+          "i": 19,
+          "payload": {
+            "shift_is_exposure": 0.95,
+            "relevance": "related"
+          },
+          "label": "related"
+        },
+        {
+          "i": 20,
+          "payload": {
+            "shift_is_exposure": 0.97,
+            "relevance": "related"
+          },
+          "label": "related"
+        }
+      ]
+    },
+    "noul_compose_v2": {
+      "note": "post-hoc on noul_compose payloads",
+      "sweeps": [
+        {
+          "name": "v2_0.5/0.7/0.5",
+          "agree": 18,
+          "n": 20,
+          "direct": "13/13",
+          "related": "3/5",
+          "tangential": "2/2",
+          "critical_ok": true,
+          "counts": {
+            "direct": 15,
+            "related": 3,
+            "tangential": 2
+          },
+          "disagreements": [
+            {
+              "i": 1,
+              "opus": "related",
+              "jev": "direct"
+            },
+            {
+              "i": 15,
+              "opus": "related",
+              "jev": "direct"
+            }
+          ]
+        },
+        {
+          "name": "v2_0.5/0.6/0.5",
+          "agree": 17,
+          "n": 20,
+          "direct": "13/13",
+          "related": "2/5",
+          "tangential": "2/2",
+          "critical_ok": true,
+          "counts": {
+            "direct": 15,
+            "related": 2,
+            "tangential": 3
+          },
+          "disagreements": [
+            {
+              "i": 1,
+              "opus": "related",
+              "jev": "direct"
+            },
+            {
+              "i": 10,
+              "opus": "related",
+              "jev": "tangential"
+            },
+            {
+              "i": 15,
+              "opus": "related",
+              "jev": "direct"
+            }
+          ]
+        },
+        {
+          "name": "v2_0.5/0.55/0.5",
+          "agree": 16,
+          "n": 20,
+          "direct": "13/13",
+          "related": "1/5",
+          "tangential": "2/2",
+          "critical_ok": true,
+          "counts": {
+            "direct": 15,
+            "related": 1,
+            "tangential": 4
+          },
+          "disagreements": [
+            {
+              "i": 1,
+              "opus": "related",
+              "jev": "direct"
+            },
+            {
+              "i": 10,
+              "opus": "related",
+              "jev": "tangential"
+            },
+            {
+              "i": 15,
+              "opus": "related",
+              "jev": "direct"
+            },
+            {
+              "i": 16,
+              "opus": "related",
+              "jev": "tangential"
+            }
+          ]
+        },
+        {
+          "name": "v2_0.5/0.7/0.55",
+          "agree": 17,
+          "n": 20,
+          "direct": "12/13",
+          "related": "3/5",
+          "tangential": "2/2",
+          "critical_ok": false,
+          "counts": {
+            "direct": 13,
+            "related": 4,
+            "tangential": 3
+          },
+          "disagreements": [
+            {
+              "i": 1,
+              "opus": "related",
+              "jev": "direct"
+            },
+            {
+              "i": 15,
+              "opus": "related",
+              "jev": "tangential"
+            },
+            {
+              "i": 20,
+              "opus": "direct",
+              "jev": "related"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "claims": {
+    "baseline_choice": {
+      "n": 12,
+      "exact": 8,
+      "collapsed": 9,
+      "exact_rate": 0.6666666666666666,
+      "collapsed_rate": 0.75,
+      "overreach_recall": "0/2",
+      "false_overreach": 2,
+      "confusion": {
+        "supported": {
+          "supported": 8,
+          "overreach": 2
+        },
+        "overreach": {
+          "supported": 1,
+          "unclear": 1
+        }
+      },
+      "disagreements": [
+        {
+          "id": 2,
+          "human": "supported",
+          "model": "overreach"
+        },
+        {
+          "id": 3,
+          "human": "overreach",
+          "model": "supported"
+        },
+        {
+          "id": 11,
+          "human": "overreach",
+          "model": "unclear"
+        },
+        {
+          "id": 12,
+          "human": "supported",
+          "model": "overreach"
+        }
+      ],
+      "seconds": null,
+      "note": "from 10-run bakeoff run 1"
+    },
+    "relation_choice": {
+      "n": 12,
+      "exact": 10,
+      "collapsed": 10,
+      "exact_rate": 0.8333333333333334,
+      "collapsed_rate": 0.8333333333333334,
+      "overreach_recall": "1/2",
+      "false_overreach": 1,
+      "confusion": {
+        "supported": {
+          "supported": 9,
+          "overreach": 1
+        },
+        "overreach": {
+          "supported": 1,
+          "overreach": 1
+        }
+      },
+      "disagreements": [
+        {
+          "id": 3,
+          "human": "overreach",
+          "model": "supported"
+        },
+        {
+          "id": 10,
+          "human": "supported",
+          "model": "overreach"
+        }
+      ],
+      "seconds": 3.36,
+      "tokens_in": 39917,
+      "tokens_out": 484,
+      "est_usd": 0.001677,
+      "results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.7
+            }
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.9
+            }
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.73
+            }
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.92
+            }
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.81
+            }
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.77
+            }
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.85
+            }
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.87
+            }
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.92
+            }
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "overreach",
+          "payload": {
+            "relation": {
+              "choice": "overreaches",
+              "confidence": 0.52
+            }
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "overreach",
+          "payload": {
+            "relation": {
+              "choice": "overreaches",
+              "confidence": 0.67
+            }
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "supported",
+          "payload": {
+            "relation": {
+              "choice": "supports",
+              "confidence": 0.38
+            }
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ]
+    },
+    "noul_clause": {
+      "n": 12,
+      "exact": 8,
+      "collapsed": 9,
+      "exact_rate": 0.6666666666666666,
+      "collapsed_rate": 0.75,
+      "overreach_recall": "1/2",
+      "false_overreach": 3,
+      "confusion": {
+        "supported": {
+          "supported": 7,
+          "overreach": 3
+        },
+        "overreach": {
+          "unclear": 1,
+          "overreach": 1
+        }
+      },
+      "disagreements": [
+        {
+          "id": 3,
+          "human": "overreach",
+          "model": "unclear"
+        },
+        {
+          "id": 6,
+          "human": "supported",
+          "model": "overreach"
+        },
+        {
+          "id": 10,
+          "human": "supported",
+          "model": "overreach"
+        },
+        {
+          "id": 12,
+          "human": "supported",
+          "model": "overreach"
+        }
+      ],
+      "seconds": 3.56,
+      "tokens_in": 40373,
+      "tokens_out": 468,
+      "est_usd": 0.001696,
+      "results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "payload": {
+            "core_in_excerpt": 0.72,
+            "unsupported_clause": 0.32
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "payload": {
+            "core_in_excerpt": 0.91,
+            "unsupported_clause": 0.23
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "unclear",
+          "payload": {
+            "core_in_excerpt": 0.9,
+            "unsupported_clause": 0.4
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "payload": {
+            "core_in_excerpt": 0.97,
+            "unsupported_clause": 0.1
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "payload": {
+            "core_in_excerpt": 0.84,
+            "unsupported_clause": 0.26
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "overreach",
+          "payload": {
+            "core_in_excerpt": 0.82,
+            "unsupported_clause": 0.55
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "payload": {
+            "core_in_excerpt": 0.93,
+            "unsupported_clause": 0.21
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "payload": {
+            "core_in_excerpt": 0.93,
+            "unsupported_clause": 0.26
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "payload": {
+            "core_in_excerpt": 0.95,
+            "unsupported_clause": 0.22
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "overreach",
+          "payload": {
+            "core_in_excerpt": 0.79,
+            "unsupported_clause": 0.77
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "overreach",
+          "payload": {
+            "core_in_excerpt": 0.11,
+            "unsupported_clause": 0.89
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "payload": {
+            "core_in_excerpt": 0.59,
+            "unsupported_clause": 0.79
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ]
+    },
+    "relation_conf_0.55": {
+      "n": 12,
+      "exact": 10,
+      "collapsed": 10,
+      "exact_rate": 0.8333333333333334,
+      "collapsed_rate": 0.8333333333333334,
+      "overreach_recall": "1/2",
+      "false_overreach": 0,
+      "confusion": {
+        "supported": {
+          "supported": 9,
+          "unclear": 1
+        },
+        "overreach": {
+          "supported": 1,
+          "overreach": 1
+        }
+      },
+      "disagreements": [
+        {
+          "id": 3,
+          "human": "overreach",
+          "model": "supported"
+        },
+        {
+          "id": 10,
+          "human": "supported",
+          "model": "unclear"
+        }
+      ],
+      "seconds": null,
+      "note": "post-hoc"
+    },
+    "relation_conf_0.6": {
+      "n": 12,
+      "exact": 10,
+      "collapsed": 10,
+      "exact_rate": 0.8333333333333334,
+      "collapsed_rate": 0.8333333333333334,
+      "overreach_recall": "1/2",
+      "false_overreach": 0,
+      "confusion": {
+        "supported": {
+          "supported": 9,
+          "unclear": 1
+        },
+        "overreach": {
+          "supported": 1,
+          "overreach": 1
+        }
+      },
+      "disagreements": [
+        {
+          "id": 3,
+          "human": "overreach",
+          "model": "supported"
+        },
+        {
+          "id": 10,
+          "human": "supported",
+          "model": "unclear"
+        }
+      ],
+      "seconds": null,
+      "note": "post-hoc"
+    },
+    "relation_conf_0.7": {
+      "n": 12,
+      "exact": 9,
+      "collapsed": 10,
+      "exact_rate": 0.75,
+      "collapsed_rate": 0.8333333333333334,
+      "overreach_recall": "0/2",
+      "false_overreach": 0,
+      "confusion": {
+        "supported": {
+          "supported": 9,
+          "unclear": 1
+        },
+        "overreach": {
+          "supported": 1,
+          "unclear": 1
+        }
+      },
+      "disagreements": [
+        {
+          "id": 3,
+          "human": "overreach",
+          "model": "supported"
+        },
+        {
+          "id": 10,
+          "human": "supported",
+          "model": "unclear"
+        },
+        {
+          "id": 11,
+          "human": "overreach",
+          "model": "unclear"
+        }
+      ],
+      "seconds": null,
+      "note": "post-hoc"
+    },
+    "relation_plus_modifier": {
+      "n": 12,
+      "exact": 11,
+      "collapsed": 11,
+      "exact_rate": 0.9166666666666666,
+      "collapsed_rate": 0.9166666666666666,
+      "overreach_recall": "2/2",
+      "false_overreach": 1,
+      "confusion": {
+        "supported": {
+          "supported": 9,
+          "overreach": 1
+        },
+        "overreach": {
+          "overreach": 2
+        }
+      },
+      "disagreements": [
+        {
+          "id": 10,
+          "human": "supported",
+          "model": "overreach"
+        }
+      ],
+      "seconds": 4.02,
+      "tokens_in": 41045,
+      "tokens_out": 504,
+      "est_usd": 0.001724,
+      "results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "payload": {
+            "modifier_mismatch": 0.17,
+            "nearest_clause_ok": 0.24,
+            "relation": "supported"
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "payload": {
+            "modifier_mismatch": 0.14,
+            "nearest_clause_ok": 0.52,
+            "relation": "supported"
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "overreach",
+          "payload": {
+            "modifier_mismatch": 0.61,
+            "nearest_clause_ok": 0.38,
+            "relation": "supported"
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "payload": {
+            "modifier_mismatch": 0.1,
+            "nearest_clause_ok": 0.2,
+            "relation": "supported"
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "payload": {
+            "modifier_mismatch": 0.1,
+            "nearest_clause_ok": 0.33,
+            "relation": "supported"
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "payload": {
+            "modifier_mismatch": 0.14,
+            "nearest_clause_ok": 0.11,
+            "relation": "supported"
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "payload": {
+            "modifier_mismatch": 0.13,
+            "nearest_clause_ok": 0.1,
+            "relation": "supported"
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "payload": {
+            "modifier_mismatch": 0.13,
+            "nearest_clause_ok": 0.16,
+            "relation": "supported"
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "payload": {
+            "modifier_mismatch": 0.36,
+            "nearest_clause_ok": 0.19,
+            "relation": "supported"
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "overreach",
+          "payload": {
+            "modifier_mismatch": 0.18,
+            "nearest_clause_ok": 0.4,
+            "relation": "overreach"
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "overreach",
+          "payload": {
+            "modifier_mismatch": 0.13,
+            "nearest_clause_ok": 0.17,
+            "relation": "overreach"
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "supported",
+          "payload": {
+            "modifier_mismatch": 0.25,
+            "nearest_clause_ok": 0.25,
+            "relation": "supported"
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ]
+    },
+    "relation_modifier_conf06": {
+      "n": 12,
+      "exact": 11,
+      "collapsed": 11,
+      "exact_rate": 0.9166666666666666,
+      "collapsed_rate": 0.9166666666666666,
+      "overreach_recall": "2/2",
+      "false_overreach": 0,
+      "confusion": {
+        "supported": {
+          "supported": 9,
+          "unclear": 1
+        },
+        "overreach": {
+          "overreach": 2
+        }
+      },
+      "disagreements": [
+        {
+          "id": 10,
+          "human": "supported",
+          "model": "unclear"
+        }
+      ],
+      "seconds": null,
+      "note": "post-hoc: modifier>=0.55 or relation overreach if conf>=0.6"
+    }
+  },
+  "updated": "2026-09-17T02:42:31.988619+00:00"
+}

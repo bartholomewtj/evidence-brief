@@ -1,0 +1,4322 @@
+{
+  "started": "2026-09-17T02:04:34.864966+00:00",
+  "topic": "night shift health risk",
+  "n_papers": 20,
+  "n_claims": 12,
+  "runs_requested": 3,
+  "opus_ref": {
+    "1": "related",
+    "2": "tangential",
+    "3": "direct",
+    "4": "direct",
+    "5": "direct",
+    "6": "direct",
+    "7": "direct",
+    "8": "direct",
+    "9": "direct",
+    "10": "related",
+    "11": "direct",
+    "12": "direct",
+    "13": "direct",
+    "14": "direct",
+    "15": "related",
+    "16": "related",
+    "17": "tangential",
+    "18": "direct",
+    "19": "related",
+    "20": "direct"
+  },
+  "paper_titles": [
+    "Modified Cortisol Circadian Rhythm: The Hidden Toll of Night-Shift Work",
+    "Beneficial Effects of Early Time-Restricted Feeding on Metabolic Diseases: Importance of Aligning Food Habits with the Circadian Clock",
+    "How to schedule night shift work in order to reduce health and safety risks",
+    "Night shift work characteristics and risk of incident coronary heart disease among health care workers: national cohort study",
+    "Chronotype differences in the risk of cancers, diabetes mellitus, and poor mental health among shift workers: a meta-analysis.",
+    "Shift work and risk of sleep disturbances in occupational populations: a systematic review and meta-analysis.",
+    "Rotating Night Shifts and Risk of Breast Cancer in Women Participating in the Nurses' Health Study",
+    "Night shift work and breast cancer risk in healthcare workers: a systematic review and meta-analysis.",
+    "Role of Life's Essential 8 in the association of night shift work with cardiovascular disease and mortality: a prospective cohort study of UK Biobank participants.",
+    "Limited Circadian Misalignment in Japanese Two-Shift Nurses: A Field Study",
+    "Is Night Shift Work Associated With Depression and Suicidal Ideation? A 17-Year Follow-Up Study.",
+    "Comparative evaluation of gut health, inflammatory factors, and sleep quality among shift workers: A cross-sectional study.",
+    "Genomic Landscape of Phenotypes Causally Associated with Night Shift Work.",
+    "Association between shift work patterns and the incidence of prediabetes and diabetes among night shift workers: a retrospective cohort study.",
+    "Shining a Light on the Challenges of Night Shift Nursing: A Mixed-Methods Study.",
+    "Circadian rhythm sleep disorders and changes in cognitive function and sleepiness among healthcare workers.",
+    "Occupational Health Support Needs and Barriers to Aligning Services With Needs Among Highway Traffic Police in Hunan Province, China: An Explanatory Sequential Mixed-Methods Study",
+    "Night shift work and the acceleration of chronic kidney disease onset: dose-response relationships, interactions with cardiometabolic genetic risk, and metabolomic mediators.",
+    "Chronotype distinctness a key risk factor for emotional and cognitive disruption in shift working nurses",
+    "Impact of nursing shift patterns on work-related gastrointestinal disorders: a systematic review and meta-analysis."
+  ],
+  "models": {
+    "meta-llama/llama-3.3-70b-instruct": {
+      "curation": [
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "direct",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "direct",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 18,
+            "related": 2,
+            "tangential": 0
+          },
+          "tokens_in": 9128,
+          "tokens_out": 816,
+          "seconds": 80.17,
+          "est_usd": 0.001174,
+          "error": "",
+          "run": 1,
+          "gate": {
+            "n": 20,
+            "agree": 13,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 0,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 5,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 16,
+            "related": 4,
+            "tangential": 0
+          },
+          "tokens_in": 9148,
+          "tokens_out": 834,
+          "seconds": 17.49,
+          "est_usd": 0.001182,
+          "error": "",
+          "run": 2,
+          "gate": {
+            "n": 20,
+            "agree": 15,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 2,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 3,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "direct",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "direct",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 18,
+            "related": 2,
+            "tangential": 0
+          },
+          "tokens_in": 9128,
+          "tokens_out": 739,
+          "seconds": 48.28,
+          "est_usd": 0.001149,
+          "error": "",
+          "run": 3,
+          "gate": {
+            "n": 20,
+            "agree": 13,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 0,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 5,
+            "critical_ok": false
+          }
+        }
+      ],
+      "claims": [
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 10,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.8333333333333334,
+          "overreach_recall": "0/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "supported": 2
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "supported"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Shift work was associated with higher odds of sleep disturbances (OR = 1.42, 95% CI: 1.24\u20131.62), with rotating shift (OR = 1.48, 95% CI: 1.23\u20131.77) and night shift of \u2264 8 hours (OR = 1.77, 95% CI: 1.11\u20132.81) were associated with higher odds of sleep disturbances. Among occupational groups, healthcare professionals showed higher odds (OR = 1.56, 95% CI: 1.21\u20132.01).",
+              "note": "The excerpt directly reports the association between shift work and sleep disturbances, including the odds ratios for rotating shifts and healthcare professionals, which matches the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 explained... 39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work",
+              "note": "The excerpt directly states that LE8 mediated 39.2% of the CVD association for usual or permanent night shift work, which matches the claim in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "Usual or permanent night shifts were associated with the highest risk [hazard ratio (HR) 1.16, 95% confidence interval (CI) 1.02-1.32].... Usual/permanent current night shifts, \u226510 years and 3-8 nights/month of lifetime night shifts were significantly associated with a higher risk of incident CHD (HR 1.37, 95% CI 1.20-1.58)",
+              "note": "The excerpt directly reports the hazard ratios and confidence intervals for atrial fibrillation and coronary heart disease risk associated with night shift work, matching the sentence's claims.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "The multivariable adjusted hazard ratios for type 2 diabetes were 1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "The excerpt directly reports the hazard ratio of 1.31 for each five-year increment of rotating night shift work, matching the claim in the sentence.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (...; >8/month: OR 1.36 [95% CI 1.14\u20131.62];",
+              "note": "The excerpt directly reports the association between night shifts per month and type 2 diabetes odds, including the specific odds ratio for more than 8 night shifts per month.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "This systematic review of 57 observational studies did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, non-Hodgkin's lymph, and stomach cancers.",
+              "note": "The excerpt directly states the findings of the meta-analysis, which match the claim made in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "Compared to never exposure, pooled RRs were 1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies, I2 = 39%) for ever, and 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years",
+              "note": "The excerpt directly reports the relative risks (RR) for ever exposure and for \u226520 years of night shift work, matching the values given in the sentence.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias. 60% of these were rated as 'definitely' or 'probably' high RoB in the exposure characterization domain.",
+              "note": "The excerpt directly states that the RR for \u226520 years of exposure lost statistical significance and approached unity after correction for publication bias, and also mentions that 60% of the studies were rated high risk of bias for exposure assessment, which matches the sentence.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62; I2 = 70.6%) and specifically for depressive symptoms (ES = 1.33; 95% CI = 1.02, 1.74; I2 = 31.5%). Gender differences explained more than 90% of heterogeneity, with female shift workers more likely to experience depressive symptoms than female non\u2013shift workers (odds ratio = 1.73; 95% CI = 1.39, 2.14).",
+              "note": "The excerpt directly reports the effect sizes and confidence intervals for the association between shift work and adverse mental health outcomes, including depressive symptoms, and the increased risk for female shift workers.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "The excerpt directly states the proposed schedule limits, including the number of consecutive night shifts, shift intervals, and night shift duration, which matches the sentence.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "supported",
+              "quote": "Short-term physiological effects in terms of circadian disruption, inadequate sleep duration and quality, and fatigue were considered as possible links between night shift work and selected health and safety risks, namely, cancer, cardio-metabolic disease, injuries, and pregnancy-related outcomes.",
+              "note": "The excerpt discusses the consideration of short-term physiological effects as possible links to health risks, which aligns with the sentence's claim that scheduling recommendations seem to rest largely on short-term physiological and observational evidence.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "LE8 explained 52.0% (95% CI = 30.3\u201372.9) of the association between some night shift work and incident CVD and 39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work. For all-cause mortality, LE8 mediated 33.1% (95% CI = 15.3\u201357.5) of the association for usual or permanent night shift work.",
+              "note": "The excerpt provides evidence that the association between night shift work and cardiovascular disease and mortality is partially mediated by Life's Essential 8 (LE8) scores, which is a measure of cardiovascular health. The mediation analysis suggests that improving cardiovascular health could prevent a substantial proportion of CVD events and deaths among night shift workers.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 34132,
+          "tokens_out": 1491,
+          "seconds": 119.72,
+          "est_usd": 0.00389,
+          "errors": 0,
+          "run": 1
+        },
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 10,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.8333333333333334,
+          "overreach_recall": "0/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "supported": 2
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "supported"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Shift work was associated with higher odds of sleep disturbances (OR = 1.42, 95% CI: 1.24\u20131.62), with rotating shift (OR = 1.48, 95% CI: 1.23\u20131.77) and night shift of \u2264 8 hours (OR = 1.77, 95% CI: 1.11\u20132.81) were associated with higher odds of sleep disturbances. Among occupational groups, healthcare professionals showed higher odds (OR = 1.56, 95% CI: 1.21\u20132.01).",
+              "note": "The excerpt directly reports the association between shift work and sleep disturbances, including the odds ratios for rotating shift, night shift, and healthcare professionals, which matches the information in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 mediated 39.2% of the association for usual or permanent night shift work",
+              "note": "The excerpt directly states that LE8 mediated 39.2% of the association for usual or permanent night shift work, which matches the claim in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "Usual or permanent night shifts were associated with the highest risk [hazard ratio (HR) 1.16, 95% confidence interval (CI) 1.02-1.32].",
+              "note": "The excerpt directly reports the hazard ratio for atrial fibrillation risk associated with usual or permanent night shifts, matching the value in the sentence.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "The multivariable adjusted hazard ratios for type 2 diabetes were 1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "The excerpt directly reports the hazard ratio of 1.31 for each five-year increment of rotating night shift work, matching the claim in the sentence.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (...; >8/month: OR 1.36 [95% CI 1.14\u20131.62];",
+              "note": "The excerpt directly reports the association between night shifts per month and type 2 diabetes odds, including the specific odds ratio for more than 8 night shifts per month.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "This systematic review of 57 observational studies did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, non-Hodgkin's lymph, and stomach cancers.",
+              "note": "The excerpt directly states the findings of the meta-analysis, which matches the claim made in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "Compared to never exposure, pooled RRs were 1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies, I2 = 39%) for ever, and 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years",
+              "note": "The excerpt directly reports the results of a meta-analysis, including the relative risks (RR) for ever exposure and for \u226520 years of night shift work, which match the values stated in the sentence.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias. 60% of these were rated as 'definitely' or 'probably' high RoB in the exposure characterization domain.",
+              "note": "The sentence is supported by the excerpt, which states that the RR for \u226520 years of exposure lost statistical significance and approached unity after correction for publication bias, and also mentions that 60% of the studies were rated as high risk of bias for exposure assessment.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62; I2 = 70.6%) and specifically for depressive symptoms (ES = 1.33; 95% CI = 1.02, 1.74; I2 = 31.5%). Gender differences explained more than 90% of heterogeneity, with female shift workers more likely to experience depressive symptoms than female non\u2013shift workers (odds ratio = 1.73; 95% CI = 1.39, 2.14).",
+              "note": "The excerpt directly reports the associations between shift work and adverse mental health outcomes, including the effect sizes and confidence intervals for overall mental health and depressive symptoms, as well as the odds ratio for female shift workers experiencing depressive symptoms.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "The excerpt directly states the recommended schedule limits, including no more than three consecutive night shifts, shift intervals of at least 11 hours, and night shifts no longer than nine hours, which matches the sentence.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "supported",
+              "quote": "Short-term physiological effects in terms of circadian disruption, inadequate sleep duration and quality, and fatigue were considered as possible links between night shift work and selected health and safety risks, namely, cancer, cardio-metabolic disease, injuries, and pregnancy-related outcomes.",
+              "note": "The excerpt discusses the consideration of short-term physiological effects as possible links to health risks, which aligns with the sentence's statement that scheduling recommendations seem to rest largely on short-term physiological and observational evidence.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "LE8 mediated 39.2% of the CVD association, 33.1% of all-cause mortality",
+              "note": "The excerpt directly states that LE8 mediated a substantial proportion of the associations with cardiovascular outcomes, including 39.2% of the CVD association and 33.1% of all-cause mortality for usual or permanent night shift work.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 34192,
+          "tokens_out": 1361,
+          "seconds": 81.65,
+          "est_usd": 0.003855,
+          "errors": 0,
+          "run": 2
+        },
+        {
+          "n": 12,
+          "exact": 9,
+          "collapsed": 9,
+          "exact_rate": 0.75,
+          "collapsed_rate": 0.75,
+          "overreach_recall": "0/2",
+          "false_overreach": 1,
+          "confusion": {
+            "supported": {
+              "supported": 9,
+              "overreach": 1
+            },
+            "overreach": {
+              "supported": 2
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 4,
+              "human": "supported",
+              "model": "overreach"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "supported"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Shift work was associated with higher odds of sleep disturbances (OR = 1.42, 95% CI: 1.24\u20131.62), with rotating shift (OR = 1.48, 95% CI: 1.23\u20131.77) and healthcare professionals showing higher odds (OR = 1.56, 95% CI: 1.21\u20132.01).",
+              "note": "The excerpt directly reports the association between shift work and sleep disturbances, including the odds ratios for rotating shift and healthcare professionals, matching the claim in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 mediated 39.2% of the association between usual or permanent night shift work and incident CVD",
+              "note": "The excerpt directly states that LE8 mediated 39.2% of the CVD association, which matches the claim in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "Usual or permanent night shifts were associated with the highest risk [hazard ratio (HR) 1.16, 95% confidence interval (CI) 1.02-1.32]. ... Usual/permanent current night shifts, \u226510 years and 3-8 nights/month of lifetime night shifts were significantly associated with a higher risk of incident CHD (HR 1.22, 95% CI 1.11-1.35, HR 1.37, 95% CI 1.20-1.58",
+              "note": "The excerpt directly reports the hazard ratios and confidence intervals for atrial fibrillation and coronary heart disease risks associated with night shift work, matching the sentence's claims.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "overreach",
+              "quote": "The excess risk of rotating night shift work combined with unhealthy lifestyle was higher than the addition of risk associated with each individual factor.",
+              "note": "The findings suggest that most cases of type 2 diabetes could be prevented by adhering to a healthy lifestyle, and the benefits could be greater in rotating night shift workers.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (<3/month: OR 1.24 [95% CI 0.90\u20131.68]; 3\u20138/month: OR 1.11 [95% CI 0.90\u20131.37]; and >8/month: OR 1.36 [95% CI 1.14\u20131.62];",
+              "note": "The excerpt directly reports the association between night shifts per month and type 2 diabetes odds, including the specific odds ratio for more than 8 night shifts per month.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "This systematic review of 57 observational studies did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, non-Hodgkin's lymph, and stomach cancers.",
+              "note": "The sentence accurately reflects the conclusion of the systematic review and meta-analysis.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "Compared to never exposure, pooled RRs were 1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies, I2 = 39%) for ever, and ... 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years of night shift work.",
+              "note": "The excerpt directly reports the relative risks for ever exposure and for \u226520 years of night shift work, matching the values given in the sentence.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "60% of these were rated as 'definitely' or 'probably' high RoB in the exposure characterization domain. The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "The sentence statement about 60% of studies being rated high risk of bias and the loss of significance for \u226520 years of exposure after correction for publication bias is directly supported by the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62; I2 = 70.6%) and specifically for depressive symptoms (ES = 1.33; 95% CI = 1.02, 1.74; I2 = 31.5%). Gender differences explained more than 90% of heterogeneity, with female shift workers more likely to experience depressive symptoms than female non\u2013shift workers (odds ratio = 1.73; 95% CI = 1.39, 2.14).",
+              "note": "The excerpt directly reports the effect sizes and confidence intervals for the association between shift work and adverse mental health outcomes, as well as the odds ratio for female shift workers experiencing depressive symptoms, matching the claims made in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "The excerpt directly states the proposed schedule limits, including the number of consecutive night shifts, shift intervals, and night shift duration, which matches the sentence.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature",
+              "note": "The excerpt explicitly states that the recommendations are based on limited existing literature, which aligns with the sentence's claim that scheduling recommendations seem to rest largely on short-term physiological and observational evidence.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "LE8 explained 52.0% (95% CI = 30.3\u201372.9) of the association between some night shift work and incident CVD and 39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work. For all-cause mortality, LE8 mediated 33.1% (95% CI = 15.3\u201357.5) of the association for usual or permanent night shift work.",
+              "note": "The excerpt provides evidence that the association between night shift work and cardiovascular disease (CVD) and all-cause mortality is partially mediated by Life's Essential 8 (LE8) scores, which is a measure of cardiovascular health. The mediation analysis suggests that improving LE8 scores could prevent a substantial proportion of CVD events and deaths among night shift workers.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 34252,
+          "tokens_out": 1436,
+          "seconds": 86.74,
+          "est_usd": 0.003885,
+          "errors": 0,
+          "run": 3
+        }
+      ]
+    },
+    "openai/gpt-5.6-luna": {
+      "curation": [
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "related",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "direct",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "direct",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "related"
+          },
+          "counts": {
+            "direct": 16,
+            "related": 4,
+            "tangential": 0
+          },
+          "tokens_in": 9225,
+          "tokens_out": 1092,
+          "seconds": 20.69,
+          "est_usd": 0.003155,
+          "error": "",
+          "run": 1,
+          "gate": {
+            "n": 20,
+            "agree": 11,
+            "retained": {
+              "direct": {
+                "kept": 11,
+                "held": 13
+              },
+              "related": {
+                "kept": 0,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 4,
+            "away_related": 5,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "related",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "direct",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "direct",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 16,
+            "related": 4,
+            "tangential": 0
+          },
+          "tokens_in": 9225,
+          "tokens_out": 1516,
+          "seconds": 23.58,
+          "est_usd": 0.003664,
+          "error": "",
+          "run": 2,
+          "gate": {
+            "n": 20,
+            "agree": 13,
+            "retained": {
+              "direct": {
+                "kept": 12,
+                "held": 13
+              },
+              "related": {
+                "kept": 1,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 3,
+            "away_related": 4,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "direct",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "direct",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 18,
+            "related": 2,
+            "tangential": 0
+          },
+          "tokens_in": 9225,
+          "tokens_out": 864,
+          "seconds": 14.67,
+          "est_usd": 0.002882,
+          "error": "",
+          "run": 3,
+          "gate": {
+            "n": 20,
+            "agree": 13,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 0,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 5,
+            "critical_ok": false
+          }
+        }
+      ],
+      "claims": [
+        {
+          "n": 12,
+          "exact": 9,
+          "collapsed": 9,
+          "exact_rate": 0.75,
+          "collapsed_rate": 0.75,
+          "overreach_recall": "1/2",
+          "false_overreach": 2,
+          "confusion": {
+            "supported": {
+              "supported": 8,
+              "overreach": 2
+            },
+            "overreach": {
+              "supported": 1,
+              "overreach": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 2,
+              "human": "supported",
+              "model": "overreach"
+            },
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 12,
+              "human": "supported",
+              "model": "overreach"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+              "note": "The excerpt reports the association, all stated subgroup odds ratios, and that all included studies were cross-sectional, supporting uncertainty about direction.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "overreach",
+              "quote": "LE8 explained 52.0% ... of the association between some night shift work and incident CVD and 39.2% ... for usual or permanent night shift work.",
+              "note": "The 39% estimate applies specifically to usual/permanent night shifts; the excerpt does not state that it depends on modelling assumptions.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "From 'day workers'... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+              "note": "The excerpt reports a graded AF risk increase, the stated HR, higher CHD risk with \u226510 years, and no modification by genetic predisposition.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+              "note": "The excerpt reports 143,410 women, 22\u201324 years of follow-up, the exact hazard ratio and confidence interval, and significant additive interaction.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": "working more night shifts per month was associated with higher type 2 diabetes odds",
+              "note": "The excerpt reports the >8/month association and OR 1.36; its prevalent-case observational design supports the temporal-ordering caveat.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "The pooled results showed that night-shift work was not associated with the risk of breast cancer",
+              "note": "The excerpt reports 57 studies, 8,477,849 participants, and no overall association for all five listed cancers.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "Compared to never exposure, pooled RRs were 1.05 (95% CI 0.96-1.14, 12 studies) for ever",
+              "note": "The excerpt reports all cited study counts, case numbers, RRs, and confidence intervals, including the \u226520-year estimate.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "The excerpt explicitly reports attenuation after influence and publication-bias analyses, plus 60% high risk of bias in exposure characterization, supporting possible fragility.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+              "note": "The excerpt reports all stated study counts, effect sizes, depressive symptoms, and higher odds among female shift workers.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that ... night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "The excerpt identifies 15 researchers, calls it a consensus, gives the three limits, and explicitly says the literature is limited.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "overreach",
+              "quote": "Based on the limited, existing literature",
+              "note": "The excerpt supports limited evidence and short-term physiological links, but does not establish that no controlled interventions exist or that evidence is observational.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "overreach",
+              "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+              "note": "The excerpt describes a prospective cohort, but reports modelling rather than an intervention; \u201conly\u201d and the intrinsic-circadian comparison are not established.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 34806,
+          "tokens_out": 3253,
+          "seconds": 90.18,
+          "est_usd": 0.010865,
+          "errors": 0,
+          "run": 1
+        },
+        {
+          "n": 12,
+          "exact": 8,
+          "collapsed": 9,
+          "exact_rate": 0.6666666666666666,
+          "collapsed_rate": 0.75,
+          "overreach_recall": "0/2",
+          "false_overreach": 2,
+          "confusion": {
+            "supported": {
+              "supported": 8,
+              "overreach": 2
+            },
+            "overreach": {
+              "supported": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 5,
+              "human": "supported",
+              "model": "overreach"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            },
+            {
+              "id": 12,
+              "human": "supported",
+              "model": "overreach"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+              "note": "The excerpt reports the overall OR, rotating-shift and healthcare-professional estimates, and identifies all studies as cross-sectional, supporting the uncertainty about direction.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+              "note": "The excerpt reports 39.2% mediation and describes counterfactual mediation analysis, supporting the estimate and its dependence on modelling assumptions.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "From 'day workers'... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+              "note": "The excerpt reports a graded AF risk increase, the stated HR, higher CHD risk after \u226510 years, and no modification by genetic predisposition.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "The multivariable adjusted hazard ratios for type 2 diabetes were 1.31 (95% confidence interval 1.19 to 1.44) per five year increment",
+              "note": "The excerpt reports the same cohort size, 22\u201324-year follow-up, hazard ratio, confidence interval, and significant additive interaction with unhealthy lifestyle.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "overreach",
+              "quote": ">8/month: OR 1.36 [95% CI 1.14\u20131.62]",
+              "note": "The odds association is supported, but the excerpt does not state that the data were cross-sectional or that temporal ordering cannot be established.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "Included in the meta-analyses were 57 eligible studies with 8,477,849 participants",
+              "note": "The excerpt reports 57 studies and millions of participants, with no overall association for ever-exposure to night-shift work and the five listed cancers.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies, I2 = 39%) for ever, and 1.25 (95% CI 1.01-1.55",
+              "note": "The excerpt reports these pooled estimates in 12 healthcare-worker studies involving 12,132 breast cancer cases; it also notes uncertainty around the association.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "The excerpt also reports that 60% were high risk of bias in exposure characterization, supporting the claim that the estimate may be fragile.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk... (ES = 1.28; 95% CI = 1.02, 1.62)",
+              "note": "The excerpt reports the seven studies, both effect sizes, and higher depressive-symptom odds among female shift workers with the stated OR and CI.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that ... night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "The excerpt identifies 15 researchers, calls the paper a consensus, recommends the stated limits, and explicitly notes the literature is limited.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "quote": "Based on the limited, existing literature",
+              "note": "The excerpt indicates limited evidence and short-term physiological considerations, but does not establish that no controlled interventions exist or that evidence is observational.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "overreach",
+              "quote": "We used Cox models to estimate associations and counterfactual mediation analysis to quantify the proportion mediated by LE8.",
+              "note": "The study quantified LE8 mediation and counterfactual preventability, but did not compare these with intrinsic circadian effects or test an intervention.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 34806,
+          "tokens_out": 2829,
+          "seconds": 71.24,
+          "est_usd": 0.010356,
+          "errors": 0,
+          "run": 2
+        },
+        {
+          "n": 12,
+          "exact": 8,
+          "collapsed": 9,
+          "exact_rate": 0.6666666666666666,
+          "collapsed_rate": 0.75,
+          "overreach_recall": "0/2",
+          "false_overreach": 2,
+          "confusion": {
+            "supported": {
+              "supported": 8,
+              "overreach": 2
+            },
+            "overreach": {
+              "supported": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 2,
+              "human": "supported",
+              "model": "overreach"
+            },
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            },
+            {
+              "id": 12,
+              "human": "supported",
+              "model": "overreach"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+              "note": "The excerpt reports the stated study design, sample, countries, odds ratios, subgroup estimates, and association-only interpretation consistent with cross-sectional evidence.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "overreach",
+              "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+              "note": "The 39.2% estimate is supported, but the excerpt does not state that it depends on modelling assumptions.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "From 'day workers' ... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+              "note": "The excerpt reports a graded AF risk increase, the stated HRs for usual/permanent nights and \u226510 years of work, and no modification by genetic predisposition.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+              "note": "The excerpt reports 143,410 women, 22\u201324 years of follow-up, the stated hazard ratio and confidence interval, and significant additive interaction.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (<3/month: OR 1.24; 3\u20138/month: OR 1.11; and >8/month: OR 1.36)",
+              "note": "The excerpt reports the stated >8/month odds ratio and describes associations from UK Biobank prevalent-case data; cross-sectional temporal ordering is not established.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal",
+              "note": "The excerpt reports 57 studies with 8,477,849 participants and no overall association for the listed cancers, including stomach cancer.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "Compared to never exposure, pooled RRs were 1.05; 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years",
+              "note": "The excerpt reports RR 1.05 for ever exposure and RR 1.25 for \u226520 years among 12 studies and 12,132 cases.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "The excerpt also explicitly reports that 60% were rated high risk of bias in exposure characterization, supporting the fragility qualification.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+              "note": "The excerpt reports all stated study counts, effect estimates, depressive symptoms, and higher odds among female shift workers.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that ... night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "The excerpt identifies 15 researchers, calls the paper a consensus, recommends all three limits, and explicitly describes the literature as limited.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "quote": "Short-term physiological effects in terms of circadian disruption, inadequate sleep duration and quality, and fatigue were considered",
+              "note": "The excerpt supports reliance on short-term physiological evidence but does not establish that no randomized or controlled interventions tested disease incidence or characterize evidence as observational.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "overreach",
+              "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+              "note": "The excerpt supports observational mediation and counterfactual estimates, but does not establish that these are the only estimates or that prospective testing has not occurred.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 34806,
+          "tokens_out": 2608,
+          "seconds": 69.59,
+          "est_usd": 0.010091,
+          "errors": 0,
+          "run": 3
+        }
+      ]
+    },
+    "google/gemini-2.5-flash": {
+      "curation": [
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "related",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 14,
+            "related": 6,
+            "tangential": 0
+          },
+          "tokens_in": 9508,
+          "tokens_out": 896,
+          "seconds": 4.91,
+          "est_usd": 0.005092,
+          "error": "",
+          "run": 1,
+          "gate": {
+            "n": 20,
+            "agree": 17,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 4,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 1,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "related",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 14,
+            "related": 6,
+            "tangential": 0
+          },
+          "tokens_in": 9508,
+          "tokens_out": 898,
+          "seconds": 4.29,
+          "est_usd": 0.005097,
+          "error": "",
+          "run": 2,
+          "gate": {
+            "n": 20,
+            "agree": 17,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 4,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 1,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 16,
+            "related": 4,
+            "tangential": 0
+          },
+          "tokens_in": 9508,
+          "tokens_out": 936,
+          "seconds": 26.98,
+          "est_usd": 0.005192,
+          "error": "",
+          "run": 3,
+          "gate": {
+            "n": 20,
+            "agree": 15,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 2,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 3,
+            "critical_ok": false
+          }
+        }
+      ],
+      "claims": [
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 10,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.8333333333333334,
+          "overreach_recall": "0/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "supported": 2
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "supported"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates. Shift work was associated with higher odds of sleep disturbances (OR = 1.42, 95% CI: 1.24\u20131.62)",
+              "note": "The sentence accurately reports the meta-analysis details, ORs, and the limitation of cross-sectional design.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 mediated 39.2% of the CVD association",
+              "note": "The excerpt directly states the 39.2% mediation for CVD.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "Usual or permanent night shifts were associated with the highest risk [hazard ratio (HR) 1.16, 95% confidence interval (CI) 1.02-1.32].",
+              "note": "The excerpt directly states the AF risk and CHD risk with genetic predisposition.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "The multivariable adjusted hazard ratios for type 2 diabetes were 1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "The sentence accurately reflects the hazard ratio and confidence interval for night shift work.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": ">8/month: OR 1.36 [95% CI 1.14\u20131.62]; Ptrend = 0.001",
+              "note": "The excerpt states the OR for >8 night shifts/month and the cross-sectional design.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "This systematic review of 57 observational studies did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, Non-Hodgkin\u2019s lymph, and stomach cancers.",
+              "note": "The excerpt directly states the meta-analysis of 57 studies found no association for the listed cancers.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "Twelve studies were included (12 132 breast cancer cases); ...pooled RRs were 1.05 ... for ever, and ... 1.25 (95% CI 1.01\u20131.55) for \u226520 years",
+              "note": "The excerpt directly states the numbers of studies and cases, and the RRs for 'ever' and '\u226520 years' exposure.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "The excerpt directly states the longer-duration estimate lost significance and approached unity after correction for publication bias.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "We included 7 longitudinal studies...Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28...CI = 1.02, 1.62) and specifically for depressive symptoms (ES = 1.33...CI = 1.02, 1.74). Gender differences explained more than 90% of heterogeneity, with female shift workers more likely to experience depressive symptoms than female non\u2013shift workers (odds ratio = 1.73; 95% CI = 1.39, 2.14).",
+              "note": "The sentence accurately reports the findings and statistics from the meta-analysis.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "The sentence accurately reflects the recommendations and the acknowledgment of limited literature.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "supported",
+              "quote": "scheduling recommendations seem to rest largely on short-term physiological and observational evidence",
+              "note": "The excerpt discusses recommendations based on 'limited, existing literature' and 'short-term physiological effects'.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "estimated only by mediation and counterfactual modelling within a single cohort",
+              "note": "The excerpt explicitly states that the estimation was done using mediation and counterfactual modeling within a single cohort.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 38773,
+          "tokens_out": 1060,
+          "seconds": 17.04,
+          "est_usd": 0.014282,
+          "errors": 0,
+          "run": 1
+        },
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 10,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.8333333333333334,
+          "overreach_recall": "0/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "supported": 2
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "supported"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates. Shift work was associated with higher odds of sleep disturbances (OR = 1.42, 95% CI: 1.24\u20131.62)",
+              "note": "The sentence accurately reports the meta-analysis details and findings, including the ORs and CI, and the cross-sectional design limitation.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 mediated 39.2% of the CVD association",
+              "note": "The excerpt directly states the mediation percentage for CVD.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "Usual or permanent night shifts were associated with the highest risk [hazard ratio (HR) 1.16, 95% confidence interval (CI) 1.02-1.32].",
+              "note": "The sentence accurately reports the findings and quotes the HR.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "The multivariable adjusted hazard ratios for type 2 diabetes were 1.31 (95% confidence interval 1.19 to 1.44) per five year increment",
+              "note": "The sentence accurately reflects the hazard ratio and interaction reported.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": ">8/month: OR 1.36 [95% CI 1.14\u20131.62]; Ptrend = 0.001",
+              "note": "The excerpt directly states the OR for >8 night shifts/month and mentions the study design.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "This systematic review of 57 observational studies did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, Non-Hodgkin\u2019s lymph, and stomach cancers.",
+              "note": "The excerpt directly states no association for the listed cancers.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "Twelve studies were included (12 132 breast cancer cases); ... pooled RRs were 1.05 ... for ever, and ... 1.25 (95% CI 1.01\u20131.55) for \u226520 years",
+              "note": "The excerpt directly states the numbers of studies and cases, and the RRs for 'ever' and '\u226520 years' exposure.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "The excerpt directly states the longer-duration estimate lost significance and approached unity after correction for publication bias.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "We included 7 longitudinal studies...Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28...CI = 1.02, 1.62)",
+              "note": "The excerpt directly states the meta-analysis included 7 longitudinal studies and provides the exact effect sizes and confidence intervals for mental health outcomes and depressive symptoms, and the odds ratio for female shift workers.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "The sentence accurately reflects the recommendations and the concession about limited literature.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "supported",
+              "quote": "scheduling recommendations seem to rest largely on short-term physiological and observational evidence",
+              "note": "The excerpt discusses recommendations based on 'limited, existing literature' and 'short-term physiological effects'.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "estimated only by mediation and counterfactual modelling within a single cohort",
+              "note": "The excerpt explicitly states that the estimation was done using mediation and counterfactual modeling within a single cohort.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 38773,
+          "tokens_out": 983,
+          "seconds": 17.19,
+          "est_usd": 0.014089,
+          "errors": 0,
+          "run": 2
+        },
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 10,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.8333333333333334,
+          "overreach_recall": "0/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "supported": 2
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "supported"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates. Shift work was associated with higher odds of sleep disturbances (OR = 1.42, 95% CI: 1.24\u20131.62)",
+              "note": "The sentence accurately reports the meta-analysis details, ORs, and the limitation of cross-sectional design.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 mediated 39.2% of the CVD association",
+              "note": "The excerpt states the exact percentage for CVD association.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "Usual or permanent night shifts were associated with the highest risk [hazard ratio (HR) 1.16, 95% confidence interval (CI) 1.02-1.32].",
+              "note": "The sentence accurately reports the findings and quotes the HR and CI.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "The multivariable adjusted hazard ratios for type 2 diabetes were 1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "The sentence accurately reflects the hazard ratio and interaction found in the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": ">8/month: OR 1.36 [95% CI 1.14\u20131.62]; Ptrend = 0.001",
+              "note": "The excerpt directly states the OR for >8 night shifts/month and mentions the study design.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "This systematic review of 57 observational studies did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, Non-Hodgkin\u2019s lymph, and stomach cancers.",
+              "note": "The excerpt directly states the meta-analysis of 57 studies found no association for the listed cancers.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "Twelve studies were included (12 132 breast cancer cases); ... pooled RRs were 1.05 ... for ever, and ... 1.25 (95% CI 1.01\u20131.55) for \u226520 years",
+              "note": "The excerpt directly states the numbers of studies and cases, and the RRs for 'ever' and '\u226520 years' exposure.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "The excerpt directly states the longer-duration estimate lost significance and approached unity after correction for publication bias, and 60% of studies had high risk of bias.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "We included 7 longitudinal studies...Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28...CI = 1.02, 1.62) and specifically for depressive symptoms (ES = 1.33...CI = 1.02, 1.74). Gender differences explained more than 90% of heterogeneity, with female shift workers more likely to experience depressive symptoms than female non\u2013shift workers (odds ratio = 1.73; 95% CI = 1.39, 2.14).",
+              "note": "The sentence accurately reports the findings and statistics from the meta-analysis.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "The sentence accurately reflects the recommendations and the acknowledgment of limited literature.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "supported",
+              "quote": "scheduling recommendations seem to rest largely on short-term physiological and observational evidence",
+              "note": "The excerpt discusses recommendations based on 'limited, existing literature' and 'short-term physiological effects'.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "estimated only by mediation and counterfactual modelling within a single cohort",
+              "note": "The excerpt explicitly states that the estimation was done using mediation and counterfactual modeling within a single cohort.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 38773,
+          "tokens_out": 1066,
+          "seconds": 16.89,
+          "est_usd": 0.014297,
+          "errors": 0,
+          "run": 3
+        }
+      ]
+    },
+    "jev-latest": {
+      "curation": [
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "confidence": {
+            "1": 0.84,
+            "2": 0.83,
+            "3": 0.81,
+            "4": 0.86,
+            "5": 0.69,
+            "6": 0.62,
+            "7": 0.67,
+            "8": 0.69,
+            "9": 0.89,
+            "10": 0.35,
+            "11": 0.81,
+            "12": 0.76,
+            "13": 0.61,
+            "14": 0.66,
+            "15": 0.46,
+            "16": 0.56,
+            "17": 0.76,
+            "18": 0.86,
+            "19": 0.65,
+            "20": 0.46
+          },
+          "counts": {
+            "direct": 16,
+            "related": 4,
+            "tangential": 0
+          },
+          "tokens_in": 17167,
+          "tokens_out": 774,
+          "seconds": 1.33,
+          "est_usd": 0.000721,
+          "error": "",
+          "run": 1,
+          "gate": {
+            "n": 20,
+            "agree": 15,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 2,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 3,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "confidence": {
+            "1": 0.84,
+            "2": 0.83,
+            "3": 0.81,
+            "4": 0.85,
+            "5": 0.73,
+            "6": 0.7,
+            "7": 0.72,
+            "8": 0.69,
+            "9": 0.92,
+            "10": 0.33,
+            "11": 0.77,
+            "12": 0.77,
+            "13": 0.66,
+            "14": 0.72,
+            "15": 0.43,
+            "16": 0.52,
+            "17": 0.78,
+            "18": 0.86,
+            "19": 0.65,
+            "20": 0.54
+          },
+          "counts": {
+            "direct": 16,
+            "related": 4,
+            "tangential": 0
+          },
+          "tokens_in": 17167,
+          "tokens_out": 774,
+          "seconds": 0.4,
+          "est_usd": 0.000721,
+          "error": "",
+          "run": 2,
+          "gate": {
+            "n": 20,
+            "agree": 15,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 2,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 3,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "confidence": {
+            "1": 0.84,
+            "2": 0.8,
+            "3": 0.82,
+            "4": 0.82,
+            "5": 0.71,
+            "6": 0.6,
+            "7": 0.73,
+            "8": 0.69,
+            "9": 0.89,
+            "10": 0.39,
+            "11": 0.81,
+            "12": 0.77,
+            "13": 0.59,
+            "14": 0.67,
+            "15": 0.49,
+            "16": 0.5,
+            "17": 0.76,
+            "18": 0.79,
+            "19": 0.62,
+            "20": 0.51
+          },
+          "counts": {
+            "direct": 16,
+            "related": 4,
+            "tangential": 0
+          },
+          "tokens_in": 17167,
+          "tokens_out": 774,
+          "seconds": 0.39,
+          "est_usd": 0.000721,
+          "error": "",
+          "run": 3,
+          "gate": {
+            "n": 20,
+            "agree": 15,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 2,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 3,
+            "critical_ok": false
+          }
+        }
+      ],
+      "claims": [
+        {
+          "n": 12,
+          "exact": 9,
+          "collapsed": 9,
+          "exact_rate": 0.75,
+          "collapsed_rate": 0.75,
+          "overreach_recall": "1/2",
+          "false_overreach": 2,
+          "confusion": {
+            "supported": {
+              "supported": 8,
+              "overreach": 2
+            },
+            "overreach": {
+              "supported": 1,
+              "overreach": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 2,
+              "human": "supported",
+              "model": "overreach"
+            },
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 12,
+              "human": "supported",
+              "model": "overreach"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "confidence": 0.35,
+              "probabilities": {
+                "overreach": 0.3,
+                "supported": 0.57,
+                "unclear": 0.13
+              },
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "overreach",
+              "confidence": 0.21,
+              "probabilities": {
+                "unclear": 0.13,
+                "supported": 0.4,
+                "overreach": 0.47
+              },
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "confidence": 0.93,
+              "probabilities": {
+                "supported": 0.95,
+                "overreach": 0.05,
+                "unclear": 0.0
+              },
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "confidence": 0.97,
+              "probabilities": {
+                "supported": 0.98,
+                "overreach": 0.02,
+                "unclear": 0.0
+              },
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "confidence": 0.91,
+              "probabilities": {
+                "supported": 0.94,
+                "unclear": 0.02,
+                "overreach": 0.04
+              },
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "confidence": 0.93,
+              "probabilities": {
+                "overreach": 0.04,
+                "unclear": 0.0,
+                "supported": 0.96
+              },
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "confidence": 0.55,
+              "probabilities": {
+                "overreach": 0.29,
+                "supported": 0.7,
+                "unclear": 0.01
+              },
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "confidence": 0.68,
+              "probabilities": {
+                "unclear": 0.02,
+                "overreach": 0.19,
+                "supported": 0.79
+              },
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "confidence": 0.85,
+              "probabilities": {
+                "unclear": 0.01,
+                "supported": 0.89,
+                "overreach": 0.1
+              },
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "confidence": 0.87,
+              "probabilities": {
+                "overreach": 0.09,
+                "supported": 0.91,
+                "unclear": 0.0
+              },
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "overreach",
+              "confidence": 0.15,
+              "probabilities": {
+                "overreach": 0.43,
+                "supported": 0.15,
+                "unclear": 0.42
+              },
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "overreach",
+              "confidence": 0.49,
+              "probabilities": {
+                "overreach": 0.66,
+                "supported": 0.28,
+                "unclear": 0.06
+              },
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 41626,
+          "tokens_out": 510,
+          "seconds": 3.98,
+          "est_usd": 0.001748,
+          "errors": 0,
+          "run": 1
+        },
+        {
+          "n": 12,
+          "exact": 9,
+          "collapsed": 9,
+          "exact_rate": 0.75,
+          "collapsed_rate": 0.75,
+          "overreach_recall": "1/2",
+          "false_overreach": 2,
+          "confusion": {
+            "supported": {
+              "supported": 8,
+              "overreach": 2
+            },
+            "overreach": {
+              "supported": 1,
+              "overreach": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 2,
+              "human": "supported",
+              "model": "overreach"
+            },
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 12,
+              "human": "supported",
+              "model": "overreach"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "confidence": 0.31,
+              "probabilities": {
+                "supported": 0.54,
+                "overreach": 0.37,
+                "unclear": 0.09
+              },
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "overreach",
+              "confidence": 0.15,
+              "probabilities": {
+                "overreach": 0.44,
+                "supported": 0.43,
+                "unclear": 0.13
+              },
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "confidence": 0.92,
+              "probabilities": {
+                "supported": 0.95,
+                "overreach": 0.05,
+                "unclear": 0.0
+              },
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "confidence": 0.96,
+              "probabilities": {
+                "overreach": 0.03,
+                "supported": 0.97,
+                "unclear": 0.0
+              },
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "confidence": 0.91,
+              "probabilities": {
+                "unclear": 0.01,
+                "supported": 0.94,
+                "overreach": 0.05
+              },
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "confidence": 0.94,
+              "probabilities": {
+                "unclear": 0.0,
+                "supported": 0.96,
+                "overreach": 0.04
+              },
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "confidence": 0.72,
+              "probabilities": {
+                "overreach": 0.18,
+                "supported": 0.8200000000000001,
+                "unclear": 0.0
+              },
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "confidence": 0.64,
+              "probabilities": {
+                "unclear": 0.03,
+                "overreach": 0.21,
+                "supported": 0.76
+              },
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "confidence": 0.84,
+              "probabilities": {
+                "overreach": 0.1,
+                "unclear": 0.01,
+                "supported": 0.89
+              },
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "confidence": 0.9,
+              "probabilities": {
+                "unclear": 0.0,
+                "supported": 0.94,
+                "overreach": 0.06
+              },
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "overreach",
+              "confidence": 0.13,
+              "probabilities": {
+                "supported": 0.16,
+                "overreach": 0.42,
+                "unclear": 0.42
+              },
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "overreach",
+              "confidence": 0.48,
+              "probabilities": {
+                "supported": 0.28,
+                "overreach": 0.65,
+                "unclear": 0.07
+              },
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 41626,
+          "tokens_out": 510,
+          "seconds": 3.85,
+          "est_usd": 0.001748,
+          "errors": 0,
+          "run": 2
+        },
+        {
+          "n": 12,
+          "exact": 9,
+          "collapsed": 10,
+          "exact_rate": 0.75,
+          "collapsed_rate": 0.8333333333333334,
+          "overreach_recall": "0/2",
+          "false_overreach": 1,
+          "confusion": {
+            "supported": {
+              "supported": 9,
+              "overreach": 1
+            },
+            "overreach": {
+              "supported": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            },
+            {
+              "id": 12,
+              "human": "supported",
+              "model": "overreach"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "confidence": 0.32,
+              "probabilities": {
+                "unclear": 0.09,
+                "supported": 0.54,
+                "overreach": 0.37
+              },
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "confidence": 0.24,
+              "probabilities": {
+                "unclear": 0.1,
+                "supported": 0.5,
+                "overreach": 0.4
+              },
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "confidence": 0.95,
+              "probabilities": {
+                "overreach": 0.03,
+                "supported": 0.97,
+                "unclear": 0.0
+              },
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "confidence": 0.97,
+              "probabilities": {
+                "unclear": 0.0,
+                "overreach": 0.02,
+                "supported": 0.98
+              },
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "confidence": 0.9,
+              "probabilities": {
+                "supported": 0.94,
+                "overreach": 0.05,
+                "unclear": 0.01
+              },
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "confidence": 0.94,
+              "probabilities": {
+                "unclear": 0.0,
+                "supported": 0.96,
+                "overreach": 0.04
+              },
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "confidence": 0.74,
+              "probabilities": {
+                "supported": 0.83,
+                "overreach": 0.17,
+                "unclear": 0.0
+              },
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "confidence": 0.68,
+              "probabilities": {
+                "overreach": 0.19,
+                "supported": 0.78,
+                "unclear": 0.03
+              },
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "confidence": 0.86,
+              "probabilities": {
+                "supported": 0.9,
+                "unclear": 0.01,
+                "overreach": 0.09
+              },
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "confidence": 0.92,
+              "probabilities": {
+                "supported": 0.95,
+                "overreach": 0.05,
+                "unclear": 0.0
+              },
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "confidence": 0.14,
+              "probabilities": {
+                "unclear": 0.43,
+                "overreach": 0.4,
+                "supported": 0.17
+              },
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "overreach",
+              "confidence": 0.66,
+              "probabilities": {
+                "overreach": 0.77,
+                "unclear": 0.05,
+                "supported": 0.18
+              },
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 41626,
+          "tokens_out": 507,
+          "seconds": 3.94,
+          "est_usd": 0.001748,
+          "errors": 0,
+          "run": 3
+        }
+      ]
+    },
+    "anthropic/claude-sonnet-5": {
+      "curation": [
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "tangential",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 14,
+            "related": 5,
+            "tangential": 1
+          },
+          "tokens_in": 15551,
+          "tokens_out": 1609,
+          "seconds": 15.43,
+          "est_usd": 0.047192,
+          "error": "",
+          "run": 1,
+          "gate": {
+            "n": 20,
+            "agree": 18,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 4,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 1,
+                "held": 2
+              }
+            },
+            "toward_related": 1,
+            "away_related": 1,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "tangential",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 14,
+            "related": 5,
+            "tangential": 1
+          },
+          "tokens_in": 15551,
+          "tokens_out": 1551,
+          "seconds": 14.55,
+          "est_usd": 0.046612,
+          "error": "",
+          "run": 2,
+          "gate": {
+            "n": 20,
+            "agree": 18,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 4,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 1,
+                "held": 2
+              }
+            },
+            "toward_related": 1,
+            "away_related": 1,
+            "critical_ok": false
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "related",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "direct",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "direct",
+            "16": "direct",
+            "17": "related",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 18,
+            "related": 2,
+            "tangential": 0
+          },
+          "tokens_in": 15551,
+          "tokens_out": 1459,
+          "seconds": 13.13,
+          "est_usd": 0.045692,
+          "error": "",
+          "run": 3,
+          "gate": {
+            "n": 20,
+            "agree": 13,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 0,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 0,
+                "held": 2
+              }
+            },
+            "toward_related": 2,
+            "away_related": 5,
+            "critical_ok": false
+          }
+        }
+      ],
+      "claims": [
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 10,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.8333333333333334,
+          "overreach_recall": "0/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "supported": 2
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "supported"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "OR = 1.42, 95% CI: 1.24\u20131.62",
+              "note": "All figures and cross-sectional nature match excerpt; direction uncertainty is reasonable inference from cross-sectional design.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 explained... 39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work",
+              "note": "Matches excerpt's mediation figure; caveat about modelling assumptions is reasonable given stated methodology.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "Usual or permanent night shifts were associated with the highest risk [hazard ratio (HR) 1.16, 95% confidence interval (CI) 1.02-1.32]",
+              "note": "Matches HR values, trend, CHD \u226510yr HR1.37, and genetic non-modification stated in excerpt.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "Matches sample size, follow-up, hazard ratio, CI, and significant additive interaction with unhealthy lifestyle.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": ">8/month: OR 1.36 [95% CI 1.14\u20131.62]",
+              "note": "Excerpt confirms OR 1.36 for >8 nights/month; cross-sectional design supports temporal ordering caveat.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "night-shift work was not associated with the risk of breast cancer... prostate cancer... ovarian cancer... colorectal cancer... and stomach cancer",
+              "note": "Excerpt directly reports null associations for these five cancers from the 57-study meta-analysis.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "pooled RRs were 1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies... and 1.25 (95% CI 1.01-1.55, 7 studies... for \u226520 years",
+              "note": "Matches figures and studies count exactly; excerpt confirms 12 studies, 12,132 cases, RR 1.05 ever, RR 1.25 for \u226520 years.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "Matches excerpt's \u226520-year RR losing significance and 60% high RoB in exposure characterization.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62",
+              "note": "Excerpt directly reports the same effect sizes, CIs, and OR for depressive symptoms in female shift workers.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration",
+              "note": "Matches recommendations, researcher count, and 'limited, existing literature' caveat exactly.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "supported",
+              "quote": "Short-term physiological effects in terms of circadian disruption, inadequate sleep duration and quality, and fatigue were considered as possible links",
+              "note": "Excerpt shows recommendations based on physiological/observational evidence, no mention of RCTs testing schedule changes on disease incidence.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+              "note": "Excerpt uses mediation/counterfactual modeling in one cohort and calls for further studies, implying no prospective intervention test yet.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 55337,
+          "tokens_out": 2285,
+          "seconds": 45.11,
+          "est_usd": 0.133524,
+          "errors": 0,
+          "run": 1
+        },
+        {
+          "n": 12,
+          "exact": 11,
+          "collapsed": 12,
+          "exact_rate": 0.9166666666666666,
+          "collapsed_rate": 1.0,
+          "overreach_recall": "1/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "overreach": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Rotating shift work was associated with the highest odds of sleep disturbances (OR = 1.48",
+              "note": "Numbers, subgroup findings, and cross-sectional design all match excerpt; direction-uncertainty caveat is accurate given design.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work",
+              "note": "Matches excerpt exactly; 'depends on modelling assumptions' reasonably reflects mediation analysis caveats.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "overreach",
+              "quote": "associations between current and lifetime night shifts and AF were not modified by genetic predisposition to AF",
+              "note": "Genetic modification testing applied only to AF, not CHD, but sentence implies it applies to CHD risk too.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "Matches sample size, follow-up, HR, CI, and significant additive interaction with unhealthy lifestyle.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": ">8/month: OR 1.36 [95% CI 1.14\u20131.62]",
+              "note": "Matches excerpt's cross-sectional design and OR; temporal caveat reasonable given design description.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "night-shift work was not associated with the risk of breast cancer... prostate cancer... ovarian cancer... colorectal cancer... and stomach cancer",
+              "note": "Excerpt directly reports no association for all five cancer types listed in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "pooled RRs were 1.05 ... for ever ... 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years",
+              "note": "Matches excerpt's reported RRs for ever exposure and \u226520 years exposure, with same CI and sample size.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias",
+              "note": "Matches excerpt; 60% high RoB and duration finding both directly stated.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62",
+              "note": "All figures and gender finding match excerpt exactly.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration",
+              "note": "Matches excerpt's recommendations, researcher count, and explicit acknowledgment of limited literature.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "quote": "Short-term physiological effects ... were considered as possible links",
+              "note": "Excerpt supports reliance on physiological/observational evidence but never states whether any RCT was conducted.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "We used Cox models to estimate associations and counterfactual mediation analysis to quantify the proportion mediated by LE8.",
+              "note": "Single UK Biobank cohort used mediation/counterfactual modeling; study is prospective cohort but doesn't test mediation hypothesis prospectively/experimentally.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 55337,
+          "tokens_out": 2039,
+          "seconds": 44.86,
+          "est_usd": 0.131064,
+          "errors": 0,
+          "run": 2
+        },
+        {
+          "n": 12,
+          "exact": 11,
+          "collapsed": 11,
+          "exact_rate": 0.9166666666666666,
+          "collapsed_rate": 0.9166666666666666,
+          "overreach_recall": "1/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "overreach": 1,
+              "supported": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "supported"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "OR = 1.42, 95% CI: 1.24\u20131.62",
+              "note": "Numbers, rotating shift (1.48) and healthcare professionals (1.56) subgroups, and cross-sectional design all match excerpt.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 explained 52.0% ... and 39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work",
+              "note": "Matches 39.2% mediation figure for CVD; hedge on modelling assumptions reasonable given mediation methodology.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "overreach",
+              "quote": "not modified by genetic predisposition to AF",
+              "note": "Excerpt reports genetic non-modification only for AF risk, not for the CHD association also cited in the sentence.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "1.31 (95% confidence interval 1.19 to 1.44) per five year increment... with a significant additive interaction",
+              "note": "Matches sample size, follow-up duration, hazard ratio, CI, and significant additive interaction reported in excerpt.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": ">8/month: OR 1.36 [95% CI 1.14\u20131.62]",
+              "note": "Matches excerpt data; cross-sectional design implies temporal ordering caveat is accurate.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "night-shift work was not associated with the risk of breast cancer ... prostate cancer ... ovarian cancer ... colorectal cancer ... and stomach cancer",
+              "note": "Excerpt confirms no association for these five cancers among 57 studies, matching sentence's claim.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "pooled RRs were 1.05 ... for ever, and ... 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years",
+              "note": "Matches excerpt's reported RRs for ever and \u226520 years exposure exactly.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "Matches excerpt's finding on \u226520-year RR losing significance and 60% high risk of bias for exposure characterization.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28... 1.02, 1.62) and specifically for depressive symptoms (ES = 1.33",
+              "note": "Numbers and gender OR match excerpt; 'apparently' hedges appropriately with excerpt's findings.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration",
+              "note": "Matches recommendations, 15 researchers, and 'limited, existing literature' qualifier exactly.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "supported",
+              "quote": "recommendations were discussed based on the current evidence",
+              "note": "Excerpt confirms recommendations rest on short-term physiological/observational evidence, no mention of RCTs testing schedule changes.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "Cox models to estimate associations and counterfactual mediation analysis to quantify the proportion mediated by LE8",
+              "note": "Single UK Biobank cohort used mediation/counterfactual modelling; no prospective testing of interventions mentioned, matching the claim.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 55337,
+          "tokens_out": 1815,
+          "seconds": 39.66,
+          "est_usd": 0.128824,
+          "errors": 0,
+          "run": 3
+        }
+      ]
+    },
+    "anthropic/claude-opus-5": {
+      "curation": [
+        {
+          "relevance": {
+            "1": "related",
+            "2": "tangential",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "tangential",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 13,
+            "related": 5,
+            "tangential": 2
+          },
+          "tokens_in": 15551,
+          "tokens_out": 866,
+          "seconds": 10.44,
+          "est_usd": 0.099405,
+          "error": "",
+          "run": 1,
+          "gate": {
+            "n": 20,
+            "agree": 20,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 5,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 2,
+                "held": 2
+              }
+            },
+            "toward_related": 0,
+            "away_related": 0,
+            "critical_ok": true
+          }
+        },
+        {
+          "relevance": {
+            "1": "related",
+            "2": "tangential",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "tangential",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 13,
+            "related": 5,
+            "tangential": 2
+          },
+          "tokens_in": 15551,
+          "tokens_out": 887,
+          "seconds": 10.47,
+          "est_usd": 0.09993,
+          "error": "",
+          "run": 2,
+          "gate": {
+            "n": 20,
+            "agree": 20,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 5,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 2,
+                "held": 2
+              }
+            },
+            "toward_related": 0,
+            "away_related": 0,
+            "critical_ok": true
+          }
+        },
+        {
+          "relevance": {
+            "1": "related",
+            "2": "tangential",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "tangential",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 13,
+            "related": 5,
+            "tangential": 2
+          },
+          "tokens_in": 15551,
+          "tokens_out": 874,
+          "seconds": 10.14,
+          "est_usd": 0.099605,
+          "error": "",
+          "run": 3,
+          "gate": {
+            "n": 20,
+            "agree": 20,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 5,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 2,
+                "held": 2
+              }
+            },
+            "toward_related": 0,
+            "away_related": 0,
+            "critical_ok": true
+          }
+        }
+      ],
+      "claims": [
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 11,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.9166666666666666,
+          "overreach_recall": "0/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "supported": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Rotating shift work was associated with the highest odds of sleep disturbances (OR = 1.48, 95% CI: 1.23\u20131.77)... Healthcare professionals exhibited the strongest association (OR = 1.56",
+              "note": "Figures and design match; excerpt confirms all 22 studies were cross-sectional, and claim stays at association level.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 explained ... 39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work",
+              "note": "Mediation figure matches excerpt; added hedge about modelling assumptions weakens rather than overstates the claim.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "These associations between current and lifetime night shifts and AF were not modified by genetic predisposition to AF.",
+              "note": "HRs, trend, and genetic non-modification match; genetic testing applied to AF, but sentence's referent is plausibly the AF finding.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "Cohort size, follow-up, HR, CI, and significant additive interaction all match the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (... >8/month: OR 1.36 [95% CI 1.14\ndash1.62]; Ptrend = 0.001)",
+              "note": "Matches excerpt's lifetime-exposure OR; prevalent cases indicate cross-sectional design, so the temporality caveat is apt.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, non-Hodgkin's lymph, and stomach cancers",
+              "note": "Conclusion matches listed cancers; 57 studies, 8,477,849 participants confirmed.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "pooled RRs were 1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies... 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years",
+              "note": "Figures, population, and case count match; null ever-exposure CI supports 'no excess'.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "Both the influence/publication-bias caveat and the 60% high risk-of-bias exposure figure appear verbatim in the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62",
+              "note": "Sentence mirrors excerpt's association framing, study count, and reported estimates including female depressive symptom OR.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that ... night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "Excerpt matches the three recommendations, the 15 researchers, and the acknowledgment of limited literature.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "quote": "Short-term physiological effects in terms of circadian disruption, inadequate sleep duration and quality, and fatigue were considered as possible links between night shift work and selected health",
+              "note": "Excerpt supports reliance on short-term physiological evidence but never states that no randomised or controlled intervention trials exist.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+              "note": "Excerpt is a single UK Biobank cohort using counterfactual mediation analysis, and itself calls for future intervention studies; sentence is suitably hedged.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 55337,
+          "tokens_out": 3355,
+          "seconds": 62.05,
+          "est_usd": 0.36056,
+          "errors": 0,
+          "run": 1
+        },
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 11,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.9166666666666666,
+          "overreach_recall": "0/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "supported": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates. Shift work was associated with higher odds of sleep disturbances (OR = 1.42, 95% CI: 1.24-1.62)",
+              "note": "Figures, subgroup maxima (rotating 1.48; healthcare 1.56) and all-cross-sectional design caveat all match the excerpt.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 explained ... 39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work.",
+              "note": "Excerpt reports 39.2% mediation of the CVD association; sentence's hedging about modelling assumptions is consistent with counterfactual mediation methods.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "Usual or permanent night shifts were associated with the highest risk [hazard ratio (HR) 1.16, 95% confidence interval (CI) 1.02-1.32]",
+              "note": "Trend across categories, CHD HR 1.37 for \\u226510 years, and non-modification by genetic AF risk all appear in excerpt.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "Excerpt confirms cohort size, follow-up length, hazard ratio, CI, and significant additive interaction with unhealthy lifestyle.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (... >8/month: OR 1.36 [95% CI 1.14\u20131.62]; Ptrend = 0.001)",
+              "note": "Matches excerpt's lifetime-schedule finding; prevalent cases/odds indicate cross-sectional design, so the temporality caveat is apt.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, non-Hodgkin's lymph, and stomach cancers",
+              "note": "Sentence mirrors the meta-analysis conclusion, study count and participant scale; listing a subset of cancers is faithful.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "pooled RRs were 1.05 (95% confidence interval [CI] 0.96\u20131.14, 12 studies... 1.25 (95% CI 1.01\u20131.55, 7 studies... for \u226520 years",
+              "note": "Figures and population match; \"no excess\" and \"modest excess\" fit the reported CIs.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "Both the influence-analysis/publication-bias finding and the 60% high risk-of-bias exposure rating are stated in the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62",
+              "note": "All figures and the associational framing match the excerpt, including the female-specific OR of 1.73 (1.39, 2.14).",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have: (i) \u22643 consecutive night shifts",
+              "note": "Recommendations, participant count, and the 'limited literature' caveat all match the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer",
+              "note": "Excerpt notes limited literature and short-term physiological links but never states that no randomised/controlled intervention trials exist.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "We used Cox models to estimate associations and counterfactual mediation analysis to quantify the proportion mediated by LE8... Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+              "note": "Excerpt is a single UK Biobank cohort using mediation/counterfactual modelling and explicitly calls for future intervention studies; sentence is appropriately hedged.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 55337,
+          "tokens_out": 3516,
+          "seconds": 62.84,
+          "est_usd": 0.364585,
+          "errors": 0,
+          "run": 2
+        },
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 11,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.9166666666666666,
+          "overreach_recall": "0/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "supported": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 3,
+              "human": "overreach",
+              "model": "supported"
+            },
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates. Shift work was associated with higher odds of sleep disturbances (OR = 1.42, 95% CI: 1.24-1.62)",
+              "note": "Figures, subgroup maxima (rotating 1.48; healthcare 1.56) and cross-sectional design caveat all match the excerpt.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 mediated 39.2% of the CVD association",
+              "note": "Excerpt reports 39.2% mediation for usual/permanent night shift CVD association; sentence appropriately hedged as an estimate.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "supported",
+              "quote": "Usual or permanent night shifts were associated with the highest risk [hazard ratio (HR) 1.16, 95% confidence interval (CI) 1.02-1.32]",
+              "note": "Excerpt reports the AF trend, the 1.16 HR, CHD HR 1.37 at \\u226510 years, and no modification by genetic AF risk.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "Cohort size, follow-up, HR, CI, and significant additive interaction all match; wording stays associational.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (<3/month: OR 1.24 ... >8/month: OR 1.36 [95% CI 1.14\\u20131.62]",
+              "note": "Matches OR and prevalent-case cross-sectional design; the temporality caveat is appropriate hedging.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, non-Hodgkin's lymph, and stomach cancers",
+              "note": "Excerpt's 57-study meta-analysis of 8.4 million participants reports null associations for exactly the listed cancers.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "pooled RRs were 1.05 (95% confidence interval [CI] 0.96\u20131.14, 12 studies... 1.25 (95% CI 1.01\u20131.55, 7 studies",
+              "note": "Figures, population (healthcare workers, 12 studies, 12,132 cases) and interpretation match the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "Both the fragility findings and the 60% high risk-of-bias exposure rating appear verbatim in the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62",
+              "note": "Sentence mirrors excerpt's figures, study count, and associational framing, including female depressive symptom odds ratio.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have:",
+              "note": "Excerpt gives the same three recommendations, the 15-researcher consensus, and the 'limited literature' caveat.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer",
+              "note": "Excerpt notes limited literature and short-term physiological links, but never states that no randomised or controlled intervention trials exist.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+              "note": "Excerpt is a single UK Biobank cohort using counterfactual mediation analysis and explicitly calls for future intervention studies; sentence is appropriately hedged.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 55337,
+          "tokens_out": 3200,
+          "seconds": 63.21,
+          "est_usd": 0.356685,
+          "errors": 0,
+          "run": 3
+        }
+      ]
+    },
+    "anthropic/claude-fable-5": {
+      "curation": [
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "tangential",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "tangential",
+            "18": "direct",
+            "19": "direct",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 15,
+            "related": 3,
+            "tangential": 2
+          },
+          "tokens_in": 15551,
+          "tokens_out": 1762,
+          "seconds": 21.77,
+          "est_usd": 0.24361,
+          "error": "",
+          "run": 1,
+          "gate": {
+            "n": 20,
+            "agree": 18,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 3,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 2,
+                "held": 2
+              }
+            },
+            "toward_related": 0,
+            "away_related": 2,
+            "critical_ok": true
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "tangential",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "tangential",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 14,
+            "related": 4,
+            "tangential": 2
+          },
+          "tokens_in": 15551,
+          "tokens_out": 1670,
+          "seconds": 20.65,
+          "est_usd": 0.23901,
+          "error": "",
+          "run": 2,
+          "gate": {
+            "n": 20,
+            "agree": 19,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 4,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 2,
+                "held": 2
+              }
+            },
+            "toward_related": 0,
+            "away_related": 1,
+            "critical_ok": true
+          }
+        },
+        {
+          "relevance": {
+            "1": "direct",
+            "2": "tangential",
+            "3": "direct",
+            "4": "direct",
+            "5": "direct",
+            "6": "direct",
+            "7": "direct",
+            "8": "direct",
+            "9": "direct",
+            "10": "related",
+            "11": "direct",
+            "12": "direct",
+            "13": "direct",
+            "14": "direct",
+            "15": "related",
+            "16": "related",
+            "17": "tangential",
+            "18": "direct",
+            "19": "related",
+            "20": "direct"
+          },
+          "counts": {
+            "direct": 14,
+            "related": 4,
+            "tangential": 2
+          },
+          "tokens_in": 15551,
+          "tokens_out": 1696,
+          "seconds": 22.41,
+          "est_usd": 0.24031,
+          "error": "",
+          "run": 3,
+          "gate": {
+            "n": 20,
+            "agree": 19,
+            "retained": {
+              "direct": {
+                "kept": 13,
+                "held": 13
+              },
+              "related": {
+                "kept": 4,
+                "held": 5
+              },
+              "tangential": {
+                "kept": 2,
+                "held": 2
+              }
+            },
+            "toward_related": 0,
+            "away_related": 1,
+            "critical_ok": true
+          }
+        }
+      ],
+      "claims": [
+        {
+          "n": 12,
+          "exact": 11,
+          "collapsed": 12,
+          "exact_rate": 0.9166666666666666,
+          "collapsed_rate": 1.0,
+          "overreach_recall": "1/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "overreach": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates. Shift work was associated with higher odds of sleep disturbances (OR = 1.42",
+              "note": "All figures and subgroup findings match; rotating shift and healthcare workers showed highest odds in their subgroups; cross-sectional caveat is a fair hedge.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 explained 52.0% (95% CI = 30.3\u201372.9) of the association between some night shift work and incident CVD and 39.2% (95% CI = 29.3\u201350.0)",
+              "note": "Excerpt reports LE8 mediated 39.2% of the CVD association for permanent night shifts; sentence's added hedge is cautious, not overreaching.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "overreach",
+              "quote": "These associations between current and lifetime night shifts and AF were not modified by genetic predisposition to AF.",
+              "note": "Genetic non-modification was reported only for AF; the sentence attaches it to CHD risk, which the excerpt never tested.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "Excerpt matches cohort size, follow-up duration, hazard ratio, and reports a significant additive interaction with unhealthy lifestyle.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": ">8/month: OR 1.36 [95% CI 1.14\u20131.62]",
+              "note": "Excerpt reports this OR for prevalent diabetes in UK Biobank; sentence appropriately hedges with association language and design limits.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, non-Hodgkin's lymph, and stomach cancers",
+              "note": "Excerpt's 57-study meta-analysis of 8,477,849 participants reports no association for all cancers the sentence lists.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "pooled RRs were 1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies, I2 = 39%) for ever, and... 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years",
+              "note": "Excerpt reports the same study count, case count, and pooled RRs; sentence accurately describes null ever-exposure and modest \u226520-year excess.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "Excerpt states both the sensitivity-analysis findings and that 60% of studies were high RoB in exposure characterization; fragility is a hedged, entailed conclusion.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62",
+              "note": "Excerpt reports same associations, depressive symptoms ES 1.33, and female OR 1.73 (1.39\u20132.14); sentence keeps associational wording.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have",
+              "note": "Excerpt confirms 15 researchers' consensus recommendations matching all three limits, explicitly acknowledging limited literature.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "quote": "Based on the limited, existing literature, we recommend",
+              "note": "Excerpt supports recommendations resting on limited/short-term evidence but never states whether randomised intervention trials exist or not.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+              "note": "Excerpt is a single UK Biobank cohort using mediation and counterfactual modelling, and explicitly calls for future intervention studies, matching the claim.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 55337,
+          "tokens_out": 4281,
+          "seconds": 93.29,
+          "est_usd": 0.76742,
+          "errors": 0,
+          "run": 1
+        },
+        {
+          "n": 12,
+          "exact": 10,
+          "collapsed": 11,
+          "exact_rate": 0.8333333333333334,
+          "collapsed_rate": 0.9166666666666666,
+          "overreach_recall": "1/2",
+          "false_overreach": 1,
+          "confusion": {
+            "supported": {
+              "supported": 9,
+              "overreach": 1
+            },
+            "overreach": {
+              "overreach": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            },
+            {
+              "id": 12,
+              "human": "supported",
+              "model": "overreach"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "This meta-analysis included 22 cross-sectional studies comprising 21,677 participants from eight countries",
+              "note": "All figures and subgroup estimates match; rotating shift and healthcare professionals showed highest ORs. The directionality caveat is a hedge, not overreach.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work",
+              "note": "Excerpt reports LE8 mediated 39.2% of the CVD association; the sentence's added hedge about modelling assumptions does not overstate the finding.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "overreach",
+              "quote": "These associations between current and lifetime night shifts and AF were not modified by genetic predisposition to AF.",
+              "note": "Genetic non-modification was reported only for AF; the sentence attaches it to CHD risk, extending beyond the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "Cohort size, follow-up length, hazard ratio, and significant additive interaction all match the excerpt.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (<3/month: OR 1.24 ... >8/month: OR 1.36 [95% CI 1.14\ru20131.62]",
+              "note": "Excerpt reports higher odds with more night shifts using prevalent cases; sentence's hedged, cross-sectional framing matches the design.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, non-Hodgkin's lymph, and stomach cancers",
+              "note": "Excerpt reports 57 studies, 8,477,849 participants, and null associations for all cancers named in the sentence.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "pooled RRs were 1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies, I2 = 39%) for ever, and... 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years",
+              "note": "Excerpt reports the same population, study count, case count, and RRs; 'no excess' fairly reflects the null ever-exposure CI.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "Excerpt states both the sensitivity-analysis findings and that 60% of studies were high RoB in exposure characterization; fragility framing matches its hedging.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62",
+              "note": "All figures and claims (7 longitudinal studies, ES 1.33 for depression, female OR 1.73) match the excerpt, with association wording preserved.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that... night shift schedules have: (i) \n\u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+              "note": "Excerpt confirms 15 researchers' consensus recommendations matching all three limits, explicitly acknowledging the limited literature.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer",
+              "note": "Excerpt notes limited evidence and short-term physiological links, but never states whether randomised or controlled intervention trials exist.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "overreach",
+              "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+              "note": "Excerpt describes one cohort's mediation/counterfactual estimates but cannot establish these are the 'only' such estimates across the literature.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 55337,
+          "tokens_out": 3893,
+          "seconds": 94.09,
+          "est_usd": 0.74802,
+          "errors": 0,
+          "run": 2
+        },
+        {
+          "n": 12,
+          "exact": 11,
+          "collapsed": 12,
+          "exact_rate": 0.9166666666666666,
+          "collapsed_rate": 1.0,
+          "overreach_recall": "1/2",
+          "false_overreach": 0,
+          "confusion": {
+            "supported": {
+              "supported": 10
+            },
+            "overreach": {
+              "overreach": 1,
+              "unclear": 1
+            }
+          },
+          "disagreements": [
+            {
+              "id": 11,
+              "human": "overreach",
+              "model": "unclear"
+            }
+          ],
+          "results": [
+            {
+              "id": 1,
+              "verdict": "supported",
+              "quote": "Shift work was associated with higher odds of sleep disturbances (OR = 1.42, 95% CI: 1.24-1.62)",
+              "note": "All figures and subgroup findings match; excerpt confirms all studies were cross-sectional, and sentence appropriately hedges direction of association.",
+              "truncated": true,
+              "excerpt_chars": 14529
+            },
+            {
+              "id": 2,
+              "verdict": "supported",
+              "quote": "LE8 explained 52.0% (95% CI = 30.3\u201372.9)... and 39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work.",
+              "note": "Excerpt reports LE8 mediated 39.2% of the CVD association; the sentence's hedging about modelling assumptions does not exceed the excerpt.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            },
+            {
+              "id": 3,
+              "verdict": "overreach",
+              "quote": "These associations between current and lifetime night shifts and AF were not modified by genetic predisposition to AF.",
+              "note": "Genetic non-modification was tested only for AF; the sentence attaches this to coronary heart disease risk, which the excerpt never reports.",
+              "truncated": false,
+              "excerpt_chars": 2445
+            },
+            {
+              "id": 4,
+              "verdict": "supported",
+              "quote": "hazard ratios for type 2 diabetes were 1.31 (95% confidence interval 1.19 to 1.44) per five year increment of duration of rotating night shift work",
+              "note": "Excerpt confirms cohort size, follow-up length, hazard ratio, and significant additive interaction with unhealthy lifestyle.",
+              "truncated": false,
+              "excerpt_chars": 2706
+            },
+            {
+              "id": 5,
+              "verdict": "supported",
+              "quote": ">8/month: OR 1.36 [95% CI 1.14\u20131.62]",
+              "note": "Excerpt reports this odds ratio for prevalent diabetes; sentence hedges appropriately and matches the association finding.",
+              "truncated": false,
+              "excerpt_chars": 1994
+            },
+            {
+              "id": 6,
+              "verdict": "supported",
+              "quote": "did not find an overall association between ever-exposure to night-shift work and the risk of breast, prostate ovarian, pancreatic, colorectal, non-Hodgkin's lymph, and stomach cancers",
+              "note": "Excerpt reports 57 studies, 8,477,849 participants, and null associations for all cancers the sentence lists.",
+              "truncated": true,
+              "excerpt_chars": 14353
+            },
+            {
+              "id": 7,
+              "verdict": "supported",
+              "quote": "pooled RRs were 1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies, I2 = 39%) for ever, and ... 1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years",
+              "note": "Study counts, case numbers, and both pooled RRs with CIs match the excerpt; 'modest excess' fairly characterizes the \u226520-year finding.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 8,
+              "verdict": "supported",
+              "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+              "note": "Excerpt states both the fragility of the \u226520-year estimate and that 60% of studies were high RoB for exposure characterization.",
+              "truncated": false,
+              "excerpt_chars": 13617
+            },
+            {
+              "id": 9,
+              "verdict": "supported",
+              "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% confidence interval [CI] = 1.02, 1.62",
+              "note": "Excerpt reports 7 longitudinal studies, both effect sizes, and the female OR 1.73 (1.39\u20132.14) exactly as the sentence states.",
+              "truncated": true,
+              "excerpt_chars": 14680
+            },
+            {
+              "id": 10,
+              "verdict": "supported",
+              "quote": "Based on the limited, existing literature, we recommend that in order to reduce the risk of injuries and possibly breast cancer, night shift schedules have:",
+              "note": "Excerpt confirms 15 researchers, all three schedule limits, and the acknowledged limited literature.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 11,
+              "verdict": "unclear",
+              "quote": "Based on the limited, existing literature, we recommend",
+              "note": "Excerpt notes limited evidence and short-term physiological links but never states whether randomised or controlled intervention trials exist.",
+              "truncated": false,
+              "excerpt_chars": 1840
+            },
+            {
+              "id": 12,
+              "verdict": "supported",
+              "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+              "note": "Excerpt is a single UK Biobank cohort using mediation and counterfactual analyses, and explicitly calls for future intervention studies, matching the hedged claim.",
+              "truncated": true,
+              "excerpt_chars": 14341
+            }
+          ],
+          "tokens_in": 55337,
+          "tokens_out": 4324,
+          "seconds": 90.35,
+          "est_usd": 0.76957,
+          "errors": 0,
+          "run": 3
+        }
+      ]
+    }
+  },
+  "updated": "2026-09-17T02:30:34.898742+00:00"
+}

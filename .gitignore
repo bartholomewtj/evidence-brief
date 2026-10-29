@@ -8,7 +8,7 @@ venv/
 # local secrets — API keys and the contact address live here, never in the repo
 .env
 .env.*
-!.env.example
+!.env.sample
 # generated output (drafts/ is intentionally tracked — local review surface, not Pages)
 # visitor gallery on a local `articlegen web` — hosted copy is a gist, not git
 /gallery/
@@ -34,3 +34,8 @@ adws/adw_data/sssf.db*
 
 # Public-repo extras moved off GitHub
 /archive/
+
+# Pickup snapshot; leftover NEXT-SESSION/ROADMAP must not be committed.
+/STATE.md
+/NEXT-SESSION.md
+/ROADMAP.md

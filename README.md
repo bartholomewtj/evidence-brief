@@ -26,6 +26,8 @@ articlegen draft "Does reducing seclusion on acute psychiatric wards increase vi
 
 The site and the CLI run the same function. A draft writes `drafts/<date>-<slug>.html`, `.md`, and `.json`.
 
+`.env.sample` lists every variable the CLI and the server read, with what each one does.
+
 CLI default is Claude Opus 5 via OpenRouter (~50c–$1). The public site plans the search and screens the papers with GPT-5.6 Luna, and writes the briefing with Claude Sonnet 5.5, on the host's key (about 25–30c a briefing). `--model openai/gpt-5.6-luna` is the cheap CLI option.
 
 A hosted briefing takes two to four minutes, longer than the ~100s Cloudflare holds a request open in front of Render, so the site starts it as a job (`POST /api/draft` with `async: true`) and polls `GET /api/draft/<job>`. The poll reports the stage the pipeline is actually in.
@@ -102,6 +104,9 @@ Pairwise, the synthesised briefing beat the old one 10–0, and Sonnet beat Luna
 articlegen render drafts/x.json     # rebuild HTML/Markdown, no search, no model
 articlegen rerun drafts/x.json      # same pool and labels; fetch full text again; rewrite
 articlegen refresh drafts/x.json    # re-run the same queries; report new direct records
+articlegen queue                    # local queue of drafts
+articlegen demo                     # sample briefing, no APIs
+articlegen web                      # the site, served locally; drafts land in drafts/
 ```
 
 `refresh --rewrite` only writes a new briefing if it found a new *direct* paper.
