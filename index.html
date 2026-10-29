@@ -9,16 +9,49 @@
 <title>Evidence brief — sourced evidence briefings from a question</title>
 <meta name="description" content="Sourced evidence briefings from a question. Every statistic is checked against the cited papers.">
 <script>
+  // Light unless the visitor chose otherwise. "system" follows the OS.
   (function() {
-    var saved = localStorage.getItem('articlegen_theme') || 'system';
-    if (saved === 'dark' || saved === 'light') {
-      document.documentElement.setAttribute('data-theme', saved);
-    }
+    var saved = localStorage.getItem('articlegen_theme') || 'light';
+    var dark = saved === 'dark' || (saved === 'system' && window.matchMedia
+      && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
   })();
 </script>
 <style>
-  /* recipe: general (tokens.md). Type: Tool. Signature: you on .theme-box. */
-  :root, html[data-theme="dark"] {
+  /* recipe: general (tokens.md), light by default; dark when chosen. Type: Tool.
+     Signature: you on the question box — the one step the visitor takes.
+     Surfaces are white cards on the paper ground with hairline rules: the
+     2px ink borders read as heavy on light paper, and nothing here needs them. */
+  :root, html[data-theme="light"] {
+    --paper: #f3f5f7;
+    --ink: #1c2430;
+    --muted: #5a6a7b;
+    --accent: #2b6e67;
+    --you: #2b6e67;
+    --accent-soft: #e6efee;
+    --you-soft: #e6efee;
+    --you-fill: #2b6e67;
+    --warn: #95422d;
+    --warn-soft: #f6ecea;
+    --ok: #31724f;
+    --ok-soft: #e7f1ec;
+    --navy: #36588c;
+    --navy-soft: #e0e5ec;
+    --card: #ffffff;
+    --line: #dde1e5;
+    --line-strong: #c4cad0;
+    --nav: #ffffff;
+    --nav-hover: #eef1f4;
+    --chip-ink: #ffffff;
+    --shadow: 0 1px 2px rgba(28, 36, 48, 0.05), 0 2px 8px rgba(28, 36, 48, 0.04);
+    --ring: 0 0 0 3px rgba(43, 110, 103, 0.18);
+    --reader-bg: #ffffff;
+    --font-ui: "Segoe UI", Calibri, sans-serif;
+    --font-heading: "Segoe UI", Calibri, sans-serif;
+    --font-utility: Consolas, "Courier New", monospace;
+    color-scheme: light;
+  }
+  html[data-theme="dark"] {
     --paper: #12171f;
     --ink: #e6edf3;
     --muted: #8b9aab;
@@ -31,90 +64,18 @@
     --warn-soft: #2d262a;
     --ok: #6fb891;
     --ok-soft: #1f2e2f;
-    --ok-fill: #395b4f;
     --navy: #7e9cc8;
     --navy-soft: #212a37;
-    --navy-fill: #3f4f66;
     --card: #1b232f;
-    --cage: #10141b;
-    --line: #383e45;
-    --boxline: #4d535a;
-    --nav: #0f141a;
+    --line: #2f3741;
+    --line-strong: #4d535a;
+    --nav: #161c25;
     --nav-hover: #212a39;
     --chip-ink: #ffffff;
-    --bg: var(--paper);
-    --card-bg: var(--card);
-    --card-border: var(--line);
-    --header-bg: var(--nav);
-    --action-bar-bg: var(--nav);
-    --font-ui: "Segoe UI", Calibri, sans-serif;
-    --font-heading: "Segoe UI", Calibri, sans-serif;
-    --font-utility: Consolas, "Courier New", monospace;
+    --shadow: none;
+    --ring: 0 0 0 3px rgba(110, 196, 187, 0.25);
+    --reader-bg: #14150f;
     color-scheme: dark;
-  }
-  @media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) {
-      --paper: #f3f5f7;
-      --ink: #1c2430;
-      --muted: #5a6a7b;
-      --accent: #2b6e67;
-      --you: #2b6e67;
-      --accent-soft: #dfe8e9;
-      --you-soft: #dfe8e9;
-      --you-fill: #2b6e67;
-      --warn: #95422d;
-      --warn-soft: #eae3e3;
-      --ok: #31724f;
-      --ok-soft: #e0e8e6;
-      --ok-fill: #31724f;
-      --navy: #36588c;
-      --navy-soft: #e0e5ec;
-      --navy-fill: #36588c;
-      --card: #fcfcfd;
-      --cage: #e9ecee;
-      --line: #d1d4d7;
-      --boxline: #bbbfc3;
-      --nav: #e9ecee;
-      --nav-hover: #e0e2e5;
-      --chip-ink: #ffffff;
-      --bg: var(--paper);
-      --card-bg: var(--card);
-      --card-border: var(--line);
-      --header-bg: var(--nav);
-      --action-bar-bg: var(--nav);
-      color-scheme: light;
-    }
-  }
-  html[data-theme="light"] {
-    --paper: #f3f5f7;
-    --ink: #1c2430;
-    --muted: #5a6a7b;
-    --accent: #2b6e67;
-    --you: #2b6e67;
-    --accent-soft: #dfe8e9;
-    --you-soft: #dfe8e9;
-    --you-fill: #2b6e67;
-    --warn: #95422d;
-    --warn-soft: #eae3e3;
-    --ok: #31724f;
-    --ok-soft: #e0e8e6;
-    --ok-fill: #31724f;
-    --navy: #36588c;
-    --navy-soft: #e0e5ec;
-    --navy-fill: #36588c;
-    --card: #fcfcfd;
-    --cage: #e9ecee;
-    --line: #d1d4d7;
-    --boxline: #bbbfc3;
-    --nav: #e9ecee;
-    --nav-hover: #e0e2e5;
-    --chip-ink: #ffffff;
-    --bg: var(--paper);
-    --card-bg: var(--card);
-    --card-border: var(--line);
-    --header-bg: var(--nav);
-    --action-bar-bg: var(--nav);
-    color-scheme: light;
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -123,359 +84,348 @@
     padding: 0;
     background: var(--paper);
     color: var(--ink);
-    font: 16px/1.5 var(--font-ui);
+    font: 16px/1.55 var(--font-ui);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
-  body {
-    display: flex;
-    flex-direction: column;
-  }
+  body { display: flex; flex-direction: column; }
   a { color: var(--navy); }
-  :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button { font-family: inherit; }
 
+  /* ---- top bar ----------------------------------------------------------- */
   header.app-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    position: sticky; top: 0; z-index: 100;
     background: var(--nav);
     border-bottom: 1px solid var(--line);
-    padding: 0.85rem 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
-  .logo {
-    font: 700 1.05rem/1 var(--font-heading);
-    color: var(--ink);
-    text-decoration: none;
-    letter-spacing: 0.01em;
+  .topbar-inner {
+    max-width: 1120px; margin: 0 auto;
+    height: 58px; padding: 0 1.25rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
+  .brand { display: flex; align-items: center; gap: 0.4rem; min-width: 0; }
   .home-btn {
-    background: none;
-    border: none;
-    color: var(--accent);
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-radius: 10px;
-    flex-shrink: 0;
+    background: none; border: none; color: var(--accent);
+    width: 32px; height: 32px; padding: 0; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex-shrink: 0;
   }
   .home-btn:hover { background: var(--nav-hover); }
-  .home-btn svg { width: 18px; height: 18px; }
-  .header-actions { display: flex; gap: 0.4rem; }
+  .home-btn svg { width: 19px; height: 19px; }
+  .logo {
+    font: 650 1.02rem/1 var(--font-heading); color: var(--ink);
+    text-decoration: none; letter-spacing: -0.005em; white-space: nowrap;
+  }
+  .topnav { display: flex; align-items: center; gap: 0.15rem; }
+  .nav-link {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    background: none; border: none; color: var(--muted);
+    font: 500 0.88rem/1 var(--font-ui);
+    padding: 0.55rem 0.7rem; border-radius: 8px; cursor: pointer;
+  }
+  .nav-link svg { width: 17px; height: 17px; flex-shrink: 0; }
+  .nav-link:hover { background: var(--nav-hover); color: var(--ink); }
+  .nav-link[aria-current="page"] { color: var(--ink); background: var(--nav-hover); }
+  .nav-sep { width: 1px; height: 22px; background: var(--line); margin: 0 0.4rem; }
   .icon-btn {
-    background: var(--card);
-    border: 1px solid var(--line);
-    color: var(--ink);
-    min-width: 36px;
-    height: 36px;
-    padding: 0 0.55rem;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font: 700 0.68rem/1 var(--font-ui);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    background: none; border: 1px solid transparent; color: var(--muted);
+    width: 36px; height: 36px; border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
   }
-  .icon-btn:hover { background: var(--nav-hover); }
+  .icon-btn:hover { background: var(--nav-hover); color: var(--ink); }
+  .theme-glyph { display: inline-flex; }
+  .theme-glyph svg { width: 18px; height: 18px; display: block; }
+  /* Phones: the three destinations keep their icons and lose their words. */
+  @media (max-width: 699px) {
+    .nav-link .nav-text { display: none; }
+    .nav-link { padding: 0.55rem; }
+    .nav-sep { display: none; }
+    .topbar-inner { padding: 0 0.75rem 0 0.6rem; }
+  }
 
+  /* ---- page --------------------------------------------------------------- */
   main.container {
-    max-width: 640px;
-    margin: 0 auto;
-    width: 100%;
-    padding: 1.25rem 1.25rem 5rem;
-    flex: 1;
+    width: 100%; max-width: 760px; margin: 0 auto;
+    padding: 2.25rem 1.25rem 4rem; flex: 1;
   }
-  /* Forms and idea cards stay at the 640px column they were designed for.
-     The article reader takes the remaining window — its own CSS pads the
-     page; this shell must not box it into a second column. */
-  @media (min-width: 900px) {
-    main.container:has(#readerView.active) { max-width: none; }
-  }
-
+  main.container:has(#themeView.active) { max-width: 1120px; }
   .view { display: none; }
   .view.active { display: block; }
 
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.4rem;
+  }
+  .section-title { font: 650 1.45rem/1.25 var(--font-heading); margin: 0; letter-spacing: -0.01em; }
+  .section-lede { color: var(--muted); font-size: 0.92rem; margin: 0 0 1.5rem; }
+
+  .pill {
+    background: var(--card); border: 1px solid var(--line); color: var(--ink);
+    font-size: 0.84rem; font-weight: 500;
+    padding: 0.42rem 0.85rem; border-radius: 8px; cursor: pointer;
+  }
+  .pill:hover { background: var(--nav-hover); }
+  .pill.warn { color: var(--warn); border-color: var(--line); background: var(--card); }
+  .pill.warn:hover { background: var(--warn-soft); }
+
+  .btn-primary {
+    width: 100%; margin-top: 1.25rem;
+    background: var(--you-fill); color: var(--chip-ink);
+    border: 1px solid var(--you-fill); border-radius: 10px;
+    padding: 0.9rem 1rem; font-size: 0.98rem; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { filter: brightness(1.07); }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: none; }
+
+  /* ---- landing ------------------------------------------------------------ */
+  .home-grid { display: grid; gap: 2.5rem; }
+  @media (min-width: 1000px) {
+    .home-grid { grid-template-columns: minmax(0, 1fr) 380px; gap: 3.5rem; align-items: start; }
+  }
   .kicker {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 0.45rem;
+    font-size: 0.8rem; font-weight: 600; color: var(--accent);
+    margin: 0.4rem 0 0.75rem;
   }
   .hero-title {
-    font: 650 clamp(1.7rem, 5vw, 2.15rem)/1.1 var(--font-heading);
-    color: var(--ink);
-    margin: 0 0 0.55rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 3px solid var(--ink);
-    text-wrap: balance;
+    font: 700 clamp(2rem, 4.6vw, 2.75rem)/1.08 var(--font-heading);
+    letter-spacing: -0.022em; color: var(--ink);
+    margin: 0 0 1rem; text-wrap: balance;
   }
   .hero-subtitle {
-    color: var(--muted);
-    font-size: 0.95rem;
-    margin: 0.85rem 0 1.35rem;
+    color: var(--muted); font-size: 1.04rem; line-height: 1.6;
+    margin: 0 0 1.75rem; max-width: 40rem;
   }
 
+  /* The you-step: the only accent-bordered surface on the page. */
   .theme-box {
     background: var(--card);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 1.25rem;
-    margin-bottom: 1.5rem;
+    border: 1px solid var(--line); border-radius: 14px;
+    padding: 1.35rem; box-shadow: var(--shadow);
   }
-  .theme-box.you {
-    background: var(--you-soft);
-    border-color: var(--you);
-  }
-  .theme-box.you .input-label { color: var(--you); }
-
+  .theme-box.you { border-color: var(--you); box-shadow: var(--shadow), 0 0 0 1px var(--you); }
   .input-label {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
+    display: block; font-size: 0.84rem; font-weight: 600; color: var(--ink);
     margin-bottom: 0.5rem;
   }
   .theme-input {
-    width: 100%;
-    background: var(--paper);
-    border: 2px solid var(--line);
-    color: var(--ink);
-    border-radius: 10px;
-    padding: 0.85rem 1rem;
-    font-size: 1rem;
-    font-family: inherit;
+    width: 100%; background: var(--card);
+    border: 1px solid var(--line-strong); border-radius: 10px;
+    color: var(--ink); padding: 0.8rem 0.95rem;
+    font-size: 1rem; font-family: inherit;
   }
-  .theme-input:focus { border-color: var(--accent); outline: none; }
+  .theme-input::placeholder { color: var(--muted); opacity: 0.85; }
+  .theme-input:focus { border-color: var(--accent); outline: none; box-shadow: var(--ring); }
+  #themeInput { font-size: 1.06rem; padding: 0.95rem 1rem; }
 
-  .pill {
-    background: var(--paper);
-    border: 2px solid var(--ink);
-    color: var(--ink);
-    font-size: 0.82rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 99px;
-    cursor: pointer;
-  }
-  .pill:hover, .pill:active {
-    background: var(--nav-hover);
-  }
-  .pill.warn {
-    color: var(--warn);
-    border-color: var(--warn);
-    background: var(--warn-soft);
-  }
-
-  .btn-primary {
-    width: 100%;
-    margin-top: 1.25rem;
-    background: var(--you-fill);
-    color: var(--chip-ink);
-    border: 2px solid var(--you);
-    padding: 0.95rem;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-  .btn-primary:hover { filter: brightness(1.08); }
-  .examples {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem;
-    margin: 0.75rem 0 0;
-  }
-  .examples-label {
-    font-size: 0.75rem; font-weight: 700; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.08em; margin-right: 0.15rem;
-  }
+  .examples { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.4rem; margin: 0.75rem 0 0; }
+  .examples-label { font-size: 0.8rem; color: var(--muted); margin-right: 0.15rem; }
   .example {
     font: 0.8rem/1.3 var(--font-ui); color: var(--ink);
     background: var(--paper); border: 1px solid var(--line); border-radius: 99px;
     padding: 0.3rem 0.7rem; cursor: pointer; text-align: left;
   }
   .example:hover { border-color: var(--you); color: var(--you); }
-  .form-row { display: flex; flex-direction: column; gap: 0; margin-top: 1.1rem; }
-  .form-row .btn-primary { margin-top: 1.1rem; }
+  .form-row { display: flex; flex-direction: column; margin-top: 1.1rem; }
+  .form-row .btn-primary { margin-top: 1rem; }
   @media (min-width: 640px) {
     .form-row { flex-direction: row; align-items: flex-end; gap: 0.75rem; }
-    .lang-field { flex: 0 0 11.5rem; }
+    .lang-field { flex: 0 0 10.5rem; }
     .form-row .btn-primary { flex: 1; margin-top: 0; }
-    .lang-field .theme-input, .form-row .btn-primary { height: 3.25rem; }
+    .lang-field .theme-input, .form-row .btn-primary { height: 3.1rem; }
   }
-  .form-note { margin: 0.75rem 0 0; font-size: 0.8rem; color: var(--muted); }
-  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: none; }
+  .form-note { margin: 0.85rem 0 0; font-size: 0.8rem; color: var(--muted); }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+  .proof-points {
+    list-style: none; padding: 0; margin: 1.4rem 0 0;
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem;
   }
-  .section-title {
-    font: 650 1.25rem/1.2 var(--font-heading);
-    margin: 0;
+  .proof-points li {
+    display: flex; gap: 0.55rem; align-items: flex-start;
+    font-size: 0.86rem; line-height: 1.45; color: var(--muted);
+  }
+  .proof-points svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 0.15rem; color: var(--accent); }
+
+  /* The page signature: a specimen of what comes back, quoted from a real
+     briefing in the gallery, so the landing page shows the output instead of
+     describing it. */
+  .specimen {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .specimen-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.7rem 1.1rem; border-bottom: 1px solid var(--line);
+    font-size: 0.76rem; color: var(--muted);
+  }
+  .specimen-head b { color: var(--ink); font-weight: 600; }
+  .specimen-body { padding: 1.1rem 1.15rem 0.4rem; }
+  .specimen-q { font-size: 0.83rem; color: var(--muted); margin: 0 0 0.6rem; line-height: 1.45; }
+  .specimen-verdict {
+    font: 400 1.02rem/1.5 Georgia, "Times New Roman", serif; color: var(--ink);
+    margin: 0 0 0.75rem;
+  }
+  .grade {
+    display: inline-block; white-space: nowrap;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em;
+    padding: 0.08rem 0.5rem; border-radius: 99px;
+  }
+  .grade-low { color: #8a5a00; background: #f8eed9; }
+  .grade-moderate { color: #1d5a96; background: #e3edf8; }
+  html[data-theme="dark"] .grade-low { color: #f0c46e; background: #3a3020; }
+  html[data-theme="dark"] .grade-moderate { color: #9dc4f5; background: #1d2b3d; }
+  .specimen-findings { list-style: none; margin: 0.9rem 0 0; padding: 0; counter-reset: f; }
+  .specimen-findings li {
+    counter-increment: f; position: relative;
+    padding: 0.7rem 0 0.7rem 1.9rem; border-top: 1px solid var(--line);
+    font-size: 0.86rem; line-height: 1.45; font-weight: 600;
+  }
+  .specimen-findings li::before {
+    content: counter(f); position: absolute; left: 0; top: 0.72rem;
+    width: 1.3rem; height: 1.3rem; border-radius: 50%;
+    background: var(--ink); color: var(--card);
+    font-size: 0.7rem; line-height: 1.3rem; text-align: center;
+  }
+  .specimen-findings .grade { margin-left: 0.3rem; vertical-align: 0.05em; }
+  .specimen-foot {
+    display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;
+    padding: 0.8rem 1.15rem; background: var(--paper); border-top: 1px solid var(--line);
+    font-size: 0.8rem; color: var(--muted);
+  }
+  .specimen-foot a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .specimen-foot a:hover { text-decoration: underline; }
+
+  .featured { margin-top: 3rem; }
+  .band-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .featured-label { font: 650 1.05rem/1.3 var(--font-heading); margin: 0; }
+  .demo-band-go {
+    background: none; border: none; padding: 0; cursor: pointer;
+    font: 600 0.86rem/1 var(--font-ui); color: var(--accent);
+  }
+  .demo-band-go:hover { text-decoration: underline; }
+  .public-band-note { font-size: 0.86rem; line-height: 1.45; color: var(--muted); margin: 0; padding: 1rem 1.1rem; }
+
+  /* Briefing lists — the landing preview, the shared list and your library —
+     are one card with hairline rows rather than a stack of boxes. */
+  #publicPreview, #publicList, #libraryList {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  #publicPreview:empty, #publicList:empty, #libraryList:empty { display: none; }
+  #publicList > p, #libraryList > p { margin: 0; padding: 1.25rem 1.1rem !important; }
+  .featured-card, .gallery-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.85rem 1.1rem; text-decoration: none; color: inherit;
+    border-bottom: 1px solid var(--line); background: transparent;
+  }
+  .featured-card:last-child, .gallery-item:last-child { border-bottom: none; }
+  .featured-card:hover, .gallery-item:hover { background: var(--nav-hover); }
+  .featured-title, .gallery-title {
+    font-size: 0.93rem; font-weight: 600; color: var(--ink); line-height: 1.4;
+    min-width: 0;
+  }
+  .featured-take, .gallery-meta {
+    font-size: 0.8rem; color: var(--muted); white-space: nowrap; flex-shrink: 0;
+  }
+  .gallery-action { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem; }
+  .gallery-item .pill { font-size: 0.75rem !important; padding: 0.22rem 0.6rem !important; }
+  .starred { background: var(--you-soft) !important; color: var(--you); border-color: var(--you) !important; }
+  @media (max-width: 599px) {
+    .featured-card { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
   }
 
+  /* ---- ideas -------------------------------------------------------------- */
+  #draftsList { display: grid; gap: 1rem; }
   .draft-card {
-    background: var(--card);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 1.25rem;
-    margin-bottom: 1rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 1.25rem 1.35rem; box-shadow: var(--shadow);
   }
+  .draft-card:hover { border-color: var(--line-strong); }
   .draft-num {
-    display: inline-block;
-    font-family: var(--font-utility);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--muted);
-    margin-bottom: 0.6rem;
+    display: inline-block; font-size: 0.74rem; font-weight: 600; color: var(--muted);
+    margin-bottom: 0.45rem;
   }
-  .draft-title {
-    font: 650 1.1rem/1.3 var(--font-heading);
-    margin: 0 0 0.5rem;
-  }
-  .draft-angle {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-bottom: 0.8rem;
-  }
-  .draft-terms {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 1rem;
-  }
-  .draft-term {
-    font-size: 0.75rem;
-    background: var(--paper);
-    color: var(--muted);
-    padding: 0.2rem 0.5rem;
-    border-radius: 99px;
-    border: 1px solid var(--line);
-  }
+  .draft-title { font: 650 1.08rem/1.35 var(--font-heading); margin: 0 0 0.45rem; }
+  .draft-angle { color: var(--muted); font-size: 0.9rem; line-height: 1.55; margin: 0 0 0.85rem; }
   .draft-pico {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin: 0 0 0.8rem;
-    line-height: 1.5;
+    font-size: 0.82rem; line-height: 1.6; color: var(--muted);
+    margin: 0 0 0.85rem; padding: 0.6rem 0.8rem;
+    background: var(--paper); border-radius: 8px;
   }
-  .draft-pico b { font-weight: 650; color: var(--ink); }
-
+  .draft-pico b { font-weight: 600; color: var(--ink); }
+  .draft-terms { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1rem; }
+  .draft-term {
+    font-size: 0.74rem; color: var(--muted); padding: 0.18rem 0.55rem;
+    border-radius: 99px; border: 1px solid var(--line);
+  }
   .btn-select {
-    width: 100%;
-    background: var(--paper);
-    color: var(--ink);
-    border: 2px solid var(--ink);
-    padding: 0.7rem;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: var(--card); color: var(--accent);
+    border: 1px solid var(--accent); border-radius: 9px;
+    padding: 0.6rem 1rem; font-weight: 600; font-size: 0.9rem; cursor: pointer;
   }
-  .btn-select:hover, .btn-select:active {
-    background: var(--nav-hover);
-  }
+  .btn-select:hover { background: var(--you-fill); color: var(--chip-ink); }
 
+  /* ---- progress ----------------------------------------------------------- */
   .progress-card {
-    background: var(--card);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 2rem 1.5rem;
-    text-align: center;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 2.25rem 1.75rem 2rem; text-align: center; box-shadow: var(--shadow);
   }
   .spinner {
-    width: 36px;
-    height: 36px;
-    border: 3px solid var(--line);
-    border-top-color: var(--accent);
-    border-radius: 50%;
-    animation: spin 1s infinite linear;
-    margin: 0 auto 1.5rem;
+    width: 34px; height: 34px; margin: 0 auto 1.4rem;
+    border: 3px solid var(--line); border-top-color: var(--accent); border-radius: 50%;
+    animation: spin 0.9s infinite linear;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   @media (prefers-reduced-motion: reduce) {
     .spinner { animation: none; border-top-color: var(--line); }
   }
-  .progress-title {
-    font: 650 1.2rem/1.25 var(--font-heading);
-    margin: 0 0 0.5rem;
-  }
-  .progress-step {
-    color: var(--muted);
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-  }
+  .progress-title { font: 650 1.2rem/1.35 var(--font-heading); margin: 0 auto 0.5rem; max-width: 34rem; }
+  .progress-step { color: var(--muted); font-size: 0.93rem; margin: 0 0 0.35rem; }
+  .progress-elapsed { font-family: var(--font-utility); font-size: 0.78rem; color: var(--muted); margin: 0 0 1.6rem; }
   .progress-steps-list {
-    text-align: left;
-    max-width: 400px;
-    margin: 0 auto;
-    font-size: 0.85rem;
-    color: var(--muted);
+    text-align: left; max-width: 420px; margin: 0 auto;
+    border-top: 1px solid var(--line); padding-top: 1.1rem;
+    font-size: 0.88rem; color: var(--muted);
   }
-  .step-item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
-  }
-  .step-item.done { color: var(--ok); }
-  .step-item.current { color: var(--ink); font-weight: 650; }
-  .step-item.current .step-icon::before { content: "\25B8"; color: var(--accent); }
+  .step-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.35rem 0; }
   .step-icon {
-    font-family: var(--font-utility);
-    width: 1.2rem;
-    text-align: center;
+    width: 1.35rem; height: 1.35rem; border-radius: 50%; flex-shrink: 0;
+    border: 1.5px solid var(--line-strong);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
   }
-  .step-icon::before { content: "·"; }
-  .step-item.done .step-icon::before { content: "\2713"; font-weight: 700; }
-  .progress-elapsed {
-    font-family: var(--font-utility); font-size: 0.8rem; color: var(--muted);
-    margin: -1rem 0 1.25rem;
-  }
+  .step-icon::before { content: ""; }
+  .step-item.done { color: var(--ink); }
+  .step-item.done .step-icon { background: var(--ok); border-color: var(--ok); color: #fff; }
+  .step-item.done .step-icon::before { content: "\2713"; }
+  .step-item.current { color: var(--ink); font-weight: 600; }
+  .step-item.current .step-icon { border-color: var(--accent); box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 10px var(--accent); }
 
+  .error-card {
+    border: 1px solid var(--warn); border-radius: 12px; background: var(--warn-soft);
+    padding: 1rem 1.1rem; margin-top: 1.25rem; text-align: left;
+  }
+  .error-title { font-weight: 700; font-size: 0.95rem; margin: 0 0 0.4rem; color: var(--warn); }
+  .error-body { font-size: 0.87rem; line-height: 1.55; margin: 0 0 0.9rem; }
+  .error-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .error-actions .btn-primary { width: auto; margin-top: 0; padding: 0.55rem 1rem; font-size: 0.88rem; }
+
+  /* ---- reader ------------------------------------------------------------- */
+  .reader-bar { margin-bottom: 0.75rem; }
+  .reader-meta { font-size: 0.82rem; color: var(--muted); margin-right: auto; }
   .reader-frame-wrapper {
-    width: 100%;
-    background: var(--card);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    overflow: hidden;
+    width: 100%; background: var(--card);
+    border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
     margin-bottom: 1.5rem;
   }
-  iframe.article-iframe {
-    width: 100%;
-    height: 70vh;
-    border: none;
-    display: block;
-  }
+  iframe.article-iframe { width: 100%; height: 70vh; border: none; display: block; }
   /* Phones and tablets: the article runs edge to edge. Its own page padding
-     already gives it margins; the card border and the shell's padding on top
+     already gives it margins; a card border and the shell's padding on top
      of that left a column too narrow to read. */
   @media (max-width: 1099px) {
     #readerView .reader-frame-wrapper {
@@ -486,267 +436,97 @@
   }
 
   /* One set of reader actions, two layouts: a bar pinned to the bottom of the
-     screen on a phone, a toolbar above the article on a desktop. This used to
-     be two separate button sets — a header row and a bottom bar — which is
-     most of how the reader ended up five share buttons wide.
-     It lives inside #readerView, so the view's own display:none hides it (a
-     position:fixed element inside a display:none ancestor is still hidden).
-     Nothing has to remember to toggle it. */
+     screen on a phone, a toolbar above the article on a desktop. It lives
+     inside #readerView, so the view's own display:none hides it. */
   .reader-actions {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--nav);
-    border-top: 2px solid var(--ink);
-    padding: 0.75rem 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    z-index: 90;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+    background: var(--nav); border-top: 1px solid var(--line);
+    padding: 0.55rem 1rem calc(0.55rem + env(safe-area-inset-bottom));
+    display: flex; align-items: center; justify-content: space-around;
   }
   .action-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    background: none;
-    border: none;
-    color: var(--ink);
-    font-size: 0.72rem;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 0.2rem 0.6rem;
-    border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+    background: none; border: none; color: var(--ink);
+    font-size: 0.72rem; font-weight: 500; cursor: pointer;
+    padding: 0.25rem 0.7rem; border-radius: 8px;
   }
   .action-btn svg { width: 20px; height: 20px; color: var(--accent); }
-  .reader-bar { flex-wrap: wrap; gap: 0.5rem; }
-  /* margin-right:auto keeps the status text beside the back button and pushes
-     the actions to the far end, instead of stranding it mid-row. */
-  .reader-meta { font-size: 0.8rem; color: var(--muted); margin-right: auto; }
 
-  /* ---- desktop shell ------------------------------------------------------
-     Under 1100px nothing changes: the top icon row and the bottom action bar
-     are what a phone wants. Above it the same views get a desktop frame — a
-     persistent left nav instead of the icon row, the article filling the
-     remaining window, and the reader's actions as an ordinary toolbar above
-     it. */
-  .shell { display: flex; flex: 1; min-height: 0; }
-  .shell-main { flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 0; }
-  .sidebar { display: none; }
-  .sidebar-item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    width: 100%;
-    padding: 0.55rem 0.7rem;
-    background: none;
-    border: 1px solid transparent;
-    border-radius: 10px;
-    color: var(--ink);
-    font: 500 0.88rem/1.2 var(--font-ui);
-    text-align: left;
-    cursor: pointer;
-  }
-  .sidebar-item:hover { background: var(--nav-hover); }
-  .sidebar-item svg { width: 17px; height: 17px; flex-shrink: 0; color: var(--accent); }
-  .sidebar-spacer { flex: 1; }
-  .theme-glyph { display: inline-flex; color: var(--accent); }
-  .theme-glyph svg { width: 18px; height: 18px; display: block; }
-  .sidebar-item .theme-glyph svg { width: 17px; height: 17px; }
-
+  /* Desktop: under the top bar the article takes the rest of the window and
+     scrolls on its own, with the actions as a toolbar above it. */
   @media (min-width: 1100px) {
-    header.app-header { display: none; }
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-      width: 218px;
-      flex-shrink: 0;
-      padding: 1.15rem 0.75rem;
-      background: var(--nav);
-      border-right: 1px solid var(--line);
-      position: sticky;
-      top: 0;
-      height: 100vh;
-    }
-    .sidebar .brand { padding: 0 0.35rem 0 0.15rem; margin-bottom: 1.15rem; }
-    main.container { max-width: 780px; padding: 2rem 2rem 3rem; }
-    body:has(#readerView.active) { height: 100vh; overflow: hidden; }
+    /* The page takes the article's own ground, so the toolbar and the
+       briefing read as one sheet instead of a white panel on grey. */
+    body:has(#readerView.active) { height: 100vh; overflow: hidden; background: var(--reader-bg); }
     main.container:has(#readerView.active) {
-      max-width: none;
-      width: 100%;
-      padding: 0.85rem 1rem 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
-      overflow: hidden;
+      max-width: none; width: 100%;
+      padding: 0.75rem 1.25rem 0;
+      display: flex; flex-direction: column; min-height: 0; overflow: hidden;
     }
-    #readerView.active {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      min-height: 0;
+    #readerView.active { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+    #readerView.active .reader-bar {
+      width: 100%; max-width: 68rem; margin: 0 auto 0.6rem;
     }
     #readerView.active .reader-frame-wrapper {
-      flex: 1;
-      min-height: 0;
-      margin-bottom: 0;
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      position: relative;
+      flex: 1; min-height: 0; margin-bottom: 0;
+      background: transparent; border: none; border-radius: 0; position: relative;
     }
-    #readerView.active iframe.article-iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
+    #readerView.active iframe.article-iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
     body:has(#readerView.active) .build-stamp { display: none; }
 
     .reader-actions {
-      position: static;
-      background: none;
-      border-top: none;
-      padding: 0;
-      gap: 0.4rem;
-      justify-content: flex-end;
-      z-index: auto;
+      position: static; background: none; border-top: none; padding: 0;
+      gap: 0.4rem; justify-content: flex-end; z-index: auto;
     }
     .action-btn {
-      flex-direction: row;
-      gap: 0.45rem;
-      font-size: 0.82rem;
-      padding: 0.42rem 0.8rem;
-      border: 1px solid var(--line);
-      background: var(--card);
+      flex-direction: row; gap: 0.45rem; font-size: 0.84rem;
+      padding: 0.45rem 0.8rem; border: 1px solid var(--line); background: var(--card);
     }
     .action-btn:hover { background: var(--nav-hover); }
     .action-btn svg { width: 16px; height: 16px; }
   }
 
+  /* ---- misc --------------------------------------------------------------- */
   .toast {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--ok-soft);
-    color: var(--ok);
-    border: 2px solid var(--ok);
-    padding: 0.55rem 1.1rem;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    z-index: 300;
-    display: none;
+    position: fixed; bottom: 84px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: var(--card);
+    padding: 0.6rem 1.1rem; border-radius: 10px;
+    font-size: 0.86rem; font-weight: 500; z-index: 300; display: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
   }
   .toast.active { display: block; }
 
-  .gallery-item {
-    background: var(--card);
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .gallery-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem; }
-  .gallery-meta { font-size: 0.78rem; color: var(--muted); }
-  .gallery-action { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem; }
   /* Quiet on purpose — this is a diagnostic, not content. It only needs to be
      legible when someone is asking "am I looking at a stale page?" */
   .build-stamp {
     text-align: center; font-size: 0.7rem; color: var(--muted);
-    margin: 2rem 0 1rem; opacity: 0.75;
+    margin: 1rem 0 1.25rem; opacity: 0.75;
   }
   .build-stamp code { font-family: var(--font-utility); font-size: 0.7rem; }
-
-  /* Featured evidence reviews on the landing page (#152). */
-  .featured { margin-bottom: 1rem; }
-  .featured-label {
-    display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--muted); margin: 0 0 0.5rem;
-  }
-  .featured-card {
-    display: block; text-decoration: none; color: inherit;
-    background: var(--card);
-    border: 2px solid var(--ink); border-radius: 12px;
-    padding: 0.85rem 1.1rem; margin-bottom: 0.6rem;
-  }
-  .featured-card:hover { background: var(--nav-hover); }
-  .featured-title {
-    display: block; font-size: 0.92rem; font-weight: 600; color: var(--ink);
-    line-height: 1.4; margin-bottom: 0.3rem;
-  }
-  .featured-take {
-    display: block; font-size: 0.83rem; line-height: 1.45; color: var(--muted);
-  }
-
-  .demo-band-go {
-    display: block; font-size: 0.87rem; font-weight: 600; color: var(--ink);
-    margin-top: 0.5rem;
-  }
-  .public-band-note {
-    font-size: 0.83rem; line-height: 1.45; color: var(--muted);
-    margin: 0 0 0.7rem;
-  }
-
-  /* In-page error state that replaced alert(). */
-  .error-card {
-    border: 2px solid var(--warn); border-radius: 12px;
-    background: var(--warn-soft);
-    padding: 1rem 1.1rem; margin-top: 1rem; text-align: left;
-  }
-  .error-title { font-weight: 700; font-size: 0.95rem; margin: 0 0 0.4rem; color: var(--warn); }
-  .error-body { font-size: 0.87rem; line-height: 1.55; margin: 0 0 0.9rem; }
-  .error-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-
-  .starred { background: var(--you-fill); color: var(--chip-ink); border-color: var(--you); }
 </style>
 </head>
 <body>
 
-<div class="shell">
-
-<!-- Desktop navigation. Hidden under 1100px, where the header icon row below
-     does the same job in the space a phone actually has. Same handlers, so
-     the two never drift apart. -->
-<aside class="sidebar">
-  <div class="brand">
-    <button type="button" class="home-btn" onclick="goHome()" title="Home" aria-label="Home">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-    </button>
-    <a href="#" class="logo" onclick="goHome(); return false;">Evidence brief</a>
-  </div>
-  <button class="sidebar-item" onclick="showView('themeView')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>New briefing</button>
-  <button class="sidebar-item" onclick="showView('libraryView'); loadLibrary();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>Your briefings</button>
-  <button class="sidebar-item" onclick="showView('publicListView'); loadPublicList();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Shared briefings</button>
-  <div class="sidebar-spacer"></div>
-  <button class="sidebar-item theme-btn" onclick="cycleTheme()" title="Theme"><span class="theme-glyph" aria-hidden="true"></span><span class="theme-icon">Theme: System</span></button>
-</aside>
-
-<div class="shell-main">
-
+<!-- One bar on every screen size. It replaced a 218px desktop sidebar that
+     held three links: on a phone the links keep their icons and lose their
+     words. Same handlers as before. -->
 <header class="app-header">
-  <div class="brand">
-    <button type="button" class="home-btn" onclick="goHome()" title="Home" aria-label="Home">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-    </button>
-    <a href="#" class="logo" onclick="goHome(); return false;">Evidence brief</a>
-  </div>
-  <div class="header-actions">
-    <button class="icon-btn theme-btn" id="themeToggleBtn" onclick="cycleTheme()" title="Theme" aria-label="Theme">
-      <span class="theme-glyph" aria-hidden="true"></span>
-    </button>
-    <button class="icon-btn" onclick="showView('publicListView'); loadPublicList();" title="Briefings from visitors">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    </button>
-    <button class="icon-btn" onclick="showView('libraryView'); loadLibrary();" title="Your briefings">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
-    </button>
+  <div class="topbar-inner">
+    <div class="brand">
+      <button type="button" class="home-btn" onclick="goHome()" title="Home" aria-label="Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      </button>
+      <a href="#" class="logo" onclick="goHome(); return false;">Evidence brief</a>
+    </div>
+    <nav class="topnav" aria-label="Main">
+      <button type="button" class="nav-link" data-view="themeView" aria-current="page" onclick="showView('themeView')" title="New briefing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg><span class="nav-text">New briefing</span></button>
+      <button type="button" class="nav-link" data-view="libraryView" onclick="showView('libraryView'); loadLibrary();" title="Your briefings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span class="nav-text">Your briefings</span></button>
+      <button type="button" class="nav-link" data-view="publicListView" onclick="showView('publicListView'); loadPublicList();" title="Shared briefings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="nav-text">Shared</span></button>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <button type="button" class="icon-btn theme-btn" id="themeToggleBtn" onclick="cycleTheme()" title="Theme" aria-label="Theme">
+        <span class="theme-glyph" aria-hidden="true"></span>
+      </button>
+    </nav>
   </div>
 </header>
 
@@ -754,45 +534,71 @@
 
   <!-- VIEW 1: Theme Input -->
   <div id="themeView" class="view active">
-    <p class="kicker">From published papers</p>
-    <h1 class="hero-title">A sourced evidence briefing you can send</h1>
-    <p class="hero-subtitle">Ask a question. Get one page back: the answer and how
-      sure the evidence is, the studies behind it, what is still unknown, and the
-      papers worth opening. Every statistic is checked against the cited papers.</p>
+    <div class="home-grid">
+      <div class="home-main">
+        <p class="kicker">From published papers</p>
+        <h1 class="hero-title">Ask a question. Get the evidence on one page.</h1>
+        <p class="hero-subtitle">A sourced briefing you can send: the answer and how sure
+          the evidence is, the studies behind it, what is still unknown, and the papers
+          worth opening. Every statistic is checked against the cited papers.</p>
 
-    <div class="theme-box you">
-      <label class="input-label" for="themeInput">1. Your question or topic</label>
-      <input type="text" id="themeInput" name="article_topic" class="theme-input" placeholder="A question, or a topic to turn into one" autocomplete="off" autocorrect="off" spellcheck="false" data-1p-ignore="true" data-lpignore="true" data-bwignore="true">
+        <div class="theme-box you">
+          <label class="input-label" for="themeInput">Your question or topic</label>
+          <input type="text" id="themeInput" name="article_topic" class="theme-input" placeholder="e.g. Does melatonin help with insomnia?" autocomplete="off" autocorrect="off" spellcheck="false" data-1p-ignore="true" data-lpignore="true" data-bwignore="true">
 
-      <!-- Length and evidence depth are not choices. The default artefact is a
-           sourced briefing; the parked Review is CLI `--long` only.
-           See LENGTH_LABEL / DEPTH_LABEL below. -->
-      <div class="examples" aria-label="Example questions">
-        <span class="examples-label">Try</span>
-        <button type="button" class="example" onclick="useExample(this)" data-q="Is intermittent fasting more effective than continuous calorie restriction for weight loss in adults?">Intermittent fasting vs calorie restriction</button>
-        <button type="button" class="example" onclick="useExample(this)" data-q="Do school smartphone bans improve students' academic performance and wellbeing?">School smartphone bans</button>
-        <button type="button" class="example" onclick="useExample(this)" data-q="Does a four-day work week improve productivity and employee wellbeing?">Four-day work week</button>
-      </div>
+          <!-- Length and evidence depth are not choices. The default artefact is a
+               sourced briefing; the parked Review is CLI `--long` only.
+               See LENGTH_LABEL / DEPTH_LABEL below. -->
+          <div class="examples" aria-label="Example questions">
+            <span class="examples-label">Try</span>
+            <button type="button" class="example" onclick="useExample(this)" data-q="Is intermittent fasting more effective than continuous calorie restriction for weight loss in adults?">Intermittent fasting vs calorie restriction</button>
+            <button type="button" class="example" onclick="useExample(this)" data-q="Do school smartphone bans improve students' academic performance and wellbeing?">School smartphone bans</button>
+            <button type="button" class="example" onclick="useExample(this)" data-q="Does a four-day work week improve productivity and employee wellbeing?">Four-day work week</button>
+          </div>
 
-      <div class="form-row">
-        <div class="lang-field">
-        <label class="input-label" for="prefLang">Language</label>
-        <select id="prefLang" class="theme-input" onchange="savePreferences()">
-          <option value="English" selected>English</option>
-          <option value="Spanish">Spanish (Español)</option>
-          <option value="French">French (Français)</option>
-          <option value="German">German (Deutsch)</option>
-          <option value="Japanese">Japanese (日本語)</option>
-          <option value="Chinese">Chinese (中文)</option>
-        </select>
+          <div class="form-row">
+            <div class="lang-field">
+              <label class="input-label" for="prefLang">Language</label>
+              <select id="prefLang" class="theme-input" onchange="savePreferences()">
+                <option value="English" selected>English</option>
+                <option value="Spanish">Spanish (Español)</option>
+                <option value="French">French (Français)</option>
+                <option value="German">German (Deutsch)</option>
+                <option value="Japanese">Japanese (日本語)</option>
+                <option value="Chinese">Chinese (中文)</option>
+              </select>
+            </div>
+            <button id="ideasBtn" class="btn-primary" onclick="requestIdeas()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              Propose briefing questions
+            </button>
+          </div>
+          <p class="form-note">Next you pick one of six precise questions. Writing takes two to four minutes. Free, no account.</p>
         </div>
 
-      <button id="ideasBtn" class="btn-primary" onclick="requestIdeas()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        Propose briefing questions
-      </button>
+        <ul class="proof-points">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Searches four scholarly databases</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Grades certainty claim by claim</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Cites a paper for every result</span></li>
+        </ul>
       </div>
-      <p class="form-note">Next you pick one of a few precise questions. Writing takes two to four minutes.</p>
+
+      <!-- Quoted from a real briefing in the gallery (generated 28 Oct 2026),
+           so the page shows what comes back instead of describing it. Swap it
+           for another gallery item if that one is ever removed. -->
+      <aside class="specimen" aria-label="Example briefing">
+        <div class="specimen-head"><b>Example briefing</b><span>3 sources cited</span></div>
+        <div class="specimen-body">
+          <p class="specimen-q">Does melatonin improve sleep onset and sleep quality in adults with chronic insomnia?</p>
+          <p class="specimen-verdict">Melatonin, mostly prolonged-release formulations, probably shortens sleep onset by a modest amount in adults with insomnia disorder, roughly 5 to 6 minutes in pooled placebo-controlled trials, with a small gain in sleep efficiency.</p>
+          <span class="grade grade-low">Low certainty</span>
+          <ol class="specimen-findings">
+            <li>Pooled placebo-controlled data show prolonged-release melatonin shortens sleep onset latency by only a few minutes in insomnia disorder.<span class="grade grade-low">Low</span></li>
+            <li>Gains in objective sleep efficiency are small overall and somewhat larger in patients aged 55 years or older.<span class="grade grade-low">Low</span></li>
+          </ol>
+        </div>
+        <div class="specimen-foot"><span>+ 2 more findings, open questions, references</span><a href="#g=f2e1a8674d2aafd3f06fe43dfddc591b">Read it &rarr;</a></div>
+      </aside>
     </div>
 
     <!-- Visitor-generated briefings. Not drafts/ (those stay in the project
@@ -800,21 +606,21 @@
          personal library (that stays in this browser). Loaded from the
          public gist so a cold Render does not hide the list. -->
     <section class="featured" id="publicBand">
-      <h2 class="featured-label">From other visitors</h2>
-      <p class="public-band-note">Briefings appear here when they finish
-        generating.</p>
+      <div class="band-head">
+        <h2 class="featured-label">Recent briefings</h2>
+        <button type="button" class="demo-band-go" id="publicSeeAll" onclick="showView('publicListView'); loadPublicList();">Browse all &rarr;</button>
+      </div>
       <div id="publicPreview"></div>
-      <button type="button" class="demo-band-go" id="publicSeeAll" onclick="showView('publicListView'); loadPublicList();" style="background:none; border:none; padding:0; cursor:pointer; font: inherit; text-align:left;">Browse shared briefings →</button>
     </section>
   </div>
 
   <!-- VIEW 2: Draft Ideas Selection -->
   <div id="ideasView" class="view">
     <div class="section-header">
-      <h2 class="section-title">2. Choose a briefing question</h2>
+      <h2 class="section-title">Choose a question to research</h2>
       <button class="pill" onclick="showView('themeView')">← Change topic</button>
     </div>
-    <p style="color:var(--muted); font-size:0.9rem; margin-top:-0.5rem; margin-bottom:1.25rem;" id="themeLabel"></p>
+    <p class="section-lede" id="themeLabel"></p>
 
     <div id="draftsList">
       <!-- Dynamically filled with draft cards -->
@@ -903,20 +709,20 @@
        clear-all, and saving to the second one stored a second full copy of the
        article HTML. One list, one storage key, a star for what to keep. -->
   <div id="libraryView" class="view">
-    <div class="section-header" style="flex-wrap:wrap; gap:0.5rem;">
+    <div class="section-header">
       <h2 class="section-title">Your briefings</h2>
       <div style="display:flex; gap:0.4rem;">
         <button class="pill warn" onclick="clearLibrary()">Clear all</button>
         <button class="pill" onclick="showView('themeView')">+ New briefing</button>
       </div>
     </div>
-    <p style="font-size:0.85rem; color:var(--muted); margin-top:-0.5rem; margin-bottom:1rem;">
+    <p class="section-lede">
       Saved in this browser only — not synced, and cleared if you clear site data.
-      Starred briefings are kept; the rest roll over after the 20 most recent.
+      Kept briefings stay; the rest roll over after the 20 most recent.
     </p>
 
     <div style="margin-bottom: 1rem;">
-      <input type="text" id="librarySearchInput" name="search_articles" class="theme-input" placeholder="Search by title" oninput="loadLibrary()" style="padding:0.6rem 0.9rem; font-size:0.9rem;" autocomplete="off" autocorrect="off" spellcheck="false" data-1p-ignore="true" data-lpignore="true" data-bwignore="true">
+      <input type="text" id="librarySearchInput" name="search_articles" class="theme-input" placeholder="Search by title" oninput="loadLibrary()" autocomplete="off" autocorrect="off" spellcheck="false" data-1p-ignore="true" data-lpignore="true" data-bwignore="true">
     </div>
 
     <div id="libraryList">
@@ -926,12 +732,12 @@
 
   <!-- VIEW 6: Briefings other visitors generated. -->
   <div id="publicListView" class="view">
-    <div class="section-header" style="flex-wrap:wrap; gap:0.5rem;">
-      <h2 class="section-title">From other visitors</h2>
+    <div class="section-header">
+      <h2 class="section-title">Shared briefings</h2>
       <button class="pill" onclick="goHome()">← Home</button>
     </div>
-    <p style="font-size:0.85rem; color:var(--muted); margin-top:-0.5rem; margin-bottom:1rem;">
-      Briefings generated on this site. You cannot delete someone else's.
+    <p class="section-lede">
+      Every briefing generated on this site, newest first. You cannot delete someone else's.
     </p>
     <div id="publicList"></div>
   </div>
@@ -951,8 +757,6 @@
      looking at a local file that was never deployed. -->
 <p class="build-stamp" id="buildStamp">build <code>__BUILD_COMMIT__</code></p>
 
-</div><!-- /shell-main -->
-</div><!-- /shell -->
 
 <script>
   (function () {
@@ -1117,37 +921,46 @@
   let currentArticleId = '';
 
   // Theme Management Controller
-  let currentThemeSetting = localStorage.getItem('articlegen_theme') || 'system';
+  let currentThemeSetting = localStorage.getItem('articlegen_theme') || 'light';
+
+  // Light is the default. "system" follows the OS, so the page and the
+  // article frame are always given a concrete light or dark attribute.
+  const prefersDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function effectiveTheme() {
+    if (currentThemeSetting === 'dark') return 'dark';
+    if (currentThemeSetting === 'system' && prefersDark && prefersDark.matches) return 'dark';
+    return 'light';
+  }
 
   function applyTheme(theme) {
     currentThemeSetting = theme;
-    if (theme === 'system') {
+    if (theme === 'light') {
       localStorage.removeItem('articlegen_theme');
-      document.documentElement.removeAttribute('data-theme');
     } else {
       localStorage.setItem('articlegen_theme', theme);
-      document.documentElement.setAttribute('data-theme', theme);
     }
+    document.documentElement.setAttribute('data-theme', effectiveTheme());
     updateThemeIcon();
     syncThemeToIframe();
   }
+  if (prefersDark && prefersDark.addEventListener) {
+    prefersDark.addEventListener('change', function () {
+      if (currentThemeSetting === 'system') applyTheme('system');
+    });
+  }
 
   function cycleTheme() {
-    if (currentThemeSetting === 'system') {
-      applyTheme('light');
-    } else if (currentThemeSetting === 'light') {
+    if (currentThemeSetting === 'light') {
       applyTheme('dark');
-    } else {
+    } else if (currentThemeSetting === 'dark') {
       applyTheme('system');
+    } else {
+      applyTheme('light');
     }
   }
 
-  // Two theme buttons exist — one in the phone header row, one in the desktop
-  // sidebar — and only one is on screen at a time. Both carry .theme-icon so
-  // neither can show a stale label after the other was clicked.
-  // "Sys" in small caps read as a system menu, not a theme. Each button now
-  // shows the mode it is in as an icon, and says it in words where there is
-  // room (the sidebar) and in its accessible name everywhere.
+  // The theme button shows the mode it is in as an icon and names it in its
+  // accessible label. ("Sys" in small caps read as a system menu.)
   const THEME_GLYPHS = {
     system: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
     light: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
@@ -1159,7 +972,7 @@
       dark: ['Theme: Dark', 'Theme: Dark. Click for System.'],
       system: ['Theme: System', 'Theme: follows your system. Click for Light.']
     };
-    const mode = labels[currentThemeSetting] ? currentThemeSetting : 'system';
+    const mode = labels[currentThemeSetting] ? currentThemeSetting : 'light';
     const [text, title] = labels[mode];
     document.querySelectorAll('.theme-btn').forEach(btn => {
       btn.title = title;
@@ -1171,17 +984,28 @@
     });
   }
 
+  // Briefings in the gallery keep the CSS they were rendered with. Give every
+  // one the same readable measure the current renderer uses, so old and new
+  // briefings sit under the reader toolbar the same way.
+  function styleArticleFrame() {
+    const iframe = document.getElementById('articleIframe');
+    try {
+      const doc = iframe && iframe.contentDocument;
+      if (!doc || doc.getElementById('articlegen-reader-style')) return;
+      const style = doc.createElement('style');
+      style.id = 'articlegen-reader-style';
+      style.textContent = 'article { max-width: 68rem; margin-left: auto; margin-right: auto; }';
+      (doc.head || doc.documentElement).appendChild(style);
+    } catch (e) {}
+  }
+
   function syncThemeToIframe() {
     const iframe = document.getElementById('articleIframe');
     if (!iframe) return;
     try {
       const doc = iframe.contentDocument || iframe.contentWindow.document;
       if (doc && doc.documentElement) {
-        if (currentThemeSetting === 'system') {
-          doc.documentElement.removeAttribute('data-theme');
-        } else {
-          doc.documentElement.setAttribute('data-theme', currentThemeSetting);
-        }
+        doc.documentElement.setAttribute('data-theme', effectiveTheme());
       }
     } catch (e) {}
   }
@@ -1226,6 +1050,7 @@
     const iframe = document.getElementById('articleIframe');
     if (iframe) {
       iframe.addEventListener('load', function() {
+        styleArticleFrame();
         syncThemeToIframe();
         hideArticleToolbar();
         bindIframeFragmentLinks();
@@ -1336,9 +1161,18 @@
   if (wideReader.addEventListener) wideReader.addEventListener('change', fitArticleFrame);
   window.addEventListener('resize', fitArticleFrame);
 
+  // The question, its ideas and its progress are all "New briefing".
+  const NAV_FOR_VIEW = { themeView: 'themeView', ideasView: 'themeView', progressView: 'themeView',
+                         libraryView: 'libraryView', publicListView: 'publicListView' };
   function showView(viewId) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById(viewId).classList.add('active');
+    const nav = NAV_FOR_VIEW[viewId] || '';
+    document.querySelectorAll('.nav-link').forEach(function (b) {
+      if (b.dataset.view === nav) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+    window.scrollTo(0, 0);
   }
 
   // Opening an article writes #read= / #g= / #p= so the URL can be shared and
@@ -1650,12 +1484,12 @@
         : '';
 
       card.innerHTML = `
-        <span class="draft-num">Idea #${idx + 1}</span>
+        <span class="draft-num">Option ${idx + 1}</span>
         <h3 class="draft-title">${escapeHtml(idea.title)}</h3>
         <p class="draft-angle">${escapeHtml(idea.angle)}</p>
         ${picoHtml}
         <div class="draft-terms">${termsHtml}</div>
-        <button class="btn-select">Generate briefing →</button>
+        <button class="btn-select">Write this briefing →</button>
       `;
       card.querySelector('.btn-select').onclick = function () {
         selectDraft(idea.title, terms, pico);
