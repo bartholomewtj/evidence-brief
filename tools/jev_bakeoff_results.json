@@ -1,0 +1,4397 @@
+{
+  "started": "2026-09-17T01:39:09.894004+00:00",
+  "topic": "night shift health risk",
+  "manifest": "C:\\claudeOS\\Projects\\articlegenerator\\tests\\replays\\2026-09-05-night-shift-health-risk.json",
+  "n_papers": 20,
+  "n_claims": 12,
+  "runs_requested": 10,
+  "curation_model": "default",
+  "claim_model": "openai/gpt-5.6-luna",
+  "jev_model": "jev-latest",
+  "smoke": false,
+  "paper_titles": [
+    "Modified Cortisol Circadian Rhythm: The Hidden Toll of Night-Shift Work",
+    "Beneficial Effects of Early Time-Restricted Feeding on Metabolic Diseases: Importance of Aligning Food Habits with the Circadian Clock",
+    "How to schedule night shift work in order to reduce health and safety risks",
+    "Night shift work characteristics and risk of incident coronary heart disease among health care workers: national cohort study",
+    "Chronotype differences in the risk of cancers, diabetes mellitus, and poor mental health among shift workers: a meta-analysis.",
+    "Shift work and risk of sleep disturbances in occupational populations: a systematic review and meta-analysis.",
+    "Rotating Night Shifts and Risk of Breast Cancer in Women Participating in the Nurses' Health Study",
+    "Night shift work and breast cancer risk in healthcare workers: a systematic review and meta-analysis.",
+    "Role of Life's Essential 8 in the association of night shift work with cardiovascular disease and mortality: a prospective cohort study of UK Biobank participants.",
+    "Limited Circadian Misalignment in Japanese Two-Shift Nurses: A Field Study",
+    "Is Night Shift Work Associated With Depression and Suicidal Ideation? A 17-Year Follow-Up Study.",
+    "Comparative evaluation of gut health, inflammatory factors, and sleep quality among shift workers: A cross-sectional study.",
+    "Genomic Landscape of Phenotypes Causally Associated with Night Shift Work.",
+    "Association between shift work patterns and the incidence of prediabetes and diabetes among night shift workers: a retrospective cohort study.",
+    "Shining a Light on the Challenges of Night Shift Nursing: A Mixed-Methods Study.",
+    "Circadian rhythm sleep disorders and changes in cognitive function and sleepiness among healthcare workers.",
+    "Occupational Health Support Needs and Barriers to Aligning Services With Needs Among Highway Traffic Police in Hunan Province, China: An Explanatory Sequential Mixed-Methods Study",
+    "Night shift work and the acceleration of chronic kidney disease onset: dose-response relationships, interactions with cardiometabolic genetic risk, and metabolomic mediators.",
+    "Chronotype distinctness a key risk factor for emotional and cognitive disruption in shift working nurses",
+    "Impact of nursing shift patterns on work-related gastrointestinal disorders: a systematic review and meta-analysis."
+  ],
+  "curation_runs": [
+    {
+      "run": 1,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.83,
+        "2": 0.84,
+        "3": 0.82,
+        "4": 0.87,
+        "5": 0.71,
+        "6": 0.67,
+        "7": 0.75,
+        "8": 0.73,
+        "9": 0.92,
+        "10": 0.4,
+        "11": 0.82,
+        "12": 0.78,
+        "13": 0.63,
+        "14": 0.71,
+        "15": 0.38,
+        "16": 0.53,
+        "17": 0.77,
+        "18": 0.86,
+        "19": 0.68,
+        "20": 0.47
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 887,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 10.39,
+      "jev_seconds": 1.11,
+      "llm_est_usd": 0.0999,
+      "jev_est_usd": 0.000721
+    },
+    {
+      "run": 2,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.82,
+        "2": 0.81,
+        "3": 0.81,
+        "4": 0.83,
+        "5": 0.68,
+        "6": 0.67,
+        "7": 0.7,
+        "8": 0.73,
+        "9": 0.91,
+        "10": 0.46,
+        "11": 0.82,
+        "12": 0.78,
+        "13": 0.56,
+        "14": 0.63,
+        "15": 0.49,
+        "16": 0.52,
+        "17": 0.73,
+        "18": 0.78,
+        "19": 0.61,
+        "20": 0.4
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 898,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 11.09,
+      "jev_seconds": 1.33,
+      "llm_est_usd": 0.1002,
+      "jev_est_usd": 0.000721
+    },
+    {
+      "run": 3,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.83,
+        "2": 0.82,
+        "3": 0.8,
+        "4": 0.84,
+        "5": 0.73,
+        "6": 0.62,
+        "7": 0.71,
+        "8": 0.71,
+        "9": 0.92,
+        "10": 0.42,
+        "11": 0.8,
+        "12": 0.77,
+        "13": 0.62,
+        "14": 0.67,
+        "15": 0.39,
+        "16": 0.5,
+        "17": 0.74,
+        "18": 0.81,
+        "19": 0.61,
+        "20": 0.44
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 881,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 9.64,
+      "jev_seconds": 1.47,
+      "llm_est_usd": 0.0998,
+      "jev_est_usd": 0.000721
+    },
+    {
+      "run": 4,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.84,
+        "2": 0.83,
+        "3": 0.78,
+        "4": 0.81,
+        "5": 0.72,
+        "6": 0.65,
+        "7": 0.71,
+        "8": 0.7,
+        "9": 0.88,
+        "10": 0.46,
+        "11": 0.8,
+        "12": 0.75,
+        "13": 0.59,
+        "14": 0.65,
+        "15": 0.41,
+        "16": 0.45,
+        "17": 0.75,
+        "18": 0.82,
+        "19": 0.6,
+        "20": 0.48
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 908,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 10.68,
+      "jev_seconds": 1.24,
+      "llm_est_usd": 0.1005,
+      "jev_est_usd": 0.000721
+    },
+    {
+      "run": 5,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.82,
+        "2": 0.82,
+        "3": 0.83,
+        "4": 0.85,
+        "5": 0.73,
+        "6": 0.72,
+        "7": 0.68,
+        "8": 0.66,
+        "9": 0.91,
+        "10": 0.39,
+        "11": 0.8,
+        "12": 0.78,
+        "13": 0.69,
+        "14": 0.67,
+        "15": 0.42,
+        "16": 0.53,
+        "17": 0.78,
+        "18": 0.82,
+        "19": 0.66,
+        "20": 0.44
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 878,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 12.76,
+      "jev_seconds": 1.13,
+      "llm_est_usd": 0.0997,
+      "jev_est_usd": 0.000721
+    },
+    {
+      "run": 6,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.82,
+        "2": 0.85,
+        "3": 0.81,
+        "4": 0.81,
+        "5": 0.74,
+        "6": 0.65,
+        "7": 0.68,
+        "8": 0.73,
+        "9": 0.93,
+        "10": 0.45,
+        "11": 0.84,
+        "12": 0.77,
+        "13": 0.61,
+        "14": 0.64,
+        "15": 0.45,
+        "16": 0.51,
+        "17": 0.75,
+        "18": 0.85,
+        "19": 0.68,
+        "20": 0.49
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 885,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 10.74,
+      "jev_seconds": 1.65,
+      "llm_est_usd": 0.0999,
+      "jev_est_usd": 0.000721
+    },
+    {
+      "run": 7,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.83,
+        "2": 0.84,
+        "3": 0.82,
+        "4": 0.84,
+        "5": 0.74,
+        "6": 0.62,
+        "7": 0.71,
+        "8": 0.68,
+        "9": 0.91,
+        "10": 0.31,
+        "11": 0.81,
+        "12": 0.77,
+        "13": 0.67,
+        "14": 0.7,
+        "15": 0.42,
+        "16": 0.6,
+        "17": 0.76,
+        "18": 0.81,
+        "19": 0.67,
+        "20": 0.42
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 859,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 10.99,
+      "jev_seconds": 1.12,
+      "llm_est_usd": 0.0992,
+      "jev_est_usd": 0.000721
+    },
+    {
+      "run": 8,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.81,
+        "2": 0.83,
+        "3": 0.8,
+        "4": 0.86,
+        "5": 0.72,
+        "6": 0.63,
+        "7": 0.71,
+        "8": 0.73,
+        "9": 0.91,
+        "10": 0.38,
+        "11": 0.79,
+        "12": 0.71,
+        "13": 0.57,
+        "14": 0.67,
+        "15": 0.45,
+        "16": 0.54,
+        "17": 0.77,
+        "18": 0.83,
+        "19": 0.59,
+        "20": 0.42
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 862,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 10.8,
+      "jev_seconds": 1.33,
+      "llm_est_usd": 0.0993,
+      "jev_est_usd": 0.000721
+    },
+    {
+      "run": 9,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.83,
+        "2": 0.85,
+        "3": 0.8,
+        "4": 0.83,
+        "5": 0.73,
+        "6": 0.65,
+        "7": 0.72,
+        "8": 0.74,
+        "9": 0.93,
+        "10": 0.43,
+        "11": 0.81,
+        "12": 0.75,
+        "13": 0.65,
+        "14": 0.67,
+        "15": 0.41,
+        "16": 0.51,
+        "17": 0.76,
+        "18": 0.82,
+        "19": 0.66,
+        "20": 0.46
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 879,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 12.11,
+      "jev_seconds": 1.17,
+      "llm_est_usd": 0.0997,
+      "jev_est_usd": 0.000721
+    },
+    {
+      "run": 10,
+      "llm": {
+        "1": "related",
+        "2": "tangential",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "related",
+        "17": "tangential",
+        "18": "direct",
+        "19": "related",
+        "20": "direct"
+      },
+      "jev": {
+        "1": "direct",
+        "2": "related",
+        "3": "direct",
+        "4": "direct",
+        "5": "direct",
+        "6": "direct",
+        "7": "direct",
+        "8": "direct",
+        "9": "direct",
+        "10": "related",
+        "11": "direct",
+        "12": "direct",
+        "13": "direct",
+        "14": "direct",
+        "15": "related",
+        "16": "direct",
+        "17": "related",
+        "18": "direct",
+        "19": "direct",
+        "20": "direct"
+      },
+      "jev_confidence": {
+        "1": 0.85,
+        "2": 0.86,
+        "3": 0.82,
+        "4": 0.86,
+        "5": 0.72,
+        "6": 0.62,
+        "7": 0.66,
+        "8": 0.69,
+        "9": 0.92,
+        "10": 0.4,
+        "11": 0.79,
+        "12": 0.78,
+        "13": 0.64,
+        "14": 0.67,
+        "15": 0.44,
+        "16": 0.56,
+        "17": 0.75,
+        "18": 0.85,
+        "19": 0.61,
+        "20": 0.49
+      },
+      "llm_counts": {
+        "direct": 13,
+        "related": 5,
+        "tangential": 2
+      },
+      "jev_counts": {
+        "direct": 16,
+        "related": 4,
+        "tangential": 0
+      },
+      "gate": {
+        "n": 20,
+        "agree": 15,
+        "retained": {
+          "direct": {
+            "kept": 13,
+            "held": 13
+          },
+          "related": {
+            "kept": 2,
+            "held": 5
+          },
+          "tangential": {
+            "kept": 0,
+            "held": 2
+          }
+        },
+        "toward_related": 2,
+        "away_related": 3,
+        "critical_ok": false
+      },
+      "llm_tokens_in": 15551,
+      "llm_tokens_out": 892,
+      "jev_tokens_in": 17167,
+      "jev_tokens_out": 774,
+      "llm_seconds": 10.88,
+      "jev_seconds": 1.08,
+      "llm_est_usd": 0.1001,
+      "jev_est_usd": 0.000721
+    }
+  ],
+  "claim_runs": [
+    {
+      "run": 1,
+      "luna": {
+        "n": 12,
+        "exact": 11,
+        "collapsed": 11,
+        "exact_rate": 0.9166666666666666,
+        "collapsed_rate": 0.9166666666666666,
+        "overreach_recall": "1/2",
+        "false_overreach": 0,
+        "confusion": {
+          "supported": {
+            "supported": 10
+          },
+          "overreach": {
+            "supported": 1,
+            "overreach": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 8,
+        "collapsed": 9,
+        "exact_rate": 0.6666666666666666,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "0/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 2,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt reports all stated study details, associations, subgroup estimates, and cross-sectional design, which does not establish directionality.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+          "note": "The excerpt reports 39.2% mediation and describes model-based counterfactual mediation analysis, supporting the modelling-assumptions qualification.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers'...to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports the graded AF trend, the stated HR, higher CHD risk after \u226510 years, and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 women, 22\u201324 years of follow-up, the stated hazard ratio and confidence interval, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "quote": "working more night shifts per month was associated with higher type 2 diabetes odds",
+          "note": "The excerpt reports the >8/month OR 1.36 association and prevalent diabetes outcomes, supporting the cross-sectional temporal-ordering caveat.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "The pooled results showed that night-shift work was not associated with the risk of breast cancer",
+          "note": "The excerpt reports 57 studies, 8,477,849 participants, and no overall association for each listed cancer.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "Compared to never exposure, pooled RRs were 1.05 ... for ever, and ... 1.25 ... for \u226520 years",
+          "note": "The excerpt reports the same healthcare-worker population, 12 studies, case count, RR 1.05 for ever exposure, and RR 1.25 for \u226520 years.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt reports both estimate instability and high exposure-assessment bias, supporting the cautious conclusion that the finding may be fragile.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+          "note": "The excerpt reports all stated study counts, effect sizes, depressive symptoms, and higher odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "Based on the limited, existing literature, we recommend that ... night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+          "note": "The excerpt identifies 15 researchers, calls the paper a consensus, recommends all three limits, and explicitly describes the literature as limited.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "overreach",
+          "quote": "Knowledge gaps and possible recommendations were discussed based on the current evidence.",
+          "note": "The excerpt supports limited evidence and recommendations based on physiological and existing literature, but does not state that no randomized or controlled interventions tested disease incidence.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "supported",
+          "quote": "We used Cox models to estimate associations and counterfactual mediation analysis to quantify the proportion mediated by LE8.",
+          "note": "The excerpt reports observational mediation and counterfactual estimates in one prospective cohort, while stating that intervention studies are still needed.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.24,
+          "probabilities": {
+            "supported": 0.5,
+            "overreach": 0.38,
+            "unclear": 0.12
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "overreach",
+          "confidence": 0.18,
+          "probabilities": {
+            "supported": 0.45,
+            "overreach": 0.45,
+            "unclear": 0.1
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.92,
+          "probabilities": {
+            "overreach": 0.05,
+            "unclear": 0.0,
+            "supported": 0.95
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.97,
+          "probabilities": {
+            "supported": 0.98,
+            "overreach": 0.02,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.94,
+          "probabilities": {
+            "unclear": 0.01,
+            "supported": 0.96,
+            "overreach": 0.03
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.93,
+          "probabilities": {
+            "unclear": 0.0,
+            "supported": 0.96,
+            "overreach": 0.04
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.68,
+          "probabilities": {
+            "supported": 0.79,
+            "overreach": 0.21,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.68,
+          "probabilities": {
+            "unclear": 0.02,
+            "supported": 0.79,
+            "overreach": 0.19
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.79,
+          "probabilities": {
+            "unclear": 0.01,
+            "supported": 0.86,
+            "overreach": 0.13
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.9,
+          "probabilities": {
+            "overreach": 0.06,
+            "supported": 0.9400000000000001,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "confidence": 0.17,
+          "probabilities": {
+            "supported": 0.15,
+            "overreach": 0.4,
+            "unclear": 0.45
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.53,
+          "probabilities": {
+            "unclear": 0.06,
+            "overreach": 0.6799999999999999,
+            "supported": 0.26
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 3301,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 509,
+      "luna_seconds": 97.94,
+      "jev_seconds": 4.2,
+      "luna_est_usd": 0.0109,
+      "jev_est_usd": 0.001748
+    },
+    {
+      "run": 2,
+      "luna": {
+        "n": 12,
+        "exact": 9,
+        "collapsed": 9,
+        "exact_rate": 0.75,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "1/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "overreach": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 2,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 5,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 9,
+        "collapsed": 10,
+        "exact_rate": 0.75,
+        "collapsed_rate": 0.8333333333333334,
+        "overreach_recall": "0/2",
+        "false_overreach": 1,
+        "confusion": {
+          "supported": {
+            "supported": 9,
+            "overreach": 1
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt reports the stated study design, sample, countries, odds ratios, subgroup estimates, and association-only interpretation; cross-sectional design supports uncertainty about direction.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "overreach",
+          "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+          "note": "The 39.2% mediation estimate is supported, but the excerpt does not state that it depends on modelling assumptions.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers'...to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports the graded AF trend, the stated HR, \u226510-year CHD risk (HR 1.37), and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 women, 22\u201324 years of follow-up, the stated hazard ratio and confidence interval, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "overreach",
+          "quote": "and >8/month: OR 1.36 [95% CI 1.14\u20131.62]",
+          "note": "The association and OR are stated, but the excerpt does not identify the design as cross-sectional or establish the temporal-ordering limitation.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "Included in the meta-analyses were 57 eligible studies with 8,477,849 participants",
+          "note": "The excerpt reports 57 studies and millions of participants, with no overall association for ever-exposure to night-shift work and the five listed cancers.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "Compared to never exposure, pooled RRs were 1.05 ... for ever ... and 1.25 ... for \u226520 years",
+          "note": "The excerpt reports the same population, study count, case count, and pooled RRs; it also notes uncertainty around the \u226520-year association.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt explicitly reports these findings and that 60% were rated high risk of bias for exposure characterization.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+          "note": "The excerpt reports all stated study counts, effect sizes, depressive symptoms, and higher odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "Based on the limited, existing literature, we recommend that ... night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+          "note": "The excerpt identifies 15 researchers, calls the paper a consensus, recommends the stated limits, and explicitly notes the literature is limited.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "overreach",
+          "quote": "Short-term physiological effects ... were considered as possible links between night shift work and selected health and safety risks",
+          "note": "The excerpt describes limited literature and physiological reasoning but does not establish that no controlled interventions exist or that evidence is observational.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "supported",
+          "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+          "note": "The study used mediation and counterfactual analyses in one UK Biobank cohort; its call for further intervention studies supports the qualification.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.25,
+          "probabilities": {
+            "supported": 0.5,
+            "unclear": 0.11,
+            "overreach": 0.39
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "confidence": 0.17,
+          "probabilities": {
+            "unclear": 0.13,
+            "overreach": 0.43,
+            "supported": 0.44
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.94,
+          "probabilities": {
+            "supported": 0.96,
+            "overreach": 0.04,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.97,
+          "probabilities": {
+            "unclear": 0.0,
+            "supported": 0.98,
+            "overreach": 0.02
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.93,
+          "probabilities": {
+            "overreach": 0.04,
+            "unclear": 0.01,
+            "supported": 0.95
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.93,
+          "probabilities": {
+            "unclear": 0.0,
+            "overreach": 0.04,
+            "supported": 0.96
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.67,
+          "probabilities": {
+            "supported": 0.78,
+            "unclear": 0.0,
+            "overreach": 0.22
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.65,
+          "probabilities": {
+            "overreach": 0.2,
+            "supported": 0.77,
+            "unclear": 0.03
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.82,
+          "probabilities": {
+            "supported": 0.87,
+            "overreach": 0.12,
+            "unclear": 0.01
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.84,
+          "probabilities": {
+            "supported": 0.89,
+            "overreach": 0.1,
+            "unclear": 0.01
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "confidence": 0.14,
+          "probabilities": {
+            "overreach": 0.39,
+            "unclear": 0.43,
+            "supported": 0.18
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.35,
+          "probabilities": {
+            "supported": 0.36,
+            "overreach": 0.57,
+            "unclear": 0.07
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 2454,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 507,
+      "luna_seconds": 81.46,
+      "jev_seconds": 4.21,
+      "luna_est_usd": 0.0099,
+      "jev_est_usd": 0.001748
+    },
+    {
+      "run": 3,
+      "luna": {
+        "n": 12,
+        "exact": 8,
+        "collapsed": 9,
+        "exact_rate": 0.6666666666666666,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "0/2",
+        "false_overreach": 1,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "unclear": 1,
+            "overreach": 1
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 5,
+            "human": "supported",
+            "model": "unclear"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 8,
+        "collapsed": 9,
+        "exact_rate": 0.6666666666666666,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "0/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 2,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt reports the overall OR, rotating-shift and healthcare-professional estimates, and identifies all studies as cross-sectional, supporting uncertainty about direction.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+          "note": "The excerpt reports 39.2% mediation and describes counterfactual mediation analysis, supporting the modelling-assumptions qualifier.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers' ... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports a graded AF risk increase, the stated HRs for usual/permanent nights and \u226510 years of work, and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 women, 22\u201324 years of follow-up, the stated hazard ratio and confidence interval, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "unclear",
+          "quote": "working more night shifts per month was associated with higher type 2 diabetes odds",
+          "note": "The association and OR are stated, but the excerpt does not identify the data as cross-sectional or address temporal ordering.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "The pooled results showed that night-shift work was not associated with the risk of breast cancer (OR= 1.009, 95% CI=0.984-1.033), prostate cancer",
+          "note": "The excerpt reports 57 studies, 8,477,849 participants, and no association for each cancer named in the sentence.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "1.25 (95% CI 1.01-1.55, 7 studies, I2 = 59%) for \u226520 years of night shift work.",
+          "note": "The excerpt reports 12 studies, 12,132 cases, RR 1.05 for ever exposure, and RR 1.25 for \u226520 years.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt explicitly reports these fragility findings and states that 60% had high risk of bias in exposure characterization.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+          "note": "The excerpt reports all stated study counts, effect estimates, depressive symptoms, and higher odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "Based on the limited, existing literature, we recommend that ... night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+          "note": "The excerpt identifies 15 researchers, calls the paper a consensus, gives the three limits, and explicitly notes the literature is limited.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "quote": "Based on the limited, existing literature",
+          "note": "The excerpt mentions limited evidence and short-term physiological effects, but does not state whether randomized interventions or observational studies tested disease incidence.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+          "note": "The excerpt supports modelling in one prospective cohort and need for intervention studies, but does not establish that modelling was the only evidence available.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.36,
+          "probabilities": {
+            "overreach": 0.32,
+            "unclear": 0.11,
+            "supported": 0.57
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "overreach",
+          "confidence": 0.21,
+          "probabilities": {
+            "supported": 0.41,
+            "overreach": 0.47,
+            "unclear": 0.12
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.91,
+          "probabilities": {
+            "overreach": 0.06,
+            "supported": 0.94,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.98,
+          "probabilities": {
+            "unclear": 0.0,
+            "supported": 0.98,
+            "overreach": 0.02
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.91,
+          "probabilities": {
+            "overreach": 0.05,
+            "supported": 0.94,
+            "unclear": 0.01
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.94,
+          "probabilities": {
+            "supported": 0.96,
+            "overreach": 0.04,
+            "unclear": 0.0
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.77,
+          "probabilities": {
+            "supported": 0.85,
+            "overreach": 0.15,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.68,
+          "probabilities": {
+            "supported": 0.78,
+            "overreach": 0.19,
+            "unclear": 0.03
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.81,
+          "probabilities": {
+            "overreach": 0.12,
+            "supported": 0.87,
+            "unclear": 0.01
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.87,
+          "probabilities": {
+            "unclear": 0.0,
+            "overreach": 0.08,
+            "supported": 0.92
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "confidence": 0.21,
+          "probabilities": {
+            "supported": 0.15,
+            "overreach": 0.38,
+            "unclear": 0.47
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.56,
+          "probabilities": {
+            "supported": 0.23,
+            "unclear": 0.07,
+            "overreach": 0.7
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 2670,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 509,
+      "luna_seconds": 83.25,
+      "jev_seconds": 5.1,
+      "luna_est_usd": 0.0102,
+      "jev_est_usd": 0.001748
+    },
+    {
+      "run": 4,
+      "luna": {
+        "n": 12,
+        "exact": 9,
+        "collapsed": 10,
+        "exact_rate": 0.75,
+        "collapsed_rate": 0.8333333333333334,
+        "overreach_recall": "0/2",
+        "false_overreach": 1,
+        "confusion": {
+          "supported": {
+            "supported": 9,
+            "overreach": 1
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 8,
+        "collapsed": 9,
+        "exact_rate": 0.6666666666666666,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "0/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 2,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt reports the stated study design, sample, countries, odds ratios, subgroup estimates, and association-only interpretation consistent with uncertain directionality.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "quote": "LE8 explained 39.2% (95% CI = 29.3\u201350.0) of the association",
+          "note": "The excerpt reports the 39.2% mediation estimate and identifies counterfactual mediation and adjustment factors underlying the estimate.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers'... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports a graded AF risk increase, the stated HR, higher CHD risk after \u226510 years, and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 women, 22\u201324 years of follow-up, the 1.31 hazard ratio with its confidence interval, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (<3/month: OR 1.24; 3\u20138/month: OR 1.11; and >8/month: OR 1.36)",
+          "note": "The excerpt reports the >8/month OR 1.36 association and identifies prevalent cases, supporting the cross-sectional limitation that temporal ordering cannot be established.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "This systematic review of 57 observational studies did not find an overall association between ever-exposure to night-shift work",
+          "note": "The excerpt reports 57 studies, 8,477,849 participants, and no overall association for all five listed cancers.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "1.25 (95% CI 1.01\u20131.55, 7 studies, I2 = 59%) for \u226520 years",
+          "note": "The excerpt reports the stated pooled RRs and sample size for healthcare-worker studies; \u201cmodest excess\u201d accurately describes RR 1.25.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt states both the influence-analysis and publication-bias findings, and reports 60% had high risk of bias for exposure characterization.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES\u2009=\u20091.28; 95% confidence interval [CI]\u2009=\u20091.02, 1.62)",
+          "note": "The excerpt reports all stated associations, effect sizes, confidence intervals, seven longitudinal studies, and higher depressive-symptom odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "Based on the limited, existing literature, we recommend that ... night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+          "note": "The excerpt identifies 15 researchers, calls the paper a consensus, gives all three limits, and explicitly notes the literature is limited.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "quote": "Short-term physiological effects in terms of circadian disruption, inadequate sleep duration and quality, and fatigue were considered",
+          "note": "The excerpt supports reliance on short-term physiological evidence and limited literature, but does not establish that no randomized or controlled interventions tested disease incidence.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "quote": "We used Cox models to estimate associations and counterfactual mediation analysis to quantify the proportion mediated by LE8.",
+          "note": "The excerpt supports mediation and counterfactual estimates, but does not assess risk intrinsic to circadian misalignment or establish that prospective testing has not occurred.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.37,
+          "probabilities": {
+            "overreach": 0.32,
+            "supported": 0.58,
+            "unclear": 0.1
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "overreach",
+          "confidence": 0.18,
+          "probabilities": {
+            "overreach": 0.46,
+            "unclear": 0.11,
+            "supported": 0.43
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.91,
+          "probabilities": {
+            "supported": 0.94,
+            "overreach": 0.06,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.97,
+          "probabilities": {
+            "overreach": 0.02,
+            "unclear": 0.0,
+            "supported": 0.98
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.9,
+          "probabilities": {
+            "supported": 0.93,
+            "overreach": 0.05,
+            "unclear": 0.02
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.95,
+          "probabilities": {
+            "overreach": 0.03,
+            "supported": 0.97,
+            "unclear": 0.0
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.57,
+          "probabilities": {
+            "overreach": 0.28,
+            "unclear": 0.01,
+            "supported": 0.71
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.61,
+          "probabilities": {
+            "overreach": 0.22,
+            "unclear": 0.04,
+            "supported": 0.74
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.83,
+          "probabilities": {
+            "supported": 0.89,
+            "overreach": 0.1,
+            "unclear": 0.01
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.89,
+          "probabilities": {
+            "unclear": 0.0,
+            "supported": 0.93,
+            "overreach": 0.07
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "confidence": 0.16,
+          "probabilities": {
+            "overreach": 0.39,
+            "unclear": 0.44,
+            "supported": 0.17
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.4,
+          "probabilities": {
+            "overreach": 0.6,
+            "supported": 0.32,
+            "unclear": 0.08
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 2439,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 509,
+      "luna_seconds": 82.51,
+      "jev_seconds": 4.56,
+      "luna_est_usd": 0.0099,
+      "jev_est_usd": 0.001748
+    },
+    {
+      "run": 5,
+      "luna": {
+        "n": 12,
+        "exact": 9,
+        "collapsed": 9,
+        "exact_rate": 0.75,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "1/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "overreach": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 5,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 9,
+        "collapsed": 10,
+        "exact_rate": 0.75,
+        "collapsed_rate": 0.8333333333333334,
+        "overreach_recall": "0/2",
+        "false_overreach": 1,
+        "confusion": {
+          "supported": {
+            "supported": 9,
+            "overreach": 1
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt reports the stated study design, sample, countries, odds ratios, subgroup estimates, and association\u2014not causation. The cross-sectional design supports uncertainty about direction.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+          "note": "The excerpt reports the approximately 39% mediation estimate and identifies model-based Cox and counterfactual mediation analyses.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers' ... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports a graded AF risk increase, the stated HRs for usual/permanent nights and \u226510 years of night work, and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 women, 22\u201324 years of follow-up, the stated hazard ratio and confidence interval, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "overreach",
+          "quote": "working more night shifts per month was associated with higher type 2 diabetes odds",
+          "note": "The excerpt supports the association and OR, but does not explicitly identify the data as cross-sectional or state that temporal ordering cannot be established.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "The pooled results showed that night-shift work was not associated with the risk of breast cancer, prostate cancer, ovarian cancer",
+          "note": "The excerpt reports 57 studies and 8,477,849 participants, with no overall association for the listed cancers.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "Compared to never exposure, pooled RRs were 1.05 ... for ever ... and 1.25 (95% CI 1.01-1.55 ... ) for \u226520 years",
+          "note": "The excerpt reports 12 studies, 12,132 cases, RR 1.05 for ever exposure, and RR 1.25 (95% CI 1.01\u20131.55) for \u226520 years.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt directly reports both the estimate\u2019s fragility indicators and that 60% were high risk of bias in exposure characterization.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+          "note": "The excerpt reports all stated study counts, effect sizes, depressive symptoms, and higher odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "15 experienced shift work researchers participated in a workshop",
+          "note": "The excerpt identifies 15 researchers, calls the work a discussion paper, states the literature is limited, and gives all three schedule recommendations.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "overreach",
+          "quote": "Knowledge gaps and possible recommendations were discussed based on the current evidence.",
+          "note": "The excerpt supports limited evidence and recommendations based on physiological and literature evidence, but does not state that no randomized or controlled intervention tested disease incidence.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+          "note": "The study used prospective observational modelling, but does not assess intrinsic circadian misalignment or establish that modelling is the only prior evidence.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.32,
+          "probabilities": {
+            "overreach": 0.35,
+            "unclear": 0.1,
+            "supported": 0.55
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "confidence": 0.16,
+          "probabilities": {
+            "unclear": 0.12,
+            "overreach": 0.44,
+            "supported": 0.44
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.89,
+          "probabilities": {
+            "supported": 0.93,
+            "overreach": 0.07,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.97,
+          "probabilities": {
+            "overreach": 0.02,
+            "unclear": 0.0,
+            "supported": 0.98
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.92,
+          "probabilities": {
+            "overreach": 0.04,
+            "supported": 0.95,
+            "unclear": 0.01
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.95,
+          "probabilities": {
+            "overreach": 0.03,
+            "supported": 0.97,
+            "unclear": 0.0
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.67,
+          "probabilities": {
+            "overreach": 0.21,
+            "unclear": 0.0,
+            "supported": 0.79
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.66,
+          "probabilities": {
+            "unclear": 0.02,
+            "supported": 0.78,
+            "overreach": 0.2
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.83,
+          "probabilities": {
+            "unclear": 0.01,
+            "supported": 0.88,
+            "overreach": 0.11
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.89,
+          "probabilities": {
+            "unclear": 0.0,
+            "overreach": 0.07,
+            "supported": 0.93
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "confidence": 0.13,
+          "probabilities": {
+            "unclear": 0.42,
+            "supported": 0.19,
+            "overreach": 0.39
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.39,
+          "probabilities": {
+            "unclear": 0.08,
+            "supported": 0.32,
+            "overreach": 0.6
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 2698,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 507,
+      "luna_seconds": 88.01,
+      "jev_seconds": 4.17,
+      "luna_est_usd": 0.0102,
+      "jev_est_usd": 0.001748
+    },
+    {
+      "run": 6,
+      "luna": {
+        "n": 12,
+        "exact": 10,
+        "collapsed": 11,
+        "exact_rate": 0.8333333333333334,
+        "collapsed_rate": 0.9166666666666666,
+        "overreach_recall": "0/2",
+        "false_overreach": 0,
+        "confusion": {
+          "supported": {
+            "supported": 10
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 8,
+        "collapsed": 9,
+        "exact_rate": 0.6666666666666666,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "0/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 2,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt reports the stated study design, sample, countries, odds ratios, subgroup estimates, and association-based interpretation; cross-sectional studies do not establish directionality.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+          "note": "The excerpt reports 39.2% mediation for CVD; the estimate is model-based and adjusted for specified covariates.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers' ... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports a graded AF risk increase, the cited HR, higher CHD risk after \u226510 years, and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 female participants, 22\u201324 years of follow-up, the stated hazard ratio and confidence interval, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "quote": "working more night shifts per month was associated with higher type 2 diabetes odds (>8/month: OR 1.36 [95% CI 1.14\u20131.62])",
+          "note": "The excerpt reports the stated association and uses prevalent cases and odds, supporting the cautious cross-sectional interpretation without claiming causation.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "The pooled results showed that night-shift work was not associated with the risk of breast cancer",
+          "note": "The excerpt reports 57 studies, 8,477,849 participants, and no overall association for each listed cancer.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "Compared to never exposure, pooled RRs were 1.05 (95% confidence interval [CI] 0.96-1.14, 12 studies",
+          "note": "The excerpt reports the ever-exposure RR and separately gives RR 1.25 (95% CI 1.01-1.55) for \u226520 years in 7 studies.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt states both the estimate\u2019s instability and that 60% had high risk of bias in exposure characterization.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+          "note": "The excerpt reports all stated study counts, effect sizes, depressive symptoms, and higher odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "15 experienced shift work researchers participated in a workshop",
+          "note": "The excerpt identifies 15 researchers, calls the paper a consensus discussion paper, recommends all three limits, and explicitly says the literature is limited.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "quote": "Based on the limited, existing literature",
+          "note": "The excerpt emphasizes limited evidence and short-term physiological effects, but does not establish that no controlled interventions exist or that evidence was observational.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "supported",
+          "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+          "note": "The study used mediation and counterfactual modelling in one prospective cohort, while prospective lifestyle interventions remain unevaluated.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.4,
+          "probabilities": {
+            "overreach": 0.31,
+            "supported": 0.6,
+            "unclear": 0.09
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "overreach",
+          "confidence": 0.19,
+          "probabilities": {
+            "supported": 0.45,
+            "overreach": 0.46,
+            "unclear": 0.09
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.91,
+          "probabilities": {
+            "overreach": 0.06,
+            "supported": 0.94,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.97,
+          "probabilities": {
+            "overreach": 0.02,
+            "unclear": 0.0,
+            "supported": 0.98
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.91,
+          "probabilities": {
+            "supported": 0.94,
+            "overreach": 0.04,
+            "unclear": 0.02
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.94,
+          "probabilities": {
+            "supported": 0.96,
+            "overreach": 0.04,
+            "unclear": 0.0
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.67,
+          "probabilities": {
+            "supported": 0.79,
+            "overreach": 0.21,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.6,
+          "probabilities": {
+            "overreach": 0.24,
+            "unclear": 0.03,
+            "supported": 0.73
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.86,
+          "probabilities": {
+            "supported": 0.9,
+            "overreach": 0.09,
+            "unclear": 0.01
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.88,
+          "probabilities": {
+            "supported": 0.92,
+            "overreach": 0.08,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "confidence": 0.16,
+          "probabilities": {
+            "overreach": 0.37,
+            "supported": 0.19,
+            "unclear": 0.44
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.28,
+          "probabilities": {
+            "overreach": 0.52,
+            "unclear": 0.07,
+            "supported": 0.41
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 3119,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 509,
+      "luna_seconds": 94.37,
+      "jev_seconds": 4.66,
+      "luna_est_usd": 0.0107,
+      "jev_est_usd": 0.001748
+    },
+    {
+      "run": 7,
+      "luna": {
+        "n": 12,
+        "exact": 10,
+        "collapsed": 10,
+        "exact_rate": 0.8333333333333334,
+        "collapsed_rate": 0.8333333333333334,
+        "overreach_recall": "1/2",
+        "false_overreach": 1,
+        "confusion": {
+          "supported": {
+            "supported": 9,
+            "overreach": 1
+          },
+          "overreach": {
+            "supported": 1,
+            "overreach": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 9,
+        "collapsed": 9,
+        "exact_rate": 0.75,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "1/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "overreach": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 2,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt reports the overall OR, rotating-shift and healthcare-professional estimates, and identifies all studies as cross-sectional, supporting uncertainty about direction.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+          "note": "The excerpt reports approximately 39% mediation for incident CVD and describes adjusted Cox and counterfactual mediation modelling.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers' ... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports a graded AF risk increase, the stated HRs for usual/permanent nights and \u226510 years of work, and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 women, 22\u201324 years of follow-up, the stated hazard ratio and CI, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "quote": "working more night shifts per month was associated with higher type 2 diabetes odds",
+          "note": "The excerpt reports prevalent diabetes and associations, supporting the odds claim and the caution that temporal ordering cannot be established.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "This systematic review of 57 observational studies did not find an overall association between ever-exposure to night-shift work",
+          "note": "The excerpt reports 57 studies, 8.48 million participants, and no overall association for all five named cancers.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "Compared to never exposure, pooled RRs were 1.05",
+          "note": "The excerpt reports 12 studies and 12,132 cases, RR 1.05 for ever exposure, and RR 1.25 (95% CI 1.01\u20131.55) for \u226520 years.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt reports both the estimate\u2019s instability and that 60% had high exposure-characterization risk of bias, supporting the cautious conclusion that it may be fragile.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+          "note": "The excerpt reports all stated study findings, including depressive symptoms and higher odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "15 experienced shift work researchers participated in a workshop",
+          "note": "The excerpt reports 15 researchers, calls the work consensus-based, recommends all three limits, and explicitly says the literature is limited.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "overreach",
+          "quote": "Based on the limited, existing literature",
+          "note": "The excerpt supports limited evidence and short-term physiological considerations, but does not establish that no controlled interventions tested disease incidence or that evidence was observational.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+          "note": "The excerpt reports modelling in one prospective cohort, but does not establish that this is the only evidence or address intrinsic circadian misalignment.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.39,
+          "probabilities": {
+            "unclear": 0.12,
+            "overreach": 0.29,
+            "supported": 0.59
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "overreach",
+          "confidence": 0.24,
+          "probabilities": {
+            "unclear": 0.09,
+            "overreach": 0.49,
+            "supported": 0.42
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.92,
+          "probabilities": {
+            "unclear": 0.0,
+            "supported": 0.95,
+            "overreach": 0.05
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.98,
+          "probabilities": {
+            "supported": 0.99,
+            "overreach": 0.01,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.93,
+          "probabilities": {
+            "unclear": 0.01,
+            "supported": 0.96,
+            "overreach": 0.03
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.94,
+          "probabilities": {
+            "unclear": 0.0,
+            "supported": 0.96,
+            "overreach": 0.04
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.77,
+          "probabilities": {
+            "unclear": 0.0,
+            "supported": 0.85,
+            "overreach": 0.15
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.69,
+          "probabilities": {
+            "supported": 0.79,
+            "overreach": 0.18,
+            "unclear": 0.03
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.81,
+          "probabilities": {
+            "supported": 0.87,
+            "unclear": 0.01,
+            "overreach": 0.12
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.88,
+          "probabilities": {
+            "supported": 0.92,
+            "overreach": 0.08,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "overreach",
+          "confidence": 0.13,
+          "probabilities": {
+            "overreach": 0.42,
+            "unclear": 0.41,
+            "supported": 0.17
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.36,
+          "probabilities": {
+            "overreach": 0.58,
+            "supported": 0.34,
+            "unclear": 0.08
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 2823,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 510,
+      "luna_seconds": 85.49,
+      "jev_seconds": 4.41,
+      "luna_est_usd": 0.0103,
+      "jev_est_usd": 0.001748
+    },
+    {
+      "run": 8,
+      "luna": {
+        "n": 12,
+        "exact": 11,
+        "collapsed": 11,
+        "exact_rate": 0.9166666666666666,
+        "collapsed_rate": 0.9166666666666666,
+        "overreach_recall": "1/2",
+        "false_overreach": 0,
+        "confusion": {
+          "supported": {
+            "supported": 10
+          },
+          "overreach": {
+            "supported": 1,
+            "overreach": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 9,
+        "collapsed": 10,
+        "exact_rate": 0.75,
+        "collapsed_rate": 0.8333333333333334,
+        "overreach_recall": "0/2",
+        "false_overreach": 1,
+        "confusion": {
+          "supported": {
+            "supported": 9,
+            "overreach": 1
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt reports the stated sample, odds ratios, subgroup estimates, and cross-sectional design; the association wording appropriately preserves uncertainty about direction.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+          "note": "The excerpt reports 39.2% mediation for the CVD association; the modelling-qualification wording is appropriately cautious.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers'...to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports the graded AF trend, the stated HR, CHD HR for \u226510 years, and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 female participants, 22\u201324 years of follow-up, the 1.31 hazard ratio with its confidence interval, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "quote": "working more night shifts per month was associated with higher type 2 diabetes odds",
+          "note": "The excerpt reports the >8/month association and OR 1.36; describing it as suggestive and noting temporal limits is consistent with prevalent observational data.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "The pooled results showed that night-shift work was not associated with the risk of breast cancer",
+          "note": "The excerpt reports 57 studies, 8.48 million participants, and no overall association for each listed cancer, including prostate, ovarian, colorectal, and stomach.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "Compared to never exposure, pooled RRs were 1.05 ... for ever, and ... 1.25 ... for \u226520 years",
+          "note": "The excerpt reports these exact pooled estimates among 12 studies including 12,132 breast cancer cases; it also supplies the stated confidence interval.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt also reports that 60% were high risk of bias in exposure characterization, supporting the estimate\u2019s potential fragility.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+          "note": "The excerpt reports all stated study counts, effect estimates, depressive symptoms, and higher odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "Based on the limited, existing literature, we recommend that ... night shift schedules have: (i) \u22643 consecutive night shifts; (ii) shift intervals of \u226511 hours; and (iii) \u22649 hours shift duration.",
+          "note": "The excerpt identifies 15 researchers, calls the paper a consensus, gives all three limits, and explicitly acknowledges the literature is limited.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "overreach",
+          "quote": "Knowledge gaps and possible recommendations were discussed based on the current evidence.",
+          "note": "The excerpt supports limited evidence and physiological/observational-style recommendations, but does not state that no randomized or controlled intervention tested disease incidence.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "supported",
+          "quote": "Further studies are needed to evaluate integrated lifestyle interventions in night shift workers.",
+          "note": "The study estimated mediation and counterfactual preventability within one cohort, while explicitly calling for future intervention studies.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.24,
+          "probabilities": {
+            "overreach": 0.41,
+            "unclear": 0.09,
+            "supported": 0.5
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "confidence": 0.2,
+          "probabilities": {
+            "unclear": 0.12,
+            "supported": 0.47,
+            "overreach": 0.41
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.94,
+          "probabilities": {
+            "supported": 0.96,
+            "unclear": 0.0,
+            "overreach": 0.04
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.97,
+          "probabilities": {
+            "unclear": 0.0,
+            "overreach": 0.02,
+            "supported": 0.98
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.93,
+          "probabilities": {
+            "overreach": 0.04,
+            "unclear": 0.01,
+            "supported": 0.95
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.94,
+          "probabilities": {
+            "supported": 0.96,
+            "overreach": 0.04,
+            "unclear": 0.0
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.73,
+          "probabilities": {
+            "overreach": 0.17,
+            "supported": 0.83,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.66,
+          "probabilities": {
+            "unclear": 0.03,
+            "supported": 0.77,
+            "overreach": 0.2
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.82,
+          "probabilities": {
+            "unclear": 0.01,
+            "supported": 0.88,
+            "overreach": 0.11
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.89,
+          "probabilities": {
+            "supported": 0.93,
+            "overreach": 0.07,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "confidence": 0.15,
+          "probabilities": {
+            "unclear": 0.44,
+            "overreach": 0.38,
+            "supported": 0.18
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.42,
+          "probabilities": {
+            "supported": 0.32,
+            "overreach": 0.61,
+            "unclear": 0.07
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 2642,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 507,
+      "luna_seconds": 86.43,
+      "jev_seconds": 4.58,
+      "luna_est_usd": 0.0101,
+      "jev_est_usd": 0.001748
+    },
+    {
+      "run": 9,
+      "luna": {
+        "n": 12,
+        "exact": 8,
+        "collapsed": 9,
+        "exact_rate": 0.6666666666666666,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "0/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 5,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 8,
+        "collapsed": 9,
+        "exact_rate": 0.6666666666666666,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "0/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 2,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt directly reports the sample, odds ratios, subgroup estimates, and cross-sectional design; the design supports uncertainty about direction.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "quote": "LE8 explained 39.2% (95% CI = 29.3\u201350.0) of the association for usual or permanent night shift work",
+          "note": "The excerpt reports the ~39% mediation estimate and identifies model-based Cox and counterfactual mediation analyses with specified adjustments.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers'... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports the graded AF trend, the cited HR, higher CHD risk after \u226510 years, and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 female nurses, 22\u201324 years of follow-up, the 1.31 hazard ratio per five-year increment, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "overreach",
+          "quote": "working more night shifts per month was associated with higher type 2 diabetes odds",
+          "note": "The association and OR 1.36 are supported, but the excerpt does not explicitly establish a cross-sectional design or its temporal-ordering limitation.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "This systematic review of 57 observational studies did not find an overall association between ever-exposure to night-shift work",
+          "note": "The excerpt reports 57 studies, 8.48 million participants, and no overall association for each listed cancer.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "Compared to never exposure, pooled RRs were 1.05 ... for ever, and ... 1.25 ... for \u226520 years",
+          "note": "The excerpt reports the same 12-study, 12,132-case meta-analysis and pooled estimates for ever and \u226520-year exposure.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt reports both instability checks and 60% high exposure-assessment risk of bias, supporting the cautious inference that the estimate may be fragile.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES = 1.28; 95% CI = 1.02, 1.62)",
+          "note": "The excerpt reports all stated study counts, effect sizes, depressive symptoms, and higher odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "15 experienced shift work researchers participated in a workshop",
+          "note": "The excerpt describes a 15-researcher discussion paper, states the literature is limited, and explicitly recommends all three schedule limits.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "quote": "Based on the limited, existing literature",
+          "note": "The excerpt indicates limited evidence and considers short-term physiological effects, but does not establish that no randomized or controlled interventions assessed disease incidence.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "quote": "We used Cox models to estimate associations and counterfactual mediation analysis to quantify the proportion mediated by LE8.",
+          "note": "The excerpt supports modelling within one cohort, but does not establish that this is the only evidence or address intrinsic circadian misalignment.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.34,
+          "probabilities": {
+            "overreach": 0.33,
+            "supported": 0.56,
+            "unclear": 0.11
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "overreach",
+          "confidence": 0.17,
+          "probabilities": {
+            "overreach": 0.45,
+            "supported": 0.39,
+            "unclear": 0.16
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.92,
+          "probabilities": {
+            "supported": 0.95,
+            "overreach": 0.05,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.97,
+          "probabilities": {
+            "overreach": 0.02,
+            "supported": 0.98,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.92,
+          "probabilities": {
+            "overreach": 0.04,
+            "supported": 0.95,
+            "unclear": 0.01
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.94,
+          "probabilities": {
+            "unclear": 0.0,
+            "overreach": 0.04,
+            "supported": 0.96
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.65,
+          "probabilities": {
+            "unclear": 0.0,
+            "supported": 0.77,
+            "overreach": 0.23
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.69,
+          "probabilities": {
+            "supported": 0.8,
+            "overreach": 0.18,
+            "unclear": 0.02
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.81,
+          "probabilities": {
+            "supported": 0.87,
+            "overreach": 0.12,
+            "unclear": 0.01
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.86,
+          "probabilities": {
+            "unclear": 0.0,
+            "supported": 0.91,
+            "overreach": 0.09
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "confidence": 0.12,
+          "probabilities": {
+            "unclear": 0.42,
+            "supported": 0.2,
+            "overreach": 0.38
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.48,
+          "probabilities": {
+            "overreach": 0.66,
+            "supported": 0.28,
+            "unclear": 0.06
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 2912,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 509,
+      "luna_seconds": 88.88,
+      "jev_seconds": 4.48,
+      "luna_est_usd": 0.0105,
+      "jev_est_usd": 0.001748
+    },
+    {
+      "run": 10,
+      "luna": {
+        "n": 12,
+        "exact": 9,
+        "collapsed": 10,
+        "exact_rate": 0.75,
+        "collapsed_rate": 0.8333333333333334,
+        "overreach_recall": "0/2",
+        "false_overreach": 1,
+        "confusion": {
+          "supported": {
+            "supported": 9,
+            "overreach": 1
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "jev": {
+        "n": 12,
+        "exact": 8,
+        "collapsed": 9,
+        "exact_rate": 0.6666666666666666,
+        "collapsed_rate": 0.75,
+        "overreach_recall": "0/2",
+        "false_overreach": 2,
+        "confusion": {
+          "supported": {
+            "supported": 8,
+            "overreach": 2
+          },
+          "overreach": {
+            "supported": 1,
+            "unclear": 1
+          }
+        },
+        "disagreements": [
+          {
+            "id": 2,
+            "human": "supported",
+            "model": "overreach"
+          },
+          {
+            "id": 3,
+            "human": "overreach",
+            "model": "supported"
+          },
+          {
+            "id": 11,
+            "human": "overreach",
+            "model": "unclear"
+          },
+          {
+            "id": 12,
+            "human": "supported",
+            "model": "overreach"
+          }
+        ]
+      },
+      "luna_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "quote": "Twenty-two cross-sectional studies involving 21,677 participants from eight countries contributed 24 estimates.",
+          "note": "The excerpt reports the stated overall, rotating-shift, and healthcare-professional odds ratios; the cross-sectional design supports uncertainty about direction.",
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "supported",
+          "quote": "LE8 explained 39.2% (95% CI\u2009=\u200929.3\u201350.0) of the association for usual or permanent night shift work.",
+          "note": "The excerpt reports 39.2% mediation and uses counterfactual mediation analysis, supporting the estimate and its dependence on modelling assumptions.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "quote": "From 'day workers'... to 'usual/permanent night shifts', there was a significant increasing trend in the risk of incident AF",
+          "note": "The excerpt reports the graded AF trend, the stated HRs, higher CHD risk after \u226510 years, and no modification by genetic predisposition.",
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "quote": "During 22-24 years of follow-up, 10 915 cases of incident type 2 diabetes occurred.",
+          "note": "The excerpt reports 143,410 women, 22\u201324 years of follow-up, the stated hazard ratio and confidence interval, and significant additive interaction.",
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "quote": "working more night shifts per month was associated with higher type 2 diabetes odds",
+          "note": "The excerpt reports the >8/month OR 1.36 association and prevalent-case data, which do not establish temporal ordering or causation.",
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "quote": "Included in the meta-analyses were 57 eligible studies with 8,477,849 participants",
+          "note": "The excerpt reports 57 studies and no overall association between ever-exposure to night-shift work and the five listed cancers.",
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "quote": "Compared to never exposure, pooled RRs were 1.05 ... for ever, and ... 1.25 ... for \u226520 years",
+          "note": "The excerpt reports these exact pooled estimates, study count, case count, and healthcare-worker population.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "quote": "The RR for \u226520 years of exposure lost statistical significance in influence analysis and approached unity after correction for possible publication bias.",
+          "note": "The excerpt also reports 60% high risk of bias for exposure characterization; calling the estimate potentially fragile is a cautious synthesis.",
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "quote": "We included 7 longitudinal studies... Shift work was associated with increased overall risk of adverse mental health outcomes combined (ES\u2009=\u20091.28; 95% confidence interval [CI]\u2009=\u20091.02, 1.62)",
+          "note": "The excerpt reports all stated study counts, effect sizes, depressive symptoms, and higher odds among female shift workers.",
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "quote": "15 experienced shift work researchers participated in a workshop",
+          "note": "The excerpt identifies 15 researchers, calls the work a consensus discussion paper, gives all three schedule limits, and explicitly describes the literature as limited.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "quote": "Based on the limited, existing literature",
+          "note": "The excerpt indicates limited evidence and considers short-term physiology, but does not establish that no controlled interventions tested disease incidence or that evidence was observational.",
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "quote": "We used Cox models to estimate associations and counterfactual mediation analysis to quantify the proportion mediated by LE8.",
+          "note": "The excerpt supports modelling in a prospective cohort, but does not establish that this was the only evidence or address intrinsic circadian misalignment.",
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "jev_results": [
+        {
+          "id": 1,
+          "verdict": "supported",
+          "confidence": 0.23,
+          "probabilities": {
+            "supported": 0.48,
+            "unclear": 0.11,
+            "overreach": 0.41
+          },
+          "truncated": true,
+          "excerpt_chars": 14529
+        },
+        {
+          "id": 2,
+          "verdict": "overreach",
+          "confidence": 0.17,
+          "probabilities": {
+            "supported": 0.44,
+            "overreach": 0.45,
+            "unclear": 0.11
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        },
+        {
+          "id": 3,
+          "verdict": "supported",
+          "confidence": 0.95,
+          "probabilities": {
+            "overreach": 0.03,
+            "unclear": 0.0,
+            "supported": 0.97
+          },
+          "truncated": false,
+          "excerpt_chars": 2445
+        },
+        {
+          "id": 4,
+          "verdict": "supported",
+          "confidence": 0.97,
+          "probabilities": {
+            "overreach": 0.02,
+            "supported": 0.98,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 2706
+        },
+        {
+          "id": 5,
+          "verdict": "supported",
+          "confidence": 0.92,
+          "probabilities": {
+            "unclear": 0.02,
+            "supported": 0.94,
+            "overreach": 0.04
+          },
+          "truncated": false,
+          "excerpt_chars": 1994
+        },
+        {
+          "id": 6,
+          "verdict": "supported",
+          "confidence": 0.93,
+          "probabilities": {
+            "overreach": 0.05,
+            "unclear": 0.0,
+            "supported": 0.95
+          },
+          "truncated": true,
+          "excerpt_chars": 14353
+        },
+        {
+          "id": 7,
+          "verdict": "supported",
+          "confidence": 0.79,
+          "probabilities": {
+            "unclear": 0.0,
+            "overreach": 0.14,
+            "supported": 0.86
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 8,
+          "verdict": "supported",
+          "confidence": 0.73,
+          "probabilities": {
+            "overreach": 0.16,
+            "supported": 0.82,
+            "unclear": 0.02
+          },
+          "truncated": false,
+          "excerpt_chars": 13617
+        },
+        {
+          "id": 9,
+          "verdict": "supported",
+          "confidence": 0.82,
+          "probabilities": {
+            "unclear": 0.01,
+            "supported": 0.88,
+            "overreach": 0.11
+          },
+          "truncated": true,
+          "excerpt_chars": 14680
+        },
+        {
+          "id": 10,
+          "verdict": "supported",
+          "confidence": 0.89,
+          "probabilities": {
+            "overreach": 0.07,
+            "supported": 0.93,
+            "unclear": 0.0
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 11,
+          "verdict": "unclear",
+          "confidence": 0.14,
+          "probabilities": {
+            "overreach": 0.41,
+            "supported": 0.16,
+            "unclear": 0.43
+          },
+          "truncated": false,
+          "excerpt_chars": 1840
+        },
+        {
+          "id": 12,
+          "verdict": "overreach",
+          "confidence": 0.44,
+          "probabilities": {
+            "unclear": 0.07,
+            "overreach": 0.63,
+            "supported": 0.3
+          },
+          "truncated": true,
+          "excerpt_chars": 14341
+        }
+      ],
+      "luna_tokens_in": 34806,
+      "luna_tokens_out": 2831,
+      "jev_tokens_in": 41626,
+      "jev_tokens_out": 509,
+      "luna_seconds": 90.93,
+      "jev_seconds": 4.22,
+      "luna_est_usd": 0.0104,
+      "jev_est_usd": 0.001748
+    }
+  ],
+  "updated": "2026-09-17T01:56:36.544372+00:00"
+}
