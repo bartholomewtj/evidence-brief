@@ -39,3 +39,7 @@ adws/adw_data/sssf.db*
 /STATE.md
 /NEXT-SESSION.md
 /ROADMAP.md
+
+# Frozen eval pools and judged runs for tools/brief_eval.py. Local only: the
+# pools hold full-text excerpts, and the runs are large.
+/evals/
