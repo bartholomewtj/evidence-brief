@@ -10678,6 +10678,81 @@ def test_figures_survive_typography() -> None:
     check("a figure absent from every source still flags", "27.5%" in v["unverified"])
 
 
+def test_jev_is_off_by_default() -> None:
+    """Jev is an opt-in: nothing calls TypeSafe unless asked, and a request
+    without the key or SDK degrades to the LLM path instead of failing."""
+    import inspect
+    from articlegen import jev, pipeline
+
+    saved = os.environ.pop("ARTICLEGEN_JEV", None)
+    try:
+        check("no env, no features", jev.features() == frozenset())
+        check("explicit list is parsed", jev.features("prescreen, trim") == {"prescreen", "trim"})
+        check("unknown names are dropped", jev.features(["trim", "writer"]) == {"trim"})
+        os.environ["ARTICLEGEN_JEV"] = "prescreen"
+        check("env enables", jev.features() == {"prescreen"})
+        check("explicit empty overrides env", jev.features("") == frozenset())
+    finally:
+        os.environ.pop("ARTICLEGEN_JEV", None)
+        if saved is not None:
+            os.environ["ARTICLEGEN_JEV"] = saved
+    key = os.environ.pop("TYPESAFE_API_KEY", None)
+    try:
+        check("no key is reported, not raised", "TYPESAFE_API_KEY" in jev.unavailable_reason())
+    finally:
+        if key is not None:
+            os.environ["TYPESAFE_API_KEY"] = key
+    src = inspect.getsource(pipeline.generate_draft)
+    check("generate_draft takes jev=", "jev: list[str] | str | None = None" in src)
+    check("an unavailable Jev degrades with a log line", "running without it" in src)
+    head = inspect.getsource(jev).split("def unavailable_reason")[0]
+    check("articlegen.jev imports no TypeSafe at module level", "typesafe_sdk" not in head
+          .replace("typesafe-sdk", ""))
+
+
+def test_jev_prescreen_keeps_the_curation_contract() -> None:
+    """Confident tangentials skip the LLM; everything else keeps the curator's
+    label at its original SOURCE number."""
+    from articlegen import jev
+    from articlegen.sources import Paper
+
+    papers = [Paper(title=f"P{i}", abstract="a") for i in range(1, 6)]
+    judgments = {1: {"on_subject": 0.9, "answer_evidence": 0.8},
+                 2: {"on_subject": 0.05, "answer_evidence": 0.0},
+                 3: {"on_subject": 0.6, "answer_evidence": 0.05},
+                 4: {"on_subject": 0.1, "answer_evidence": 0.0},
+                 5: {"on_subject": 0.11, "answer_evidence": 0.7}}
+    seen = []
+
+    def curate(subset):
+        seen.append([p.title for p in subset])
+        return {"relevance": {1: "direct", 2: "related", 3: "tangential"},
+                "most_relevant_index": 3, "counts": {}}
+
+    cur, n = jev.prescreen_curate(papers, judgments, curate, log=lambda m: None)
+    check("only the rest reach the curator", seen == [["P1", "P3", "P5"]])
+    check("prescreened count", n == 2)
+    check("labels land on original numbers",
+          cur["relevance"] == {1: "direct", 2: "tangential", 3: "related", 4: "tangential", 5: "tangential"})
+    check("most relevant index maps back", cur["most_relevant_index"] == 5)
+    check("counts are recomputed", cur["counts"] == {"direct": 1, "related": 1, "tangential": 3})
+
+    failed = jev.prescreen_curate(papers, judgments,
+                                  lambda subset: {"relevance": {}, "error": "boom"}, log=lambda m: None)
+    check("a curator failure passes through for the stop", failed[0].get("error") == "boom" and failed[1] == 0)
+    everything_off = {i: {"on_subject": 0.0, "answer_evidence": 0.0} for i in range(1, 6)}
+    calls = []
+    jev.prescreen_curate(papers, everything_off,
+                         lambda subset: calls.append(len(subset)) or {"relevance": {1: "direct"}},
+                         log=lambda m: None)
+    check("all-off-topic goes to the LLM whole, not shortcut", calls == [5])
+
+    hidden = jev.hidden_related({1: "direct", 3: "related", 5: "related", 2: "tangential"},
+                                {1: {"answer_evidence": 0.0}, 3: {"answer_evidence": 0.05},
+                                 5: {"answer_evidence": 0.7}, 2: {"answer_evidence": 0.0}})
+    check("trim hides only related below the threshold, never direct", hidden == [3])
+
+
 def test_writer_and_revisions_see_the_same_sources() -> None:
     """The writer's omissions hold for every revision of its draft.
 
@@ -10725,12 +10800,54 @@ def test_writer_and_revisions_see_the_same_sources() -> None:
           "Title 3" not in prompt and "Title 5" not in prompt)
 
 
+def test_methods_names_jev_when_it_ran() -> None:
+    from articlegen.render import _methods_paragraphs
+
+    base = {"queries": ["q"], "databases": ["OpenAlex"], "model": "m", "date": "1 Nov 2026"}
+    off = _methods_paragraphs(base, 40, 8, "Does X work?")["search"]
+    check("no Jev, no Jev sentence", "classification model" not in off)
+    on = _methods_paragraphs(dict(base, jev={"model": "jev-1.14.0", "prescreened": 12, "hidden": 3}),
+                             40, 8, "Does X work?")["search"]
+    check("pre-screen is stated with its model",
+          "classification model (jev-1.14.0) set aside 12 records" in on)
+    check("trim is stated", "3 related records that model judged to report no results" in on)
+    only_trim = _methods_paragraphs(dict(base, jev={"model": "jev-1.14.0", "prescreened": 0, "hidden": 1}),
+                                    40, 8, "Does X work?")["search"]
+    check("trim alone names the model", "a classification model (jev-1.14.0) judged" in only_trim
+          and "1 related record that" in only_trim and "was kept out" in only_trim)
+
+
+def test_jev_passage_cut_is_ordered_and_bounded() -> None:
+    """The passage cut keeps the best passages inside the budget, in document
+    order, and Methods says the cut text is what the check read."""
+    from articlegen import jev
+    from articlegen.render import _methods_paragraphs
+
+    text = "## Results\n\n" + "\n\n".join(f"Para {i} " + "x" * 300 for i in range(6))
+    parts = jev.split_passages(text)
+    check("headings are dropped", all(not p.startswith("##") for p in parts) and len(parts) == 6)
+    long = jev.split_passages("A sentence here. " * 200)
+    check("long paragraphs are split", len(long) > 1 and all(len(p) <= 1200 for p in long))
+    kept = jev.keep_passages(parts, [0.9, 0.1, 0.8, 0.95, 0.4, 0.7], min_p=0.5, budget=950)
+    check("best three that fit, back in order", kept.split("\n\n") == [parts[0], parts[2], parts[3]])
+    check("nothing above the floor keeps nothing", jev.keep_passages(parts, [0.1] * 6) == "")
+    prov = {"model": "m", "full_text_sources": [2, 5], "full_text_via": {"papers": 0, "europe_pmc": 2},
+            "jev": {"model": "jev-1.14.0", "passages_cut": 1}}
+    handling = _methods_paragraphs(prov, 40, 8, "Q?")["handling"]
+    check("Methods states the passage cut", "full text of 1 of those sources was cut" in handling
+          and "what both the model and the figure check read" in handling)
+    check("feature is known", jev.features("passages") == {"passages"})
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     for fn in (
         test_provider_resolution, test_per_request_api_key,
+        test_figures_survive_typography, test_jev_is_off_by_default,
+        test_jev_prescreen_keeps_the_curation_contract,
         test_writer_and_revisions_see_the_same_sources,
-        test_figures_survive_typography,
+        test_methods_names_jev_when_it_ran,
+        test_jev_passage_cut_is_ordered_and_bounded,
         test_anthropic_generate_behaviour,
         test_openrouter_request_is_asserted_on_the_payload,
         test_output_ceilings_follow_the_default_model,

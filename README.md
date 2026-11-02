@@ -68,6 +68,22 @@ Two human gates: pick the question, read the page. Nothing in between asks you.
 
 Treat it as a sourced starting point. Follow the links.
 
+## Opt-in: TypeSafe Jev
+
+Three cheap typed judgments from TypeSafe's Jev, off unless named:
+
+```bash
+pip install -e ".[jev]"
+export TYPESAFE_API_KEY=...
+articlegen draft "..." --jev prescreen,trim,passages     # or ARTICLEGEN_JEV=prescreen,trim,passages
+```
+
+- `prescreen`: papers Jev is sure do not study the question's subject are labelled background before the LLM curator sees the rest.
+- `trim`: `related` papers with no results on the question stay in the pool and the counts, but not in the writer's prompt.
+- `passages`: fetched full text is cut to the passages that report results (8,000 characters each). The writer and the figure check read the same cut.
+
+Methods names the model and what it did. Any Jev failure falls back to the LLM-only path. Measured on the five eval pools (`tools/JEV_REPORT.md`, chart `docs/jev-eval.html`): writer input −36% and the writer call −24%, with blind-judged quality unchanged (10–10). Jev is not used to check claims, where it caught none of five overreaches.
+
 ## Measuring briefing quality
 
 `tools/brief_eval.py` freezes one evidence pool per topic (a full pipeline run), replays only the writer and its two gates on those exact papers, and scores the result with a blind Claude judge: a 1–10 rubric (answer, synthesis, specificity, calibration, faithfulness, coverage, gaps, readability, usefulness) and a pairwise preference judged in both orders.

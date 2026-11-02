@@ -13,6 +13,10 @@ dependencies = [
     "requests>=2.31",
 ]
 
+[project.optional-dependencies]
+# Opt-in TypeSafe Jev features (ARTICLEGEN_JEV / --jev). Nothing imports it otherwise.
+jev = ["typesafe-sdk>=0.6"]
+
 [project.scripts]
 articlegen = "articlegen.cli:main"
 
