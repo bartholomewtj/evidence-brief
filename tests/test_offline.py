@@ -10839,10 +10839,107 @@ def test_jev_passage_cut_is_ordered_and_bounded() -> None:
     check("feature is known", jev.features("passages") == {"passages"})
 
 
+def test_model_design_labels_replace_the_regex() -> None:
+    """A design the curating model assigned wins over the metadata regex, in
+    the writer's prompt, Table 1 and Fig. 1, and Methods says who chose it.
+
+    The regex was right on 40% of the eval pools' papers (most observational
+    studies came out "other"); a cheap model 92-94% (tools/JEV_REPORT.md).
+    """
+    import inspect
+    from articlegen import pipeline, render, sources, writer
+    from articlegen.sources import Paper, classify_design
+
+    p = Paper(title="Shift work and sleep", abstract="A cohort of 2,000 nurses was followed.")
+    check("regex alone calls this other", classify_design(p) == "other")
+    p.design_label = "observational"
+    check("a model label wins", classify_design(p) == "observational")
+    p.design_label = "not-a-design"
+    check("an unknown label falls back to the regex", classify_design(p) == "other")
+    p.design_label = "trial"
+    check("the label survives the manifest", Paper.from_dict(p.to_dict()).design_label == "trial")
+    check("the search cache does not keep a run's label", sources._paper_to_json(p)["design_label"] == "")
+
+    papers = [Paper(title=f"T{i}", abstract=f"a{i}") for i in range(1, 46)]
+    calls = []
+    real = writer.generate_json
+
+    def fake(prompt, schema, **kw):
+        calls.append((prompt, kw.get("model")))
+        n = prompt.count("PAPER ")
+        return {"labels": [{"index": j, "design": "trial" if j % 2 else "bogus"} for j in range(1, n + 1)]}
+
+    writer.generate_json = fake
+    try:
+        got = writer.label_designs(papers, list(range(3, 46)), model="m")
+    finally:
+        writer.generate_json = real
+    check("batches of DESIGN_BATCH", len(calls) == 2 and calls[0][0].count("PAPER ") == writer.DESIGN_BATCH)
+    check("the curating model is used", calls[0][1] == "m")
+    check("labels map back to SOURCE numbers", got.get(3) == "trial" and 4 not in got and got.get(43) == "trial")
+
+    writer.generate_json = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("down"))
+    try:
+        raised = False
+        try:
+            writer.label_designs(papers, [1, 2], model="m")
+        except RuntimeError:
+            raised = True
+    finally:
+        writer.generate_json = real
+    check("every batch failing raises, for the caller's fallback", raised)
+
+    labelled = Paper(title="X", abstract="y", design_label="observational")
+    ctx = writer._format_sources([labelled], appraisal=True)
+    check("the writer is told the design came from the abstract",
+          "Design (classified from the abstract): observational study" in ctx)
+
+    src = inspect.getsource(pipeline.generate_draft)
+    check("design labelling falls back to the regex on failure", "using index metadata" in src)
+    check("design labelling can be switched off", "ARTICLEGEN_LLM_DESIGN" in src)
+    check("only sources the writer will see are labelled", "writer_omitted(curation, papers)" in src)
+
+    cited = [Paper(title="A", abstract="a", design_label="trial"), Paper(title="B", abstract="b")]
+    check("captions name the model when it labelled", "classified by a language model" in render._design_basis(cited))
+    check("captions name the metadata when it did not",
+          "index metadata" in render._design_basis([Paper(title="B", abstract="b")]))
+    gen = render._methods_paragraphs({"model": "w", "planning_model": "p", "design_model": "c"},
+                                     10, 2, "Q?")["generation"]
+    check("Methods names the design model", "Study designs in Table 1 and Fig. 1 were classified by a "
+          "language model (c)" in gen)
+    check("Methods no longer calls Table 1 deterministic", "Table 1, Fig. 1 and" not in gen)
+
+
+def test_hosted_curator_is_haiku() -> None:
+    """The hosted path plans with Luna, curates with Haiku 5.5 and writes with
+    Sonnet 5.5. Haiku agreed with the reference on 85% of relevance labels to
+    Luna's 69%, at the same price (tools/JEV_REPORT.md)."""
+    import inspect
+    from articlegen import llm, pipeline, render, web
+
+    check("curator constant", llm.OPENROUTER_PUBLIC_CURATOR_MODEL == "anthropic/claude-haiku-5.5")
+    src = _draft_handler_src()
+    check("the hosted draft passes the curator",
+          "curator_model=(llm.OPENROUTER_PUBLIC_CURATOR_MODEL" in src)
+    check("health reports the curator", "public_curator_model" in inspect.getsource(web.ArticleGenHandler))
+    gd = inspect.getsource(pipeline.generate_draft)
+    check("generate_draft takes curator_model", "curator_model: str | None = None" in gd)
+    check("main curation uses the curator", "curate_sources(topic, papers, model=curator" in gd)
+    check("pre-screen curation uses the curator", "curate_sources(topic, subset, model=curator" in gd)
+    check("both citation passes curate with the curator", gd.count("exhausted, model=curator") == 2)
+    check("provenance records a separate curator", 'provenance["curation_model"]' in gd)
+    lead = render._methods_paragraphs({"model": "sonnet", "planning_model": "luna", "curation_model": "haiku"},
+                                      10, 2, "Q?")["generation"]
+    check("Methods names all three models",
+          "Search planning was performed by a large language model (luna), source curation by "
+          "another (haiku), and drafting by a third (sonnet)." in lead)
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     for fn in (
         test_provider_resolution, test_per_request_api_key,
+        test_model_design_labels_replace_the_regex, test_hosted_curator_is_haiku,
         test_figures_survive_typography, test_jev_is_off_by_default,
         test_jev_prescreen_keeps_the_curation_contract,
         test_writer_and_revisions_see_the_same_sources,

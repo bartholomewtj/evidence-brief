@@ -24,6 +24,11 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
+# The `jev` extra (articlegen/jev.py). The package below installs --no-deps,
+# so the extra has to be named here. Inert unless ARTICLEGEN_JEV and
+# TYPESAFE_API_KEY are set.
+RUN pip install --no-cache-dir "typesafe-sdk>=0.6"
+
 # The public `paperfetch-oa` package (bartholomewtj/paperfetch-oa, public repo,
 # no credentials needed) gives the hosted image a `papers` CLI beyond Europe
 # PMC (#173). git is only needed for `pip install git+https://...`; purge it

@@ -28,7 +28,7 @@ The site and the CLI run the same function. A draft writes `drafts/<date>-<slug>
 
 `.env.sample` lists every variable the CLI and the server read, with what each one does.
 
-CLI default is Claude Opus 5 via OpenRouter (~50c–$1). The public site plans the search and screens the papers with GPT-5.6 Luna, and writes the briefing with Claude Sonnet 5.5, on the host's key (about 25–30c a briefing). `--model openai/gpt-5.6-luna` is the cheap CLI option.
+CLI default is Claude Opus 5 via OpenRouter (~50c–$1). The public site plans the search with GPT-5.6 Luna, screens the papers and labels study designs with Claude Haiku 5.5, and writes the briefing with Claude Sonnet 5.5, on the host's key (about 25–30c a briefing). `--model openai/gpt-5.6-luna` is the cheap CLI option.
 
 A hosted briefing takes two to four minutes, longer than the ~100s Cloudflare holds a request open in front of Render, so the site starts it as a job (`POST /api/draft` with `async: true`) and polls `GET /api/draft/<job>`. The poll reports the stage the pipeline is actually in.
 
@@ -43,7 +43,7 @@ You pick the question. Everything between that and the page is `generate_draft()
 1. **Pre-flight.** Probe the scholarly APIs. If every source is down, stop before the first paid model call.
 2. **Plan queries.** The model turns the question into 2–4 search strings. Terms from the idea card are kept, not replaced. PICO fields (population, intervention, comparator, outcome) reach the planner and the curator.
 3. **Search.** Semantic Scholar, OpenAlex, Europe PMC, arXiv. Abstracts only at this stage. Deduped, ranked, capped at about 40. arXiv is queried last so a journal version wins over its preprint.
-4. **Label.** Each paper is `direct`, `related`, or `tangential`. Empty labels stop the run — no writing, no full text. Retracted records never reach the writer; Methods names them.
+4. **Label.** Each paper is `direct`, `related`, or `tangential`. Before writing, the same model labels each shown source's study design from its abstract (the title/index-metadata regex is the fallback). Empty labels stop the run — no writing, no full text. Retracted records never reach the writer; Methods names them.
 5. **Widen the pool.** One hop through the reference lists of the top direct reviews, plus landmark papers named in those abstracts. New records are labelled too, so they can be read in full later.
 6. **Write from abstracts.** A structured briefing: the verdict first, then 3–6 findings that each bring together every cited study bearing on one outcome, graded GRADE-style (high, moderate, low, very low). Cite at most `min(12, direct + 2)` sources, never fewer than 5 unless the pool is smaller.
 7. **Read cited full text.** Open-access copies of cited *direct/related* sources only, design-weighted, up to 5 (the excerpt budget). Then rewrite once with those texts. If the rewrite fails, drop the full text so Methods cannot claim a read the prose never saw.

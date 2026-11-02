@@ -750,8 +750,8 @@ STAY INSIDE THE SOURCES:
 
 - Where a study's design limits what it can show, say so in a few words at \
 the clause that cites it ("an uncontrolled before-after study", "a preprint", \
-"an opt-in sample with self-reported outcomes"). Each source's "Design (from \
-index metadata)" line and PREPRINT flag are there to help. Studies drawn from \
+"an opt-in sample with self-reported outcomes"). Each source's "Design" line \
+and PREPRINT flag are there to help. Studies drawn from \
 one programme or dataset are not independent replications.
 - Never call a study the first, largest, only or best unless its own text says so.
 - Report numbers in the units and form the source uses: never convert units, \
@@ -1396,7 +1396,8 @@ def _format_sources(
             # topic fit, not design.
             label = _PROMPT_DESIGN.get(classify_design(paper), "")
             if label:
-                design = f"Design (from index metadata): {label}\n"
+                how = "classified from the abstract" if paper.design_label else "from index metadata"
+                design = f"Design ({how}): {label}\n"
             if paper.is_preprint:
                 venue += " — PREPRINT, not peer reviewed"
         block = (
@@ -1831,3 +1832,77 @@ def revise_statistics(
             f"({len(result.get('edits') or [])} edit(s) offered)"
         )
     return revised
+
+
+# ---- study-design labels ----------------------------------------------------
+#
+# One batch call over the sources the writer will see, replacing the metadata
+# regex as the source of Table 1's design column, Fig. 1 and the writer's
+# "Design" line. Same definitions and prompt as `tools/jev_eval/design.py`,
+# where a cheap model scored 92-94% exact against an Opus 5.5 + Sonnet 5.5
+# reference plus a hand check, and the regex 40% (most observational studies
+# came out "other", so the writer was told nothing about them).
+
+DESIGN_DEFINITIONS = {
+    "synthesis": "Systematic review or meta-analysis: a stated search of the literature and pooled or systematically appraised studies.",
+    "trial": "Randomised or non-randomised controlled trial, cluster trial, or a trial's secondary analysis: investigators assigned the intervention.",
+    "observational": "Cohort, case-control, cross-sectional, registry, survey or before-after study of routinely occurring exposures; no assigned intervention.",
+    "qualitative": "Interviews, focus groups, or thematic or ethnographic analysis.",
+    "case": "Case report or case series.",
+    "scoping": "Scoping, mapping or rapid review without formal appraisal.",
+    "narrative": "Narrative or expert review, commentary, editorial or perspective without a systematic search.",
+    "consensus": "Guideline, consensus statement or position paper.",
+    "other": "Anything else: protocol, modelling, methods paper, lab or animal study, or not determinable.",
+}
+DESIGN_ABSTRACT_CHARS = 1500
+DESIGN_BATCH = 40
+
+_DESIGN_SYSTEM = (
+    "You classify the study design of each paper from its title, venue, index "
+    "publication types and abstract. Use exactly one label per paper:\n"
+    + "\n".join(f'- "{k}": {v}' for k, v in DESIGN_DEFINITIONS.items())
+    + "\nJudge what the paper itself did, not the designs it discusses."
+)
+
+_DESIGN_SCHEMA = {
+    "type": "object",
+    "properties": {"labels": {"type": "array", "items": {
+        "type": "object",
+        "properties": {"index": {"type": "integer"},
+                       "design": {"type": "string", "enum": list(DESIGN_DEFINITIONS)}},
+        "required": ["index", "design"], "additionalProperties": False}}},
+    "required": ["labels"], "additionalProperties": False,
+}
+
+
+def label_designs(papers: list[Paper], indices: list[int], model: str | None = None,
+                  api_key: str | None = None) -> dict[int, str]:
+    """{1-based index: design} for `indices`, in batches of DESIGN_BATCH.
+
+    A batch that fails or omits a paper leaves it unlabelled; the caller keeps
+    the metadata regex for those. Raises only if every batch failed.
+    """
+    out: dict[int, str] = {}
+    errors = []
+    for start in range(0, len(indices), DESIGN_BATCH):
+        chunk = indices[start:start + DESIGN_BATCH]
+        blocks = []
+        for j, i in enumerate(chunk, start=1):
+            p = papers[i - 1]
+            blocks.append(
+                f"PAPER {j}\nTitle: {p.title}\nVenue: {p.venue or ''}\n"
+                f"Publication types: {', '.join(p.publication_types) or 'none'}\n"
+                f"Abstract: {(p.abstract or '')[:DESIGN_ABSTRACT_CHARS]}")
+        try:
+            res = generate_json("Label the design of every paper below.\n\n" + "\n\n".join(blocks),
+                                _DESIGN_SCHEMA, system=_DESIGN_SYSTEM, model=model, api_key=api_key)
+        except Exception as exc:  # noqa: BLE001
+            errors.append(exc)
+            continue
+        for item in res.get("labels") or []:
+            j, design = item.get("index"), item.get("design")
+            if isinstance(j, int) and 1 <= j <= len(chunk) and design in DESIGN_DEFINITIONS:
+                out[chunk[j - 1]] = design
+    if errors and not out:
+        raise errors[0]
+    return out

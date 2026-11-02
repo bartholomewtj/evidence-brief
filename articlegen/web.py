@@ -20,8 +20,9 @@ public GitHub gist; generating puts it there. The browser also keeps its own
 copies in localStorage.
 
 The web app does not take a visitor key. A shared host holds
-`ARTICLEGEN_PUBLIC_OPENROUTER_KEY` (or `OPENROUTER_API_KEY`), plans and screens
-with `OPENROUTER_PUBLIC_MODEL` and writes with `OPENROUTER_PUBLIC_WRITER_MODEL`.
+`ARTICLEGEN_PUBLIC_OPENROUTER_KEY` (or `OPENROUTER_API_KEY`), plans with
+`OPENROUTER_PUBLIC_MODEL`, screens with `OPENROUTER_PUBLIC_CURATOR_MODEL` and
+writes with `OPENROUTER_PUBLIC_WRITER_MODEL`.
 A `key` field in the request body is ignored. Drafts run as polled jobs
 (`async: true`), because a hosted run outlives the proxy's ~100s window.
 The rate limits are a spend cap, not just a scholarly-API cap. Local
@@ -481,6 +482,7 @@ class ArticleGenHandler(SimpleHTTPRequestHandler):
                 if public:
                     body["public_model"] = llm.OPENROUTER_PUBLIC_MODEL
                     body["public_writer_model"] = llm.OPENROUTER_PUBLIC_WRITER_MODEL
+                    body["public_curator_model"] = llm.OPENROUTER_PUBLIC_CURATOR_MODEL
                 self._send_json(body)
                 return
             if self.path in ("/api/gallery", "/api/gallery/"):
@@ -844,9 +846,12 @@ def produce_draft(params: dict, log) -> tuple[int, dict, dict]:
             api_key=params["api_key"], model=params["model"], log=log,
             search_terms=search_terms,
             pico=pico,
-            # Hosted only: the host's key writes with the stronger model.
+            # Hosted only: the host's key writes with the stronger model and
+            # screens with the more accurate cheap one.
             writer_model=(llm.OPENROUTER_PUBLIC_WRITER_MODEL
                           if _hosted_openrouter_key() else None),
+            curator_model=(llm.OPENROUTER_PUBLIC_CURATOR_MODEL
+                           if _hosted_openrouter_key() else None),
         )
     except NoPapersFound as exc:
         # 503 when the upstream APIs are the problem: it's not the caller's
