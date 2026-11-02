@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jev vs LLM in evidence-brief — cost and accuracy</title>
+<style>
+.viz-root{
+  color-scheme:dark;
+  --paper:#12171f; --card:#1b232f; --ink:#e6edf3; --muted:#8b9aab; --line:#383e45; --boxline:#4d535a;
+  --llm:#7e9cc8; --jev:#d0806c; --accent:#6ec4bb;
+}
+@media (prefers-color-scheme: light){
+  :root:where(:not([data-theme="dark"])) .viz-root{
+    color-scheme:light;
+    --paper:#f3f5f7; --card:#fcfcfd; --ink:#1c2430; --muted:#5a6a7b; --line:#d1d4d7; --boxline:#bbbfc3;
+    --llm:#36588c; --jev:#95422d; --accent:#2b6e67;
+  }
+}
+:root[data-theme="light"] .viz-root{
+  color-scheme:light;
+  --paper:#f3f5f7; --card:#fcfcfd; --ink:#1c2430; --muted:#5a6a7b; --line:#d1d4d7; --boxline:#bbbfc3;
+  --llm:#36588c; --jev:#95422d; --accent:#2b6e67;
+}
+html,body{margin:0}
+.viz-root{background:var(--paper);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,sans-serif;min-height:100vh;padding:28px 20px 48px;box-sizing:border-box}
+.wrap{max-width:980px;margin:0 auto;position:relative}
+h1{font-size:22px;font-weight:600;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 22px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:22px}
+.tile{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px}
+.tile .v{font:600 26px/1.1 Consolas,monospace}
+.tile .k{color:var(--muted);font-size:13px;margin-top:6px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:18px;position:relative}
+.card h2{font-size:16px;font-weight:600;margin:0 0 2px}
+.card p.note{color:var(--muted);font-size:13px;margin:0 0 10px}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--muted);margin:4px 0 6px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+svg text{font-family:"Segoe UI",system-ui,sans-serif}
+.num{font-family:Consolas,monospace}
+.tip{position:absolute;pointer-events:none;background:var(--paper);border:2px solid var(--boxline);border-radius:8px;padding:6px 9px;font-size:12.5px;line-height:1.35;display:none;z-index:2;max-width:260px}
+details{margin-top:8px;font-size:13px}
+summary{cursor:pointer;color:var(--muted)}
+table{border-collapse:collapse;margin-top:8px;width:100%}
+td,th{border-bottom:1px solid var(--line);padding:4px 8px;text-align:left}
+td.n,th.n{text-align:right;font-family:Consolas,monospace}
+</style>
+</head>
+<body>
+<div class="viz-root">
+<div class="wrap">
+  <h1>Jev vs LLM in evidence-brief</h1>
+  <p class="sub">Five frozen eval pools, 208 papers, Nov 2026. Accuracy against an Opus 5.5 + Fable 5.1 (or Sonnet 5.5) consensus, with a hand check. Real dollar costs. Full write-up: <span class="num">tools/JEV_REPORT.md</span>.</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="v">−36%</div><div class="k">writer prompt, Jev labels + trims</div></div>
+    <div class="tile"><div class="v">−24%</div><div class="k">writer call cost ($0.143 → $0.108)</div></div>
+    <div class="tile"><div class="v">10–10</div><div class="k">blind pairwise, today vs Jev arm</div></div>
+    <div class="tile"><div class="v">31/34</div><div class="k">figure flags were typography, now fixed in code</div></div>
+  </div>
+
+  <div class="card" id="rel">
+    <h2>Relevance labelling: accuracy vs cost per 40-paper pool</h2>
+    <p class="note">Log cost axis. Jev pre-screen sets aside papers it is sure are off-subject; the LLM labels the rest. Dashed outline = simulated cascade.</p>
+    <div class="legend">
+      <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="var(--llm)"/></svg>LLM alone</span>
+      <span><svg width="12" height="12"><rect x="1.5" y="1.5" width="9" height="9" transform="rotate(45 6 6)" fill="var(--jev)"/></svg>Jev involved</span>
+    </div>
+    <svg id="relsvg" viewBox="0 0 900 380" width="100%" role="img" aria-label="Scatter of relevance labelling accuracy against cost per pool"></svg>
+    <details><summary>Table view</summary><table id="reltab"></table></details>
+  </div>
+
+  <div class="card" id="des">
+    <h2>Study-design labels: exact accuracy</h2>
+    <p class="note">Design drives Table 1 and the writer's GRADE starting point. Today's regex reads titles and index types only.</p>
+    <svg id="dessvg" viewBox="0 0 900 200" width="100%" role="img" aria-label="Bar chart of study-design accuracy"></svg>
+  </div>
+
+  <div class="card" id="clm">
+    <h2>Claim-support gate on today's briefings (93 sentences, 5 real overreaches)</h2>
+    <p class="note">Recall = overreaches caught. False flags = good sentences flagged. Jev catches none; it is not an overreach gate.</p>
+    <svg id="clmsvg" viewBox="0 0 900 230" width="100%" role="img" aria-label="Bar chart of overreach recall and false-flag rate"></svg>
+  </div>
+  <div class="tip" id="tip"></div>
+</div>
+</div>
+<script>
+const REL=[
+ {n:"Luna (hosted today)",c:0.00479,a:0.695,k:"llm"},
+ {n:"Haiku 5.5",c:0.00503,a:0.845,k:"llm"},
+ {n:"Opus 5 (CLI today)",c:0.2186,a:0.907,k:"llm"},
+ {n:"Jev alone",c:0.00244,a:0.746,k:"jev"},
+ {n:"Jev → Luna",c:0.00634,a:0.751,k:"jev"},
+ {n:"Jev → Haiku",c:0.00543,a:0.848,k:"jev"},
+ {n:"Jev → Opus 5",c:0.1568,a:0.921,k:"jev",sim:true},
+];
+const DES=[{n:"Regex (today)",a:0.399,c:"$0"},{n:"Jev",a:0.865,c:"$0.0017"},{n:"Haiku 5.5",a:0.923,c:"$0.0032"},{n:"Luna",a:0.938,c:"$0.0052"}];
+const CLM=[{n:"Fable 5.1 (ref)",r:0.8,f:0.011},{n:"Opus 5.5 (ref)",r:0.6,f:0.023},{n:"Luna",r:0.7,f:0.057},{n:"Sonnet 5.5",r:0.6,f:0.148},{n:"Haiku 5.5",r:0.4,f:0.170},{n:"Jev",r:0.0,f:0.068}];
+const NS="http://www.w3.org/2000/svg", tip=document.getElementById("tip");
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+function txt(p,x,y,s,a={}){const t=el("text",Object.assign({x,y,fill:"var(--muted)","font-size":12},a),p);t.textContent=s;return t}
+function hover(node,html){node.addEventListener("mousemove",e=>{const w=document.querySelector(".wrap").getBoundingClientRect();tip.innerHTML=html;tip.style.display="block";tip.style.left=(e.clientX-w.left+14)+"px";tip.style.top=(e.clientY-w.top+14)+"px"});node.addEventListener("mouseleave",()=>tip.style.display="none")}
+// relevance scatter
+(function(){const s=document.getElementById("relsvg"),L=70,R=860,T=20,B=330;
+ const x=c=>L+(Math.log10(c)-Math.log10(0.002))/(Math.log10(0.4)-Math.log10(0.002))*(R-L);
+ const y=a=>B-(a-0.6)/(1-0.6)*(B-T);
+ [0.6,0.7,0.8,0.9,1.0].forEach(v=>{el("line",{x1:L,x2:R,y1:y(v),y2:y(v),stroke:"var(--line)","stroke-width":1},s);txt(s,L-10,y(v)+4,v.toFixed(1),{"text-anchor":"end",class:"num"})});
+ [0.002,0.005,0.01,0.02,0.05,0.1,0.2,0.4].forEach(v=>txt(s,x(v),B+20,"$"+v,{"text-anchor":"middle",class:"num"}));
+ txt(s,(L+R)/2,B+42,"cost per pool (log scale)",{"text-anchor":"middle"});
+ txt(s,16,(T+B)/2,"accuracy",{transform:`rotate(-90 16 ${(T+B)/2})`,"text-anchor":"middle"});
+ const off={"Luna (hosted today)":[10,16],"Haiku 5.5":[-12,-12,"end"],"Jev alone":[10,4],"Jev → Luna":[12,-8],"Jev → Haiku":[12,16],"Opus 5 (CLI today)":[0,28,"middle"],"Jev → Opus 5":[-12,-10,"end"]};
+ REL.forEach(d=>{const cx=x(d.c),cy=y(d.a),g=el("g",{},s);
+  if(d.k==="llm")el("circle",{cx,cy,r:7,fill:"var(--llm)",stroke:"var(--card)","stroke-width":2},g);
+  else el("rect",{x:cx-6,y:cy-6,width:12,height:12,transform:`rotate(45 ${cx} ${cy})`,fill:"var(--jev)",stroke:d.sim?"var(--ink)":"var(--card)","stroke-width":2,"stroke-dasharray":d.sim?"3 2":""},g);
+  const o=off[d.n]||[10,4];txt(g,cx+o[0],cy+o[1],d.n,{fill:"var(--ink)","text-anchor":o[2]||"start"});
+  el("circle",{cx,cy,r:16,fill:"transparent"},g);
+  hover(g,`<b>${d.n}</b><br>accuracy <span class="num">${d.a.toFixed(3)}</span><br>cost <span class="num">$${d.c.toFixed(4)}</span> / pool${d.sim?"<br>simulated cascade (upper bound)":""}`,s)});
+ const tb=document.getElementById("reltab");tb.innerHTML="<tr><th>Arm</th><th class='n'>Accuracy</th><th class='n'>$ / pool</th></tr>"+REL.map(d=>`<tr><td>${d.n}${d.sim?" (simulated)":""}</td><td class='n'>${d.a.toFixed(3)}</td><td class='n'>${d.c.toFixed(4)}</td></tr>`).join("");
+})();
+// design bars
+(function(){const s=document.getElementById("dessvg"),L=150,R=820,bh=26,gap=14;
+ DES.forEach((d,i)=>{const yy=14+i*(bh+gap),w=(R-L)*d.a,g=el("g",{},s);
+  txt(g,L-10,yy+bh/2+4,d.n,{"text-anchor":"end",fill:"var(--ink)"});
+  el("rect",{x:L,y:yy,width:w,height:bh,rx:4,fill:i===0?"var(--llm)":(d.n==="Jev"?"var(--jev)":"var(--llm)"),opacity:i===0?0.55:1},g);
+  txt(g,L+w+8,yy+bh/2+4,(d.a*100).toFixed(0)+"%  ·  "+d.c+"/pool",{class:"num",fill:"var(--ink)"});
+  hover(g,`<b>${d.n}</b><br>exact accuracy <span class="num">${(d.a*100).toFixed(1)}%</span><br>cost ${d.c} / pool`,s)});
+})();
+// claims: two measures as paired bars per arm
+(function(){const s=document.getElementById("clmsvg"),L=150,R=820,bh=11,row=34;
+ const leg=el("g",{},s);el("rect",{x:L,y:2,width:10,height:10,rx:2,fill:"var(--accent)"},leg);txt(leg,L+16,11,"overreach recall");el("rect",{x:L+150,y:2,width:10,height:10,rx:2,fill:"var(--jev)"},leg);txt(leg,L+166,11,"false-flag rate");
+ CLM.forEach((d,i)=>{const yy=22+i*row,g=el("g",{},s);
+  txt(g,L-10,yy+bh+4,d.n,{"text-anchor":"end",fill:"var(--ink)"});
+  el("rect",{x:L,y:yy,width:Math.max(1,(R-L)*d.r),height:bh,rx:3,fill:"var(--accent)"},g);
+  el("rect",{x:L,y:yy+bh+2,width:Math.max(1,(R-L)*d.f),height:bh,rx:3,fill:"var(--jev)"},g);
+  txt(g,L+(R-L)*Math.max(d.r,d.f)+8,yy+bh+4,`${Math.round(d.r*100)}% / ${(d.f*100).toFixed(1)}%`,{class:"num",fill:"var(--ink)"});
+  hover(g,`<b>${d.n}</b><br>recall <span class="num">${Math.round(d.r*100)}%</span> (of 5)<br>false flags <span class="num">${(d.f*100).toFixed(1)}%</span>`,s)});
+})();
+</script>
+</body>
+</html>
