@@ -77,6 +77,13 @@ OPENROUTER_PUBLIC_MODEL = "openai/gpt-5.6-luna"
 # overall score, at about $0.25 a briefing against Luna's $0.01. GPT-5.6 Terra,
 # at a similar price, only edged Luna 6-4. Server-chosen, never caller-chosen.
 OPENROUTER_PUBLIC_WRITER_MODEL = "anthropic/claude-sonnet-5.5"
+# The hosted *curator*: relevance labels (and the records the citation passes
+# add) and study-design labels. Measured on the five eval pools against an
+# Opus 5.5 + Fable 5.1 reference (tools/JEV_REPORT.md, Nov 2026): Haiku 5.5
+# agreed on 85% of relevance labels against Luna's 69%, at the same ~half a
+# cent a pool; Luna kept off-topic papers as "related", and every one of them
+# then reached the writer. Luna still plans the search and proposes ideas.
+OPENROUTER_PUBLIC_CURATOR_MODEL = "anthropic/claude-haiku-5.5"
 
 # Where to retry when a safety classifier declines. OpenRouter cannot pass
 # Anthropic's server-side `fallbacks` parameter (Claude API only), so this

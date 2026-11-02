@@ -36,7 +36,8 @@ from .style import (SOURCED_RULES, check_style, errors as style_errors,
                     format_report as format_style, revision_brief)
 from .verify import check_statistics, revision_brief as statistics_brief
 from .render import _au_date
-from .writer import (writer_omitted, cite_target, clean_pico, clean_search_terms, curate_sources,
+from .writer import (writer_omitted, label_designs, cite_target, clean_pico,
+                     clean_search_terms, curate_sources,
                      is_briefing, plan_queries, revise_prose,
                      revise_statistics, write_article, write_briefing)
 
@@ -852,6 +853,7 @@ def generate_draft(
     search_terms: list[str] | None = None,
     pico: dict | None = None,
     writer_model: str | None = None,
+    curator_model: str | None = None,
     jev: list[str] | str | None = None,
 ) -> Draft:
     """Research and write one briefing (or a `--long` Review). Raises NoPapersFound
@@ -861,6 +863,12 @@ def generate_draft(
     revisions; `model` still plans the search and labels relevance. The hosted
     site splits them so the cheap model does the screening and the stronger
     one does the writing. Unset, one model does everything, as before.
+
+    `curator_model`, when given, labels relevance (including the records the
+    citation passes add) and study designs; `model` still plans the search.
+
+    Study designs are labelled by the curating model from each abstract unless
+    `ARTICLEGEN_LLM_DESIGN=0`; on any failure the metadata regex stays.
 
     `api_key` overrides the environment for this call only — the server passes
     the caller's key here and must never route it through `os.environ`.
@@ -931,16 +939,17 @@ def generate_draft(
             log(f"Jev ({', '.join(sorted(jev_on))}): judging {len(papers)} candidate records...")
             judgments = jev_mod.judge_papers(topic, core_entity, papers, log)
 
+    curator = curator_model or model
     log("Assessing source relevance...")
     n_prescreened = 0
     if "prescreen" in jev_on and judgments:
         curation, n_prescreened = jev_mod.prescreen_curate(
             papers, judgments,
-            lambda subset: curate_sources(topic, subset, model=model, api_key=api_key,
+            lambda subset: curate_sources(topic, subset, model=curator, api_key=api_key,
                                           pico=card_pico),
             log)
     else:
-        curation = curate_sources(topic, papers, model=model, api_key=api_key, pico=card_pico)
+        curation = curate_sources(topic, papers, model=curator, api_key=api_key, pico=card_pico)
     counts = curation.get("counts") or {}
     if counts:
         log(f"  relevance: {counts.get('direct', 0)} direct / "
@@ -973,7 +982,7 @@ def generate_draft(
     # named-source pass so a paper found here can also be scanned for names, and
     # before the full-text loop so it can be deep-read.
     referenced = _referenced_source_pass(
-        topic, papers, curation, exhausted, model=model, api_key=api_key,
+        topic, papers, curation, exhausted, model=curator, api_key=api_key,
         log=log, core_entity=core_entity, pico=card_pico,
     )
 
@@ -982,7 +991,7 @@ def generate_draft(
     # new records. Runs BEFORE the full-text loop so new landmark papers can be
     # deep-read.
     named = _named_source_pass(
-        topic, papers, curation, exhausted, model=model, api_key=api_key, log=log,
+        topic, papers, curation, exhausted, model=curator, api_key=api_key, log=log,
         outcomes=outcomes, core_entity=core_entity, pico=card_pico,
     )
 
@@ -1013,6 +1022,26 @@ def generate_draft(
             curation["hidden"] = hidden
             log(f"  Jev trim: {len(hidden)} related record(s) with no results on the "
                 "question are kept out of the writer's prompt.")
+
+    # Study designs, from the abstract, for every source the writer will see:
+    # they feed its "Design" line, Table 1 and Fig. 1. The metadata regex is
+    # the fallback for anything this does not label.
+    designs_by = ""
+    if os.environ.get("ARTICLEGEN_LLM_DESIGN", "1").strip().lower() not in ("0", "false", "no"):
+        omitted = writer_omitted(curation, papers)
+        shown = [i for i in range(1, len(papers) + 1) if i not in omitted]
+        if shown:
+            log(f"Labelling the study design of {len(shown)} source(s)...")
+            try:
+                designs = label_designs(papers, shown, model=curator, api_key=api_key)
+            except Exception as exc:  # noqa: BLE001 - the regex is a working fallback
+                log(f"  design labelling failed ({type(exc).__name__}: {str(exc)[:120]}); "
+                    "using index metadata.")
+                designs = {}
+            for i, design in designs.items():
+                papers[i - 1].design_label = design
+            if designs:
+                designs_by = resolve_provider(curator, api_key)[1]
 
     _n_direct = ((curation or {}).get("counts") or {}).get("direct")
     _shown = len(papers) - len(writer_omitted(curation, papers))
@@ -1123,6 +1152,11 @@ def generate_draft(
     planner = resolve_provider(planning_model, api_key)[1]
     if planner != provenance["model"]:
         provenance["planning_model"] = planner
+    curator_name = resolve_provider(curator, api_key)[1]
+    if curator_name != planner:
+        provenance["curation_model"] = curator_name
+    if designs_by:
+        provenance["design_model"] = designs_by
     if named.get("queries"):
         provenance["named_sources"] = {"queries": named["queries"], "added": named["added"]}
     if referenced.get("seeds") or referenced.get("cited_seed"):

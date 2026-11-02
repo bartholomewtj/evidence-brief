@@ -137,6 +137,7 @@ def _paper_to_json(paper: "Paper") -> dict:
     record["full_text"] = ""
     record["full_text_via"] = ""
     record["full_text_not_oa"] = False
+    record["design_label"] = ""  # a run's judgment, not part of what search returned
     record["publication_types"] = list(paper.publication_types)
     return record
 
@@ -524,6 +525,12 @@ class Paper:
     # False means "no grant listed there", never "unfunded" — every other
     # source leaves it False because no other source reports funding at all.
     has_funding_statement: bool = False
+    # Study design as a language model classified it from the title, venue,
+    # index types and abstract (`writer.label_designs`), one of
+    # DESIGN_DISPLAY_ORDER, or "" when no model labelled it. `classify_design`
+    # prefers it over the metadata regex, which was right on 40% of the eval
+    # pools' papers against 92-94% for a cheap model (tools/JEV_REPORT.md).
+    design_label: str = ""
 
     def __post_init__(self) -> None:
         # The one place a title is cleaned. Four search functions build Papers
@@ -1768,7 +1775,12 @@ def classify_design(paper: Paper) -> str:
     abstract (an abstract discussing what 'is needed' would misclassify).
     Preprints are untouched by design detection: a preprint of a trial still
     ranks as a trial.
+
+    A label the pipeline's model assigned (`Paper.design_label`) wins; the
+    regex below is the fallback when no model labelled the paper.
     """
+    if paper.design_label in DESIGN_DISPLAY_ORDER:
+        return paper.design_label
     text = f"{paper.title} {paper.venue}"
     types_text = " ".join(paper.publication_types)
     # Index vocabularies hyphenate ("systematic-review", "case-report"); match both
@@ -2562,3 +2574,8 @@ def gather_evidence(
     terms = {w for w in re.split(r"[^a-z0-9]+", raw) if len(w) > 3}
     collected.sort(key=lambda p: _rank_score(p, terms), reverse=True)
     return collected[:max_papers]
+
+
+def designs_model_labelled(papers: list["Paper"]) -> bool:
+    """True when a model, not the metadata regex, labelled these papers' designs."""
+    return any(p.design_label for p in papers)

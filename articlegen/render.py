@@ -547,8 +547,9 @@ def _table_rows(cited: list[Paper], labels: dict[int, str]) -> list[dict]:
 
 
 # Fig. 1 counts study designs only when the metadata actually supports it.
-# `classify_design` reads titles, venues and index metadata, never an abstract,
-# so a pool of terse or badly indexed titles collapses into "other" — and a bar
+# Without a model label (`Paper.design_label`), `classify_design` reads titles,
+# venues and index metadata only, so a pool of terse or badly indexed titles
+# collapses into "other" — and a bar
 # chart that is 80% "Other" says less than the year histogram it replaced.
 DESIGN_FIGURE_MIN_SHARE = 0.5
 FIGURE_WIDE_BUCKETS = 6
@@ -665,6 +666,14 @@ def _box_html(article: dict, papers: list[Paper], cite_map: dict[int, int],
     )
 
 
+def _design_basis(cited: list[Paper]) -> str:
+    """How Table 1 and Fig. 1 got their design labels, as a caption clause."""
+    if sources.designs_model_labelled(cited):
+        return ("Design was classified by a language model from each record's title, "
+                "journal, index types and abstract")
+    return "Design is inferred from title, journal and index metadata"
+
+
 def _table_html(cited: list[Paper], labels: dict[int, str]) -> str:
     """Table 1 — characteristics of the cited evidence, one row per source."""
     if not cited:
@@ -692,8 +701,8 @@ def _table_html(cited: list[Paper], labels: dict[int, str]) -> str:
         )
     caption = (
         "Characteristics of the cited evidence, read as text from each record; "
-        "no quality appraisal was performed. Design is inferred from title, journal "
-        "and index metadata (Other where none could be inferred). n is the largest "
+        "no quality appraisal was performed. " + _design_basis(cited) + " "
+        "(Other where none could be inferred). n is the largest "
         "sample size the abstract states. Registered is a trial registration number "
         "in the abstract or Europe PMC record. Funding reads Grant listed where "
         "Europe PMC lists a grant; a dash means none listed, not unfunded. Relevance is the "
@@ -857,7 +866,7 @@ def _figure_html(cited: list[Paper], labels: dict[int, str]) -> str:
             if segmented else ". "
         )
         caption += (
-            "Design is inferred from each record's title, journal and index metadata; "
+            _design_basis(cited) + "; "
             "it is not a quality appraisal. Bar labels give the number of sources in "
             "each category; the underlying records are listed in Table 1."
         )
@@ -1043,17 +1052,32 @@ def _methods_paragraphs(
         )
 
     planner = provenance.get("planning_model")
-    if model and planner:
+    curator = provenance.get("curation_model")
+    if model and curator:
+        lead = (f"Search planning was performed by a large language model "
+                f"({esc(planner or model)}), source curation by another ({esc(curator)}), "
+                f"and drafting by {'a third' if planner else 'the first'} ({esc(model)}).")
+    elif model and planner:
         lead = (f"Search planning and source curation were performed by a large language "
                 f"model ({esc(planner)}), and drafting by another ({esc(model)}).")
     else:
         lead = ("Search planning, source curation and drafting were performed by a large "
                 "language " + (f"model ({esc(model)})." if model else "model."))
-    generation = (
-        lead
-        + " Source retrieval, relevance tabulation, citation numbering, Table 1, Fig. 1 and "
-        "the statistical check are deterministic and were not model-generated."
-    )
+    design_model = provenance.get("design_model")
+    if design_model:
+        generation = (
+            lead
+            + f" Study designs in Table 1 and Fig. 1 were classified by a language model "
+            f"({esc(design_model)}) from each record's abstract. Source retrieval, relevance "
+            "tabulation, citation numbering, the other Table 1 columns and the statistical "
+            "check are deterministic and were not model-generated."
+        )
+    else:
+        generation = (
+            lead
+            + " Source retrieval, relevance tabulation, citation numbering, Table 1, Fig. 1 and "
+            "the statistical check are deterministic and were not model-generated."
+        )
     return {"search": search, "handling": handling, "generation": generation}
 
 
