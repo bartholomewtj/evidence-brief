@@ -10644,10 +10644,45 @@ def test_real_articles_still_match_the_schema() -> None:
             print("     " + e)
 
 
+def test_figures_survive_typography() -> None:
+    """A figure the source prints in another typography is the same figure.
+
+    The Lancet family writes decimals with a middle dot ("26·5%", "−0·7 to
+    14·5"), and typeset abstracts use the Unicode minus and thin spaces. Each
+    of those used to be flagged as unverified or misattributed and bought a
+    paid revision: 31 of 34 pre-revision flags on the Oct 2026 eval writes
+    (tools/JEV_REPORT.md). A figure that is genuinely absent must still flag.
+    """
+    from articlegen.verify import check_statistics
+    from articlegen.sources import Paper
+
+    papers = [
+        Paper(title="Open-door trial", year=2024,
+              abstract=("Coercion was 65 (26·5%) versus 104 (33·4%) "
+                        "(risk difference 6·9%; 95% CI −0·7 to 14·5); "
+                        "violence 0·15 per stay; not significant (P = 0.696); "
+                        "n = 245.")),
+        Paper(title="Other trial", year=2020, abstract="Attrition was 26.5% in another trial."),
+    ]
+    article = {"form": "briefing", "answer": "x", "findings": [
+        "Coercion was 26.5% versus 33.4% (95% CI -0.7 to 14.5) [1].",
+        "Violence was 0.15 per stay (p=0.696) with n = 245 [1].",
+        "Restraint fell 27.5% [1].",
+    ], "references": [1, 2]}
+    v = check_statistics(article, papers)
+    flagged = set(v["unverified"]) | set(v["misattributed"])
+    for fig in ("26.5%", "33.4%", "0.15", "p=0.696", "n = 245"):
+        check(f"{fig} matches its typeset spelling", fig not in flagged)
+    check("26.5% is not misattributed to the plain-typed source", "26.5%" not in v["misattributed"])
+    check("a range with a Unicode minus verifies", not any("14.5" in f for f in flagged))
+    check("a figure absent from every source still flags", "27.5%" in v["unverified"])
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     for fn in (
         test_provider_resolution, test_per_request_api_key,
+        test_figures_survive_typography,
         test_anthropic_generate_behaviour,
         test_openrouter_request_is_asserted_on_the_payload,
         test_output_ceilings_follow_the_default_model,

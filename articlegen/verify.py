@@ -86,6 +86,24 @@ def _normalize(token: str) -> str:
     return re.sub(r"^[+\-\s]+|[+\-\s%]+$", "", token)
 
 
+# Typography that changes the characters of a figure but not its value. The
+# Lancet family prints decimals with a middle dot ("26·5%", "−0·7 to 14·5"), and
+# typeset abstracts carry the Unicode minus and thin or no-break spaces. On the
+# Oct 2026 eval writes, 31 of 34 pre-revision flags were these, each buying a
+# paid revision that could only make a correct figure worse.
+_TYPOGRAPHY = str.maketrans({
+    "·": ".", "⋅": ".", "∙": ".",   # middle dot, dot operator, bullet operator
+    "−": "-", "‐": "-", "‑": "-",   # minus sign, hyphen, non-breaking hyphen
+    " ": " ", " ": " ", " ": " ", " ": " ", " ": " ",
+})
+
+
+def _typeset(text: str) -> str:
+    """One spelling for a figure and its haystack: plain digits, case folded
+    (`p=0.696` against `P = 0.696`)."""
+    return text.translate(_TYPOGRAPHY).lower()
+
+
 def _variants(text: str) -> tuple[str, str, str]:
     """(raw, spaces stripped, commas stripped) forms of a haystack.
 
@@ -93,11 +111,13 @@ def _variants(text: str) -> tuple[str, str, str]:
     against `7000`. Stripping on the haystack side is cheaper than enumerating
     the spellings on the figure side.
     """
+    text = _typeset(text)
     return text, text.replace(" ", ""), text.replace(",", "")
 
 
 def _found(figure: str, haystack: tuple[str, str, str], quantity: bool, is_range: bool = False) -> bool:
     """Is this figure present in this haystack?"""
+    figure = _typeset(figure)
     if is_range:
         m = _RANGE_PARTS_RE.match(figure.strip())
         if not m:
