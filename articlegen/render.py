@@ -944,6 +944,26 @@ def _methods_paragraphs(
         f"and labelled direct, related or background; {n_cited} were cited here and are "
         "listed in Table 1."
     )
+    # The opt-in Jev features (articlegen/jev.py) are model judgments, so they
+    # are named here rather than folded into the deterministic list below.
+    jev = (provenance.get("jev") or {}) if provenance else {}
+    jev_model = esc(str(jev.get("model") or "TypeSafe Jev"))
+    pre = int(jev.get("prescreened") or 0)
+    hid = int(jev.get("hidden") or 0)
+    if pre:
+        search += (
+            f" Before that assessment, a classification model ({jev_model}) set aside "
+            f"{pre} record{'s' if pre != 1 else ''} it judged not to study the "
+            "question's subject; they were labelled background without being sent "
+            "to the language model."
+        )
+    if hid:
+        search += (
+            f" {hid} related record{'s' if hid != 1 else ''} that "
+            f"{'model' if pre else f'a classification model ({jev_model})'} judged to "
+            "report no results on the question "
+            f"{'were' if hid != 1 else 'was'} kept out of the drafting model's material."
+        )
     named = (provenance.get("named_sources") or {}) if provenance else {}
     named_queries = [q for q in (named.get("queries") or []) if q]
     if named_queries:
@@ -1003,6 +1023,15 @@ def _methods_paragraphs(
             "located, or that appears only in a source other than the one cited, is "
             "flagged under Limitations."
         )
+        cut = int(((provenance.get("jev") or {}).get("passages_cut")) or 0)
+        if cut:
+            handling += (
+                f" The full text{'s' if cut != 1 else ''} of {cut} of those "
+                f"sources {'were' if cut != 1 else 'was'} cut to the passages a "
+                f"classification model ({esc(str(provenance['jev'].get('model') or 'TypeSafe Jev'))}) "
+                "judged to report results on the question, and that cut text is "
+                "what both the model and the figure check read."
+            )
     else:
         handling = (
             "Only titles and abstracts were read; full texts were not retrieved, so no claim "

@@ -19,6 +19,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Callable
 
+from . import jev as jev_mod
 from . import paperfetch
 from .llm import resolve_provider
 from .sources import (DATABASE_NAMES, DEFAULT_MAX_PAPERS, NAMED_SOURCE_LIMIT,
@@ -35,7 +36,7 @@ from .style import (SOURCED_RULES, check_style, errors as style_errors,
                     format_report as format_style, revision_brief)
 from .verify import check_statistics, revision_brief as statistics_brief
 from .render import _au_date
-from .writer import (cite_target, clean_pico, clean_search_terms, curate_sources,
+from .writer import (writer_omitted, cite_target, clean_pico, clean_search_terms, curate_sources,
                      is_briefing, plan_queries, revise_prose,
                      revise_statistics, write_article, write_briefing)
 
@@ -851,6 +852,7 @@ def generate_draft(
     search_terms: list[str] | None = None,
     pico: dict | None = None,
     writer_model: str | None = None,
+    jev: list[str] | str | None = None,
 ) -> Draft:
     """Research and write one briefing (or a `--long` Review). Raises NoPapersFound
     if the search comes back empty.
@@ -863,6 +865,9 @@ def generate_draft(
     `api_key` overrides the environment for this call only — the server passes
     the caller's key here and must never route it through `os.environ`.
     `long=True` is the parked Review path; the default artefact is the briefing.
+
+    `jev` names opt-in TypeSafe Jev features (`prescreen`, `trim`; see
+    `articlegen/jev.py`). None reads `ARTICLEGEN_JEV`; unset, nothing changes.
     """
     # Before anything paid. `plan_queries` is an LLM call, and on a day when
     # every scholarly API is refusing, the caller used to pay for it and then be
@@ -914,8 +919,28 @@ def generate_draft(
     # recently has no reason to spend a probe on the next request.
     _note_sources_answered()
 
+    jev_on = jev_mod.features(jev)
+    judgments = None
+    if jev_on:
+        reason = jev_mod.unavailable_reason()
+        if reason:
+            log(f"Jev ({', '.join(sorted(jev_on))}) was requested but {reason}; "
+                "running without it.")
+            jev_on = frozenset()
+        else:
+            log(f"Jev ({', '.join(sorted(jev_on))}): judging {len(papers)} candidate records...")
+            judgments = jev_mod.judge_papers(topic, core_entity, papers, log)
+
     log("Assessing source relevance...")
-    curation = curate_sources(topic, papers, model=model, api_key=api_key, pico=card_pico)
+    n_prescreened = 0
+    if "prescreen" in jev_on and judgments:
+        curation, n_prescreened = jev_mod.prescreen_curate(
+            papers, judgments,
+            lambda subset: curate_sources(topic, subset, model=model, api_key=api_key,
+                                          pico=card_pico),
+            log)
+    else:
+        curation = curate_sources(topic, papers, model=model, api_key=api_key, pico=card_pico)
     counts = curation.get("counts") or {}
     if counts:
         log(f"  relevance: {counts.get('direct', 0)} direct / "
@@ -978,10 +1003,19 @@ def generate_draft(
     # discover it is open access, which is what a paper found via OpenAlex
     # rather than Europe PMC always needed and never got.
 
+    # Trim (opt-in): `related` records Jev judged to carry no results on the
+    # question stay in the pool and the counts but are kept out of the
+    # writer's prompt. Only records Jev judged — those the passes above added
+    # are always shown.
+    if "trim" in jev_on and judgments:
+        hidden = jev_mod.hidden_related(curation.get("relevance") or {}, judgments)
+        if hidden:
+            curation["hidden"] = hidden
+            log(f"  Jev trim: {len(hidden)} related record(s) with no results on the "
+                "question are kept out of the writer's prompt.")
+
     _n_direct = ((curation or {}).get("counts") or {}).get("direct")
-    _shown = len(papers) - sum(
-        1 for label in (curation.get("relevance") or {}).values() if label == "tangential"
-    )
+    _shown = len(papers) - len(writer_omitted(curation, papers))
     log(f"  cite ceiling: {cite_target(_n_direct, _shown)} "
         f"({_n_direct if _n_direct is not None else 'unlabelled'} direct of {_shown} shown)")
 
@@ -1025,6 +1059,12 @@ def generate_draft(
             "the shared Europe PMC quota.")
     log("  " + _read_subset_skew(papers, fetched))
     _log_paywalled_cited(papers, cited_set, log)
+
+    n_passages_cut = 0
+    if fetched and "passages" in jev_on:
+        # Before the rewrite, so the writer and the figure check read the same
+        # cut text: both derive their excerpts from `paper.full_text`.
+        n_passages_cut = len(jev_mod.trim_excerpts(topic, papers, full_text_excerpts(papers), log))
 
     if fetched:
         log("Rewriting with cited full text...")
@@ -1090,6 +1130,14 @@ def generate_draft(
             "seeds": referenced["seeds"],
             "cited_seed": referenced["cited_seed"],
             "added": referenced["added"],
+        }
+    if judgments:
+        provenance["jev"] = {
+            "model": jev_mod.JEV_MODEL,
+            "features": sorted(jev_on),
+            "prescreened": n_prescreened,
+            "hidden": len(curation.get("hidden") or []),
+            "passages_cut": n_passages_cut,
         }
 
     return Draft(

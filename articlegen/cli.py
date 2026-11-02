@@ -100,6 +100,7 @@ def cmd_draft(args) -> int:
             log=_log,
             long=getattr(args, "long", False),
             search_terms=[t.strip() for t in (getattr(args, "queries", "") or "").split(",") if t.strip()],
+            jev=getattr(args, "jev", None),
         )
     except NoPapersFound as exc:
         _log(str(exc))
@@ -365,6 +366,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="Write the journal-style Review instead of the default briefing",
     )
     p_draft.add_argument("--open", action="store_true", help="Open the draft in your browser when done")
+    p_draft.add_argument(
+        "--jev", metavar="FEATURES", default=None,
+        help="Opt-in TypeSafe Jev features, comma-separated: prescreen (set clearly "
+             "off-topic records aside before the LLM curator), trim (keep related "
+             "records with no results out of the writer's prompt), passages (cut "
+             "fetched full text to the passages that report results). Needs "
+             "TYPESAFE_API_KEY and typesafe-sdk. Default: ARTICLEGEN_JEV, else off.",
+    )
     p_draft.add_argument(
         "--queue-ckn", action="store_true",
         help="Add paywalled cited DOIs to the CKN pickup list (papers queue). Off by default.",
