@@ -10678,10 +10678,58 @@ def test_figures_survive_typography() -> None:
     check("a figure absent from every source still flags", "27.5%" in v["unverified"])
 
 
+def test_writer_and_revisions_see_the_same_sources() -> None:
+    """The writer's omissions hold for every revision of its draft.
+
+    `revise_prose` used to reproduce the whole pool when a style rule needed
+    sources, so a revision saw retracted records (#242) and background papers
+    the writer never did, at nearly twice the writer's input.
+    """
+    import copy
+    from articlegen import writer
+    from articlegen.sources import Paper
+
+    papers = [Paper(title=f"Title {i}", abstract=f"abstract {i}", year=2020) for i in range(1, 6)]
+    papers[3].is_retracted = True
+    curation = {"relevance": {1: "direct", 2: "related", 3: "tangential", 4: "direct", 5: "related"},
+                "counts": {"direct": 2, "related": 2, "tangential": 1}, "most_relevant_index": 1,
+                "hidden": [5]}
+    check("omitted set", writer.writer_omitted(curation, papers) == {3, 4, 5})
+    ctx, _ = writer._writer_context("q", papers, "", curation, kind="briefing")
+    check("writer sees direct and related", "Title 1" in ctx and "Title 2" in ctx)
+    check("writer does not see hidden, tangential or retracted",
+          not any(f"Title {i}" in ctx for i in (3, 4, 5)))
+    check("writer is told hidden sources exist", "1 related source(s) judged to report no results" in ctx)
+
+    captured = []
+    real = writer.generate_json
+
+    def fake(prompt, schema, **kw):
+        captured.append(prompt)
+        return {"edits": []}
+
+    writer.generate_json = fake
+    try:
+        article = {"form": "briefing", "answer": "a [1]", "findings": ["f [1]"], "references": [1]}
+        try:
+            writer.revise_prose(copy.deepcopy(article), "brief", papers=papers, curation=curation)
+        except Exception:  # noqa: BLE001 - only the prompt matters here
+            pass
+    finally:
+        writer.generate_json = real
+    check("revision was asked", bool(captured))
+    prompt = captured[0] if captured else ""
+    check("revision sees the writer's sources", "Title 1" in prompt and "Title 2" in prompt)
+    check("revision never sees a retracted record", "Title 4" not in prompt)
+    check("revision never sees tangential or hidden sources",
+          "Title 3" not in prompt and "Title 5" not in prompt)
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     for fn in (
         test_provider_resolution, test_per_request_api_key,
+        test_writer_and_revisions_see_the_same_sources,
         test_figures_survive_typography,
         test_anthropic_generate_behaviour,
         test_openrouter_request_is_asserted_on_the_payload,

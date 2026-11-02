@@ -1505,6 +1505,22 @@ def curate_sources(
     return {"relevance": relevance, "most_relevant_index": mri, "counts": counts}
 
 
+def writer_omitted(curation: dict | None, papers: list[Paper]) -> set[int]:
+    """SOURCE numbers the drafting model must not see: tangential labels,
+    retracted records (#242), and records the opt-in Jev trim hid.
+
+    One set for the writer and for every revision of its draft. `revise_prose`
+    used to reproduce the whole pool, so a revision that needed sources was
+    shown the retracted records and background papers the writer never saw.
+    """
+    curation = curation or {}
+    relevance = curation.get("relevance") or {}
+    omit = {int(i) for i, label in relevance.items() if label == "tangential"}
+    omit |= {i for i, p in enumerate(papers, start=1) if p.is_retracted}
+    omit |= {int(i) for i in curation.get("hidden") or []}
+    return omit
+
+
 def _writer_context(
     topic: str,
     papers: list[Paper],
@@ -1570,12 +1586,13 @@ def _writer_context(
     # citation scheme and is never re-packed — and stay in the screened count,
     # which is what Methods reports.
     retracted = {i for i, p in enumerate(papers, start=1) if p.is_retracted}
-    omit = {i for i, label in relevance.items() if label == "tangential"} | retracted
+    hidden = {int(i) for i in curation.get("hidden") or []} - retracted
+    omit = writer_omitted(curation, papers)
     context += (
         "Here are the candidate sources with their relevance labels. Choose the ones "
         f"that genuinely support the {kind} and write it.\n\n"
     )
-    tangential = omit - retracted
+    tangential = omit - retracted - hidden
     if tangential:
         context += (
             f"{len(tangential)} tangential source(s) are counted in the tally above but "
@@ -1585,6 +1602,11 @@ def _writer_context(
         context += (
             f"{len(retracted)} record(s) reported as retracted are also NOT reproduced "
             "below and must not be cited. "
+        )
+    if hidden:
+        context += (
+            f"{len(hidden)} related source(s) judged to report no results on this "
+            "question are counted in the tally above but NOT reproduced below. "
         )
     if omit:
         context += (
@@ -1721,7 +1743,8 @@ def revise_prose(
         context += (
             "SOURCES — the material this article must be grounded in. Anything you "
             "add must come from here and be cited by its SOURCE number:\n\n"
-            + _format_sources(papers, relevance, excerpts)
+            + _format_sources(papers, relevance, excerpts,
+                              omit=writer_omitted(curation, papers))
             + "\n\n"
         )
     else:
